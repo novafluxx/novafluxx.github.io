@@ -1,0 +1,79 @@
+---
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+
+interface Props {
+    title: string;
+}
+
+const { title } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en" class="dark" data-bs-theme="dark">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="description"
+            content="Justin High - QA Analyst & Automation Engineer"
+        />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <meta name="generator" content={Astro.generator} />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <title>{title}</title>
+    </head>
+    <body
+        class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-300"
+    >
+        <header
+            class="fixed w-full top-0 z-100 h-[60px] transition-colors duration-300 pointer-events-none"
+        >
+            <div class="pointer-events-auto w-full h-full">
+                <Nav />
+            </div>
+        </header>
+
+        <main class="flex-1 mt-[60px] w-full max-w-[1200px] mx-auto p-8">
+            <slot />
+        </main>
+
+        <footer
+            class="bg-slate-800 dark:bg-slate-950 text-white py-8 mt-auto border-t border-slate-700 transition-colors duration-300"
+        >
+            <div class="max-w-[1200px] mx-auto px-4 text-center text-slate-300">
+                <p>&copy; {year} Justin High. All rights reserved.</p>
+                <div class="mt-4 flex justify-center gap-6">
+                    <a
+                        href="https://github.com/novafluxx"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:text-white transition-colors"
+                        aria-label="Visit Justin's GitHub profile"
+                        ><i class="fab fa-github text-xl"></i></a
+                    >
+                    <a
+                        href="https://www.linkedin.com/in/justin-high-4977598b"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:text-white transition-colors"
+                        aria-label="Connect with Justin on LinkedIn"
+                        ><i class="fab fa-linkedin text-xl"></i></a
+                    >
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
