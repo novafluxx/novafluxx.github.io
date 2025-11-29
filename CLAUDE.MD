@@ -75,6 +75,9 @@ pnpm deploy:pages         # Build and deploy to Cloudflare Pages (legacy)
 ### Navigation
 - **Nav.astro**: Glassmorphism-style navigation bar
   - Uses Font Awesome icons alongside text labels
+  - Includes theme toggle button with sun/moon icons (fa-sun/fa-moon)
+  - Theme toggle persists preference to localStorage
+  - Client-side script handles theme switching by toggling `.dark` class on `<html>`
   - Responsive design (stacks vertically on mobile, horizontal on desktop)
   - Active state highlighting with different colors
   - Fixed positioning via Layout.astro header
@@ -110,12 +113,15 @@ File-based routing in `src/pages/`:
 - Configured via `@tailwindcss/vite` plugin in `astro.config.mjs`
 - Uses Tailwind utility classes extensively
 - Custom theme values defined in `@theme` block in global.css
+- **Class-based dark mode**: Configured using `@custom-variant dark (&:where(.dark, .dark *))` in global.css
+- Dark mode utilities (e.g., `dark:bg-slate-900`) work by toggling `.dark` class on `<html>` element
 
 ### Global Styles Considerations
 - Font Awesome icons have global styles in `global.css` (lines 118-125)
 - These global icon styles include `margin-bottom: 1rem` and `font-size: 2rem`
-- When using icons in components like navigation, override these with utility classes like `!mb-0` and appropriate text size classes
+- When using icons in components like navigation, override these with utility classes like `mb-0!` and appropriate text size classes
 - Glass card styles are available via `.glass-card` class for consistent component styling
+- **Theme-aware components**: Use `dark:` prefix for dark mode variants (e.g., `text-slate-900 dark:text-white`)
 
 ### Design System
 - Max content width: 1200px
