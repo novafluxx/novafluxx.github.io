@@ -8,7 +8,7 @@ This is a personal portfolio website for Justin High (QA Analyst & Automation En
 
 ## Tech Stack
 
-- **Framework**: Astro 5.16.2 (Static Site Generation)
+- **Framework**: Astro 5.16.3 (Static Site Generation)
 - **Styling**: Tailwind CSS 4.1.17 (integrated via Vite plugin)
 - **Package Manager**: pnpm
 - **Language**: TypeScript
