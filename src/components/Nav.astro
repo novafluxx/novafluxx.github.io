@@ -135,6 +135,8 @@ const links = [
         if (!nav) return;
 
         function updateNavStyle() {
+            if (!nav) return;
+
             const navRect = nav.getBoundingClientRect();
             const navCenter = navRect.top + navRect.height / 2;
 
@@ -149,7 +151,7 @@ const links = [
                     navCenter <= sectionRect.bottom
                 ) {
                     const sectionId = section.getAttribute('id');
-                    if (darkSections.includes(sectionId)) {
+                    if (sectionId && darkSections.includes(sectionId)) {
                         isOverDarkSection = true;
                     }
                 }
