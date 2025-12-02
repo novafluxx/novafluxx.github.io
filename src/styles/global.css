@@ -77,6 +77,167 @@ body {
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* ========================================
+   FULL-PAGE ANIMATED BACKGROUND
+   ======================================== */
+
+/* Base gradient layer */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    background: linear-gradient(180deg, #e0e7ff 0%, #f1f5f9 50%, #e0e7ff 100%);
+    pointer-events: none;
+}
+
+/* Dark mode base gradient */
+:root.dark body::before {
+    background: linear-gradient(180deg, #0a0e1a 0%, #1a1f35 50%, #0f1729 100%);
+}
+
+/* Animated mesh gradient overlay */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -9;
+    background:
+        radial-gradient(ellipse 800px 600px at 20% 30%, rgba(96, 165, 250, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 600px 700px at 80% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse 700px 500px at 50% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+        radial-gradient(circle 400px at 10% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 50%);
+    animation: mesh-float 20s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Dark mode mesh gradient - more vibrant */
+:root.dark body::after {
+    background:
+        radial-gradient(ellipse 800px 600px at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 600px 700px at 80% 70%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 700px 500px at 50% 50%, rgba(96, 165, 250, 0.08) 0%, transparent 50%),
+        radial-gradient(circle 400px at 10% 80%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
+}
+
+/* Animated glow spots */
+.page-glow-spots {
+    position: fixed;
+    inset: 0;
+    z-index: -8;
+    background:
+        radial-gradient(circle 350px at 30% 40%, rgba(96, 165, 250, 0.08), transparent 65%),
+        radial-gradient(circle 300px at 70% 60%, rgba(139, 92, 246, 0.06), transparent 65%),
+        radial-gradient(circle 280px at 50% 80%, rgba(14, 165, 233, 0.05), transparent 60%);
+    animation: glow-pulse 12s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Dark mode glow spots - more vibrant */
+:root.dark .page-glow-spots {
+    background:
+        radial-gradient(circle 350px at 30% 40%, rgba(59, 130, 246, 0.12), transparent 65%),
+        radial-gradient(circle 300px at 70% 60%, rgba(139, 92, 246, 0.1), transparent 65%),
+        radial-gradient(circle 280px at 50% 80%, rgba(14, 165, 233, 0.08), transparent 60%);
+}
+
+/* Subtle noise texture */
+.page-noise {
+    position: fixed;
+    inset: 0;
+    z-index: -7;
+    opacity: 0.02;
+    background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 400 400%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');
+    pointer-events: none;
+}
+
+/* Dark mode noise - slightly more visible */
+:root.dark .page-noise {
+    opacity: 0.03;
+}
+
+/* Grid overlay */
+.page-grid {
+    position: fixed;
+    inset: 0;
+    z-index: -6;
+    background-image:
+        linear-gradient(rgba(96, 165, 250, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(96, 165, 250, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* Dark mode grid - more visible */
+:root.dark .page-grid {
+    background-image:
+        linear-gradient(rgba(96, 165, 250, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(96, 165, 250, 0.03) 1px, transparent 1px);
+    opacity: 0.5;
+}
+
+/* Floating orbs */
+.page-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(60px);
+    z-index: -5;
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
+
+/* Light mode orbs - softer */
+.page-orb-1 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 70%);
+    top: 15%;
+    left: 8%;
+    opacity: 0.3;
+    animation: float-orb-refined 22s ease-in-out infinite;
+}
+
+.page-orb-2 {
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.12), transparent 70%);
+    top: 55%;
+    right: 12%;
+    opacity: 0.3;
+    animation: float-orb-refined 28s ease-in-out infinite reverse;
+    animation-delay: -8s;
+}
+
+.page-orb-3 {
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.1), transparent 70%);
+    bottom: 18%;
+    left: 45%;
+    opacity: 0.3;
+    animation: float-orb-refined 25s ease-in-out infinite;
+    animation-delay: -12s;
+}
+
+/* Dark mode orbs - more vibrant */
+:root.dark .page-orb-1 {
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.4), transparent 70%);
+    opacity: 0.25;
+}
+
+:root.dark .page-orb-2 {
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.35), transparent 70%);
+    opacity: 0.25;
+}
+
+:root.dark .page-orb-3 {
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.3), transparent 70%);
+    opacity: 0.25;
 }
 
 /* Modernized Glass Card Variants */
@@ -516,6 +677,15 @@ button:focus-visible {
     animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     line-height: 1.4 !important;
     padding-bottom: 0.2em !important;
+    /* Light mode text shadow - subtle glow */
+    text-shadow:
+        0 0 30px rgba(96, 165, 250, 0.3),
+        0 0 60px rgba(139, 92, 246, 0.2),
+        0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode text shadow - more vibrant glow */
+:root.dark .hero-name {
     text-shadow:
         0 0 40px rgba(96, 165, 250, 0.5),
         0 0 80px rgba(167, 139, 250, 0.3),
@@ -526,6 +696,12 @@ button:focus-visible {
     animation: fadeIn 0.6s 0.4s cubic-bezier(0.4, 0, 0.2, 1) backwards;
     line-height: 1.6 !important;
     padding-bottom: 0.15em !important;
+    /* Light mode subtle shadow */
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark mode subtitle shadow */
+:root.dark .hero-subtitle {
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -768,16 +944,28 @@ button:focus-visible {
     position: relative;
 }
 
+/* Light mode - no dark overlay, let the image show through */
 #aviation::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(10, 15, 30, 0.85);
+    background: rgba(255, 255, 255, 0.1);
     z-index: 0;
 }
 
-/* Force dark mode styling for aviation section cards in both themes */
+/* Dark mode - add dark overlay for contrast */
+:root.dark #aviation::before {
+    background: rgba(10, 15, 30, 0.85);
+}
+
+/* Aviation section cards - theme-aware */
+/* Light mode - use standard card styling */
 #aviation .glass-card-accent {
+    /* Inherits default .glass-card-accent styles in light mode */
+}
+
+/* Dark mode - force dark styling */
+:root.dark #aviation .glass-card-accent {
     background: rgba(30, 41, 59, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow:
@@ -785,25 +973,26 @@ button:focus-visible {
         inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-#aviation .glass-card-accent::after {
+:root.dark #aviation .glass-card-accent::after {
     background: rgba(30, 41, 59, 0.8);
 }
 
-#aviation .glass-card-secondary {
+:root.dark #aviation .glass-card-secondary {
     background: rgba(30, 41, 59, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 }
 
-/* Ensure text is white/light in aviation section */
-#aviation h2,
-#aviation h3,
-#aviation h4 {
+/* Text colors - theme-aware */
+/* Dark mode - force white/light text */
+:root.dark #aviation h2,
+:root.dark #aviation h3,
+:root.dark #aviation h4 {
     color: #f1f5f9 !important;
 }
 
-#aviation p,
-#aviation li {
+:root.dark #aviation p,
+:root.dark #aviation li {
     color: #cbd5e1 !important;
 }
 
@@ -820,6 +1009,7 @@ button:focus-visible {
 /* Navigation Active State - Sliding Underline */
 .nav-link {
     position: relative;
+    transition: all 0.3s ease;
 }
 
 .nav-link::after {
@@ -835,6 +1025,18 @@ button:focus-visible {
 
 .nav-link.active::after {
     width: 100%;
+}
+
+/* Navigation Glow Effect on Hover */
+.nav-link:hover,
+button#theme-toggle:hover {
+    text-shadow: 0 0 20px rgba(96, 165, 250, 0.6);
+}
+
+/* Dark mode glow - more vibrant */
+:root.dark .nav-link:hover,
+:root.dark button#theme-toggle:hover {
+    text-shadow: 0 0 25px rgba(96, 165, 250, 0.8);
 }
 
 /* Adaptive Navigation - Changes color based on section background */
