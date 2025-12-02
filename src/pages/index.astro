@@ -3,40 +3,120 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Justin High - QA Analyst & Automation Engineer">
-	<div class="hero-section">
-		<div class="hero-content text-center">
-			<h1>Justin High</h1>
-			<h2>Quality Assurance Analyst & Automation Engineer</h2>
+	<!-- Hero Section -->
+	<section
+		id="hero"
+		class="min-h-screen flex items-center justify-center relative overflow-hidden"
+		style="margin-top: 0;"
+	>
+		<!-- Animated Gradient Background -->
+		<div
+			class="absolute inset-0 -z-10"
+			style="background: linear-gradient(135deg, #1e3a8a 0%, #312e81 50%, #1e40af 100%); background-size: 200% 200%; animation: gradient-rotate 15s ease infinite;"
+		>
 		</div>
-	</div>
 
-	<div class="section py-12">
-		<div class="container mx-auto px-4">
-			<div class="about-grid">
-				<div class="glass-card p-8 text-center">
-					<i class="fa-solid fa-code text-4xl mb-4 text-blue-500"></i>
-					<h3>QA Engineering</h3>
-					<p>
+		<!-- Radial Gradient Accents -->
+		<div
+			class="absolute inset-0 -z-10 opacity-30"
+			style="background: radial-gradient(circle at 20% 50%, rgba(96, 165, 250, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(167, 139, 250, 0.3) 0%, transparent 50%);"
+		>
+		</div>
+
+		<!-- Grid Overlay -->
+		<div class="hero-grid-overlay"></div>
+
+		<!-- Floating Orbs -->
+		<div class="hero-orb hero-orb-1"></div>
+		<div class="hero-orb hero-orb-2"></div>
+		<div class="hero-orb hero-orb-3"></div>
+
+		<!-- Geometric Shapes -->
+		<div class="hero-shape hero-shape-1"></div>
+		<div class="hero-shape hero-shape-2"></div>
+		<div class="hero-shape hero-shape-3"></div>
+
+		<!-- Hero Content -->
+		<div class="hero-content text-center z-10 px-4">
+			<h1
+				class="hero-name text-white mb-6"
+				style="font-family: var(--font-display); font-size: var(--text-5xl); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1;"
+			>
+				Justin High
+			</h1>
+			<h2
+				class="hero-subtitle text-slate-100 mb-12"
+				style="font-family: var(--font-sans); font-size: var(--text-2xl); font-weight: 500; opacity: 0.95; max-width: 700px; margin-left: auto; margin-right: auto;"
+			>
+				Quality Assurance Analyst & Automation Engineer
+			</h2>
+			<div class="scroll-indicator mt-16">
+				<i class="fas fa-chevron-down text-white text-3xl mb-0!"></i>
+			</div>
+		</div>
+	</section>
+
+	<!-- About Section -->
+	<section id="about" class="py-24 relative">
+		<div class="container mx-auto px-4 max-w-[1200px]">
+			<h2
+				class="gradient-text text-center mb-16"
+				style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: 700;"
+			>
+				What I Do
+			</h2>
+			<div
+				class="about-grid stagger-children"
+			>
+				<div class="glass-card-primary p-10 text-center">
+					<i
+						class="fa-solid fa-code text-5xl mb-6 text-blue-400"
+						style="margin-bottom: 1.5rem;"
+					></i>
+					<h3
+						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 1rem; color: var(--text-color);"
+					>
+						QA Engineering
+					</h3>
+					<p
+						style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
+					>
 						Specialized in developing and implementing comprehensive
 						test strategies to ensure software quality and
 						reliability.
 					</p>
 				</div>
-				<div class="glass-card p-8 text-center">
-					<i class="fa-solid fa-robot text-4xl mb-4 text-purple-500"
+				<div class="glass-card-primary p-10 text-center">
+					<i
+						class="fa-solid fa-robot text-5xl mb-6 text-purple-400"
+						style="margin-bottom: 1.5rem;"
 					></i>
-					<h3>Automation</h3>
-					<p>
+					<h3
+						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 1rem; color: var(--text-color);"
+					>
+						Automation
+					</h3>
+					<p
+						style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
+					>
 						Expert in creating efficient automated testing
 						frameworks and continuous integration pipelines to speed
 						up delivery.
 					</p>
 				</div>
-				<div class="glass-card p-8 text-center">
-					<i class="fa-solid fa-plane-up text-4xl mb-4 text-sky-500"
+				<div class="glass-card-primary p-10 text-center">
+					<i
+						class="fa-solid fa-plane-up text-5xl mb-6 text-cyan-400"
+						style="margin-bottom: 1.5rem;"
 					></i>
-					<h3>Aviation</h3>
-					<p>
+					<h3
+						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 1rem; color: var(--text-color);"
+					>
+						Aviation
+					</h3>
+					<p
+						style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
+					>
 						Licensed private pilot with a passion for aviation and
 						aerial photography, bringing a detail-oriented mindset
 						to all projects.
@@ -44,38 +124,283 @@ import Layout from "../layouts/Layout.astro";
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 
-	<div class="section py-12 bg-slate-50 dark:bg-slate-900/50 -mx-8 px-8">
-		<div class="container mx-auto px-4">
+	<!-- Experience Section -->
+	<section id="experience" class="py-24 relative">
+		<div class="container mx-auto px-4 max-w-[1200px]">
 			<h2
-				class="text-3xl font-bold text-center mb-12 text-slate-800 dark:text-white"
+				class="gradient-text text-center mb-16"
+				style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: 700;"
+			>
+				Professional Experience
+			</h2>
+
+			<!-- Timeline -->
+			<div class="max-w-4xl mx-auto mb-20 animate-on-scroll">
+				<div class="glass-card-primary p-10">
+					<h3
+						style="font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 700; margin-bottom: 0.5rem; color: var(--text-color);"
+					>
+						Quality Assurance Analyst & Automation Engineer
+					</h3>
+					<p
+						class="timeline-period mb-6"
+						style="font-family: var(--font-sans); font-weight: 600; color: var(--secondary-color); font-size: var(--text-lg);"
+					>
+						Current Role
+					</p>
+					<ul class="responsibility-list">
+						<li>
+							Design and implement comprehensive test strategies
+							for complex software applications
+						</li>
+						<li>
+							Develop and maintain automated test frameworks using
+							industry-standard tools
+						</li>
+						<li>
+							Lead test automation initiatives and continuous
+							integration practices
+						</li>
+						<li>
+							Collaborate with development teams to ensure
+							software quality throughout the SDLC
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Technical Skills -->
+			<h3
+				class="text-center mb-12"
+				style="font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 700; color: var(--text-color);"
 			>
 				Technical Skills
-			</h2>
-			<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-				<div class="glass-card p-6 text-center">
-					<i class="fa-brands fa-js text-3xl mb-2 text-yellow-400"
-					></i>
-					<h4 class="font-semibold">JavaScript</h4>
+			</h3>
+			<div
+				class="skills-grid grid grid-cols-1 md:grid-cols-3 gap-6 stagger-children"
+			>
+				<div class="glass-card-secondary p-8">
+					<h4
+						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 1rem; color: var(--text-color);"
+					>
+						Testing
+					</h4>
+					<ul class="skill-list">
+						<li>Test Automation</li>
+						<li>Manual Testing</li>
+						<li>Performance Testing</li>
+						<li>API Testing</li>
+					</ul>
 				</div>
-				<div class="glass-card p-6 text-center">
-					<i class="fa-brands fa-python text-3xl mb-2 text-blue-400"
-					></i>
-					<h4 class="font-semibold">Python</h4>
+				<div class="glass-card-secondary p-8">
+					<h4
+						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 1rem; color: var(--text-color);"
+					>
+						Tools & Frameworks
+					</h4>
+					<ul class="skill-list">
+						<li>Taiko</li>
+						<li>Gauge</li>
+						<li>Azure DevOps</li>
+						<li>Jira</li>
+						<li>Git</li>
+					</ul>
 				</div>
-				<div class="glass-card p-6 text-center">
-					<i
-						class="fa-brands fa-git-alt text-3xl mb-2 text-orange-500"
-					></i>
-					<h4 class="font-semibold">Git</h4>
-				</div>
-				<div class="glass-card p-6 text-center">
-					<i class="fa-brands fa-git-alt text-3xl mb-2 text-orange-500"
-					></i>
-					<h4 class="font-semibold">GitHub</h4>
+				<div class="glass-card-secondary p-8">
+					<h4
+						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 1rem; color: var(--text-color);"
+					>
+						Programming
+					</h4>
+					<ul class="skill-list">
+						<li>JavaScript</li>
+						<li>Python</li>
+						<li>C# with .NET</li>
+						<li>SQL</li>
+					</ul>
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
+
+	<!-- Aviation Section -->
+	<section id="aviation" class="py-24 relative min-h-screen flex items-center">
+		<div
+			class="parallax-bg"
+			style="background-image: url('/images/flight-line.jpg');"
+		>
+		</div>
+
+		<div class="container mx-auto px-4 max-w-[1200px] relative z-10">
+			<h2
+				class="text-white text-center mb-16"
+				style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: 700;"
+			>
+				Aviation Journey
+			</h2>
+
+			<!-- License Card -->
+			<div class="max-w-3xl mx-auto mb-16 animate-on-scroll">
+				<div class="glass-card-accent p-10 flex items-center gap-8">
+					<div class="text-6xl text-blue-400 flex-shrink-0">
+						<i
+							class="fas fa-plane"
+							style="margin-bottom: 0; font-size: 4rem;"
+						></i>
+					</div>
+					<div>
+						<h3
+							style="font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 700; margin-bottom: 0.5rem; color: var(--text-color);"
+						>
+							Private Pilot License
+						</h3>
+						<p
+							style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
+						>
+							Achieved the dream of becoming a licensed private pilot,
+							opening up new horizons and perspectives.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Aviation Skills -->
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger-children">
+				<div class="glass-card-secondary p-8 text-center">
+					<i
+						class="fas fa-compass text-5xl mb-6 text-blue-400"
+						style="margin-bottom: 1.5rem;"
+					></i>
+					<h3
+						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 0.75rem; color: var(--text-color);"
+					>
+						Navigation
+					</h3>
+					<p
+						style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
+					>
+						Proficient in VFR navigation and flight planning
+					</p>
+				</div>
+				<div class="glass-card-secondary p-8 text-center">
+					<i
+						class="fas fa-cloud text-5xl mb-6 text-slate-400"
+						style="margin-bottom: 1.5rem;"
+					></i>
+					<h3
+						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 0.75rem; color: var(--text-color);"
+					>
+						Weather
+					</h3>
+					<p
+						style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
+					>
+						Experienced in weather analysis and decision making
+					</p>
+				</div>
+				<div class="glass-card-secondary p-8 text-center">
+					<i
+						class="fas fa-tower-broadcast text-5xl mb-6 text-red-400"
+						style="margin-bottom: 1.5rem;"
+					></i>
+					<h3
+						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 0.75rem; color: var(--text-color);"
+					>
+						Communications
+					</h3>
+					<p
+						style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
+					>
+						Fluent in aviation radio communications
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Contact Section -->
+	<section id="contact" class="py-24 relative">
+		<div class="container mx-auto px-4 max-w-[1200px]">
+			<h2
+				class="gradient-text text-center mb-8"
+				style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: 700;"
+			>
+				Get in Touch
+			</h2>
+			<p
+				class="text-center mb-16 max-w-2xl mx-auto"
+				style="font-family: var(--font-sans); font-size: var(--text-lg); line-height: 1.7; color: var(--text-muted);"
+			>
+				I'm always interested in discussing new opportunities, sharing
+				aviation experiences, or talking about quality assurance and
+				automation.
+			</p>
+
+			<div
+				class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto animate-on-scroll"
+			>
+				<div class="glass-card-primary p-10 text-center">
+					<i
+						class="fab fa-linkedin text-6xl mb-6 text-blue-500"
+						aria-hidden="true"
+						style="margin-bottom: 1.5rem;"
+					></i>
+					<h3
+						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 1rem; color: var(--text-color);"
+					>
+						LinkedIn
+					</h3>
+					<p
+						class="mb-6"
+						style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
+					>
+						Connect with me professionally on LinkedIn
+					</p>
+					<a
+						href="https://www.linkedin.com/in/justin-high-4977598b"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all font-semibold"
+						aria-label="Visit Justin's LinkedIn profile"
+						style="font-family: var(--font-sans);"
+						>LinkedIn Profile</a
+					>
+				</div>
+
+				<div class="glass-card-primary p-10 text-center">
+					<i
+						class="fab fa-github text-6xl mb-6 text-slate-300 dark:text-white"
+						aria-hidden="true"
+						style="margin-bottom: 1.5rem;"
+					></i>
+					<h3
+						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 1rem; color: var(--text-color);"
+					>
+						GitHub
+					</h3>
+					<p
+						class="mb-6"
+						style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
+					>
+						Check out my automation projects and contributions
+					</p>
+					<a
+						href="https://github.com/novafluxx"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-block bg-slate-800 text-white px-8 py-3 rounded-full hover:bg-slate-900 focus:ring-2 focus:ring-slate-700 focus:ring-offset-2 transition-all dark:bg-slate-700 dark:hover:bg-slate-600 font-semibold"
+						aria-label="Visit Justin's GitHub profile"
+						style="font-family: var(--font-sans);"
+						>GitHub Profile</a
+					>
+				</div>
+			</div>
+		</div>
+	</section>
 </Layout>
+
+<!-- Animation Scripts -->
+<script src="../scripts/animations.ts"></script>
+<script src="../scripts/smooth-scroll.ts"></script>

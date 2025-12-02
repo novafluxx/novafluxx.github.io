@@ -1,12 +1,11 @@
 ---
 const links = [
-    { href: "/", label: "Home", icon: "fas fa-home" },
-    { href: "/experience", label: "Experience", icon: "fas fa-briefcase" },
-    { href: "/aviation", label: "Aviation", icon: "fas fa-plane" },
-    { href: "/contact", label: "Contact", icon: "fas fa-envelope" },
+    { href: "#hero", label: "Home", icon: "fas fa-home" },
+    { href: "#about", label: "About", icon: "fas fa-user" },
+    { href: "#experience", label: "Experience", icon: "fas fa-briefcase" },
+    { href: "#aviation", label: "Aviation", icon: "fas fa-plane" },
+    { href: "#contact", label: "Contact", icon: "fas fa-envelope" },
 ];
-
-const { currentPath = Astro.url.pathname } = Astro.props;
 ---
 
 <nav
@@ -19,17 +18,12 @@ const { currentPath = Astro.url.pathname } = Astro.props;
             links.map((link) => (
                 <a
                     href={link.href}
-                    class={`group flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 font-medium no-underline transition-all duration-300 text-xs sm:text-base md:text-base hover:scale-105 focus:scale-105 ${
-                        currentPath === link.href
-                            ? "text-slate-900 dark:text-white font-bold drop-shadow-md"
-                            : "text-slate-700 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white"
-                    }`}
-                    aria-current={currentPath === link.href ? "page" : undefined}
+                    class="nav-link group flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 font-medium no-underline transition-all duration-300 text-xs sm:text-base md:text-base hover:scale-105 focus:scale-105 text-slate-700 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white"
                     aria-label={link.label}
                 >
                     <span class="inline-flex items-center justify-center leading-none">
                         <i
-                            class={`${link.icon} transition-colors duration-300 ${currentPath === link.href ? "text-blue-500 dark:text-sky-300" : "text-slate-500 group-hover:text-slate-700 dark:text-slate-300 dark:group-hover:text-white"} mb-0! text-xl`}
+                            class={`${link.icon} transition-colors duration-300 text-slate-500 group-hover:text-slate-700 dark:text-slate-300 dark:group-hover:text-white mb-0! text-xl`}
                         />
                     </span>
                     <span class="sm:inline leading-none">{link.label}</span>
@@ -94,4 +88,93 @@ const { currentPath = Astro.url.pathname } = Astro.props;
         // Update icon
         updateIcon();
     });
+
+    // Active Section Detection
+    function initActiveSection() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        if (!sections.length || !navLinks.length) return;
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -80% 0px',
+            threshold: 0,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+
+                    navLinks.forEach((link) => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach((section) => observer.observe(section));
+    }
+
+    // Initialize active section detection
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initActiveSection);
+    } else {
+        initActiveSection();
+    }
+
+    // Adaptive Navigation - Change colors based on background section
+    function initAdaptiveNav() {
+        const nav = document.querySelector('nav');
+        const darkSections = ['hero', 'aviation']; // Sections with dark backgrounds
+
+        if (!nav) return;
+
+        function updateNavStyle() {
+            const navRect = nav.getBoundingClientRect();
+            const navCenter = navRect.top + navRect.height / 2;
+
+            // Find which section the nav center is over
+            const sections = document.querySelectorAll('section[id]');
+            let isOverDarkSection = false;
+
+            sections.forEach((section) => {
+                const sectionRect = section.getBoundingClientRect();
+                if (
+                    navCenter >= sectionRect.top &&
+                    navCenter <= sectionRect.bottom
+                ) {
+                    const sectionId = section.getAttribute('id');
+                    if (darkSections.includes(sectionId)) {
+                        isOverDarkSection = true;
+                    }
+                }
+            });
+
+            // Apply appropriate styling
+            if (isOverDarkSection) {
+                nav.classList.add('nav-over-dark');
+                nav.classList.remove('nav-over-light');
+            } else {
+                nav.classList.add('nav-over-light');
+                nav.classList.remove('nav-over-dark');
+            }
+        }
+
+        // Update on scroll
+        window.addEventListener('scroll', updateNavStyle);
+        // Initial update
+        updateNavStyle();
+    }
+
+    // Initialize adaptive nav
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAdaptiveNav);
+    } else {
+        initAdaptiveNav();
+    }
 </script>
