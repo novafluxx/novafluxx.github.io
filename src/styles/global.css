@@ -1003,6 +1003,8 @@ button:focus-visible {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #0a0f1e;
     z-index: -1;
 }
 
@@ -1124,6 +1126,8 @@ nav.nav-over-light > div {
 
     .parallax-bg {
         background-attachment: scroll;
+        background-size: contain;
+        background-position: top center;
     }
 }
 
