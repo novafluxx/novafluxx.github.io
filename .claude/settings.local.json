@@ -1,10 +1,6 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(git branch:*)",
-      "Bash(pnpm build:*)",
-      "Skill(frontend-design)"
-    ]
+    "allow": []
   },
   "outputStyle": "default"
 }
