@@ -6,9 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "preview:worker": "pnpm build && wrangler dev",
+    "preview:worker": "bun build && wrangler dev",
     "astro": "astro",
-    "deploy:cf": "pnpm build && wrangler deploy",
+    "deploy:cf": "bun build && wrangler deploy",
     "deploy:pages": "astro build && wrangler pages deploy dist --project-name=astro-personal-website"
   },
   "dependencies": {

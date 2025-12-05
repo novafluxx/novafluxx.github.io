@@ -16,7 +16,7 @@ This is a personal portfolio website for Justin High (QA Analyst & Automation En
 
 - **Framework**: Astro 5.16.3 (Static Site Generation)
 - **Styling**: Tailwind CSS 4.1.17 (integrated via Vite plugin)
-- **Package Manager**: pnpm
+- **Runtime & Package Manager**: Bun (replaces Node.js + pnpm)
 - **Language**: TypeScript
 - **Deployment**: Cloudflare Workers (migrated from Cloudflare Pages)
 - **Icons**: Font Awesome 7.0.1
@@ -56,17 +56,17 @@ astro-personal-website/
 
 ```bash
 # Development
-pnpm install              # Install dependencies
-pnpm dev                  # Start dev server at localhost:4321
-pnpm build                # Build for production to ./dist/
+bun install               # Install dependencies
+bun dev                   # Start dev server at localhost:4321
+bun build                 # Build for production to ./dist/
 
 # Preview & Testing
-pnpm preview              # Preview production build locally
-pnpm preview:worker       # Build and preview with Wrangler
+bun preview               # Preview production build locally
+bun run preview:worker    # Build and preview with Wrangler
 
 # Deployment
-pnpm deploy:cf            # Build and deploy to Cloudflare Workers
-pnpm deploy:pages         # Build and deploy to Cloudflare Pages (legacy)
+bun run deploy:cf         # Build and deploy to Cloudflare Workers
+bun run deploy:pages      # Build and deploy to Cloudflare Pages (legacy)
 ```
 
 ## Architecture
