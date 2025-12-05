@@ -239,11 +239,15 @@ Mobile optimizations using `@media (max-width: 768px)`:
   - Prevents text compression on narrow screens
 
 **Responsive Grid Patterns:**
-- **Skills Grids** (Technical Skills & Aviation Skills): Use conservative responsive layout to prevent text overflow
+- **All Card Grids**: Use conservative responsive layout to prevent text overflow at medium sizes
   - Default: `grid-cols-1` - single column (mobile through large desktop)
-  - Extra Large (1280px+): `xl:grid-cols-3` - three columns only on very wide screens
-  - Pattern: Keep single column layout longer to ensure readability; only switch to multi-column on screens with ample space
-  - Applies to: `.skills-grid` (Experience section) and Aviation section skill cards
+  - Extra Large (1280px+): `xl:grid-cols-3` - three columns only on very wide screens (1280px+)
+  - Pattern: `grid grid-cols-1 xl:grid-cols-3 gap-6`
+  - Applied to:
+    - About section "What I Do" cards
+    - Experience section Technical Skills cards (`.skills-grid`)
+    - Aviation section skill cards (Navigation, Weather, Communications)
+  - Rationale: Prevents text overflow/compression on tablets and medium-sized desktop windows
 
 **Mobile Design Principles:**
 - Prioritize readability and content spacing on small screens
