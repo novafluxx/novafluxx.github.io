@@ -161,8 +161,12 @@ Comprehensive styling system with:
 - `#about`: Radial gradient background (top, blue glow)
 - `#experience`: Linear gradient background (purple glow)
 - `#aviation`: Dark overlay with forced dark styling regardless of theme toggle
-  - Background: `rgba(10, 15, 30, 0.85)` over parallax image
-  - Text forced to white/light colors
+  - **Desktop**: `rgba(10, 15, 30, 0.85)` overlay over parallax background image (`flight-line.jpg`)
+  - **Mobile (≤768px)**: Parallax image and dark overlay removed for performance and readability
+    - Background image hidden with `background-image: none !important`
+    - Dark overlay removed with `#aviation::before { display: none }`
+    - Uses page's default animated gradient background
+  - Text forced to white/light colors (desktop)
   - Cards forced to dark mode styling
 
 **Navigation Adaptive Styling:**
@@ -218,7 +222,35 @@ nav.nav-over-light {
 - When using icons in components like navigation, may need to override with utility classes like `mb-0!` and text size classes
 - Glass card styles are available via `.glass-card`, `.glass-card-primary`, `.glass-card-secondary`, `.glass-card-accent` classes
 - **Theme-aware components**: Use `dark:` prefix for dark mode variants (e.g., `text-slate-900 dark:text-white`)
-- **Forced dark sections**: Aviation section ignores theme toggle and stays dark
+- **Forced dark sections**: Aviation section ignores theme toggle and stays dark on desktop
+
+### Mobile Responsive Design
+Mobile optimizations using `@media (max-width: 768px)`:
+
+**Aviation Section Mobile Adjustments:**
+- **Parallax Background**: Removed on mobile for better performance and user experience
+  - `background-image: none !important` overrides inline style
+  - `background-color: transparent` removes dark background
+  - Saves bandwidth by not loading large image on mobile devices
+- **Dark Overlay**: `#aviation::before { display: none }` removes overlay on mobile
+- **License Card Layout**: Aviation section's `.glass-card-accent` changes to vertical layout
+  - `flex-direction: column` stacks icon above text
+  - `text-align: center` centers content
+  - Prevents text compression on narrow screens
+
+**Responsive Grid Patterns:**
+- **Skills Grids** (Technical Skills & Aviation Skills): Use conservative responsive layout to prevent text overflow
+  - Default: `grid-cols-1` - single column (mobile through large desktop)
+  - Extra Large (1280px+): `xl:grid-cols-3` - three columns only on very wide screens
+  - Pattern: Keep single column layout longer to ensure readability; only switch to multi-column on screens with ample space
+  - Applies to: `.skills-grid` (Experience section) and Aviation section skill cards
+
+**Mobile Design Principles:**
+- Prioritize readability and content spacing on small screens
+- Remove or simplify decorative elements that don't translate well to mobile
+- Maintain visual hierarchy while adapting layout from horizontal to vertical
+- Use `!important` when necessary to override inline styles for responsive behavior
+- Use progressive grid layouts (1 → 2 → 3 columns) instead of jumping directly from 1 to 3 columns
 
 ### Design System
 - **Max Content Width**: 1200px

@@ -1003,7 +1003,19 @@ button:focus-visible {
 /* Mobile adjustments for parallax background */
 @media (max-width: 768px) {
     .parallax-bg {
-        background-image: none;
+        background-image: none !important;
+        background-color: transparent;
+    }
+
+    /* Remove dark overlay on aviation section for mobile */
+    #aviation::before {
+        display: none;
+    }
+
+    /* Stack icon above text in aviation license card */
+    #aviation .glass-card-accent {
+        flex-direction: column;
+        text-align: center;
     }
 }
 
