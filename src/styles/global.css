@@ -952,9 +952,9 @@ button:focus-visible {
 
 /* Aviation section cards - theme-aware */
 /* Light mode - use standard card styling */
-#aviation .glass-card-accent {
+/*#aviation .glass-card-accent {
     /* Inherits default .glass-card-accent styles in light mode */
-}
+/*}
 
 /* Dark mode - force dark styling */
 :root.dark #aviation .glass-card-accent {

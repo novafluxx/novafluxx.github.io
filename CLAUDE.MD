@@ -6,11 +6,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a personal portfolio website for Justin High (QA Analyst & Automation Engineer) built with Astro and styled with Tailwind CSS v4. The site is deployed to Cloudflare Workers using custom domains (novafluxx.org).
 
-**Recent Major Changes** (Commit bc8a79a, Dec 2, 2025):
+## Recent Changes Reference
+
+**Commit bc8a79a** (Dec 2, 2025): "redesigned site to single page. Added intelligent text colors for navbar"
 - Redesigned from multi-page to **single-page application (SPA)** with smooth-scrolling sections
-- Added intelligent navigation color switching based on section background
+- Removed `experience.astro`, `aviation.astro`, `contact.astro`
+- Added `src/scripts/animations.ts` and `src/scripts/smooth-scroll.ts`
+- Expanded `global.css` from ~200 to 829 lines
 - Implemented scroll-triggered animations with IntersectionObserver
-- Expanded global.css from ~200 to 829 lines with comprehensive animation system
+- Added intelligent navigation color switching based on section background
+- Expanded global.css with comprehensive animation system
+
 
 ## Tech Stack
 
@@ -308,14 +314,3 @@ Since this is now a single-page site, adding content means adding sections to `s
 - Static assets served from Cloudflare Workers (global CDN)
 - Font Awesome and Google Fonts loaded from CDN
 - Intersection Observer used efficiently (unobserves after animation)
-
-## Recent Changes Reference
-
-**Commit bc8a79a** (Dec 2, 2025): "redesigned site to single page. Added intelligent text colors for navbar"
-- Converted 4-page site to single-page application
-- Added `src/scripts/animations.ts` and `src/scripts/smooth-scroll.ts`
-- Expanded `global.css` from ~200 to 829 lines
-- Removed `experience.astro`, `aviation.astro`, `contact.astro`
-- Added intelligent navigation color switching
-- Implemented scroll-triggered animations
-- Added floating orbs and animated gradients to hero section
