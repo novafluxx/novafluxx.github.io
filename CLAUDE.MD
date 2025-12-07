@@ -47,6 +47,7 @@ astro-personal-website/
 │   │   └── 404.astro         # Custom 404 error page
 │   ├── scripts/              # Client-side TypeScript
 │   │   ├── animations.ts     # Intersection Observer scroll animations (39 lines)
+|   |   ├── nav.ts            # Navigation-related functionality (134 lines)
 │   │   └── smooth-scroll.ts  # Smooth scroll with fixed header offset (50 lines)
 │   ├── styles/               # Global styles
 │   │   └── global.css        # Comprehensive styling system (829 lines)
