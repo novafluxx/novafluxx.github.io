@@ -6,6 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a personal portfolio website for Justin High (QA Analyst & Automation Engineer) built with Astro and styled with Tailwind CSS v4. The site is deployed to Cloudflare Workers using custom domains (novafluxx.org).
 
+## Available Tools
+- Always use context7 when I need code generation, setup or configuration steps, or library/API documentation. You should automatically use the Context7 MCP tools to resolve library id and get library docs without me having to explicitly ask.
+
 ## Recent Changes Reference
 
 **Commit bc8a79a** (Dec 2, 2025): "redesigned site to single page. Added intelligent text colors for navbar"
