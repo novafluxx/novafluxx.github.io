@@ -38,8 +38,6 @@ astro-personal-website/
 ├── public/                     # Static assets served directly
 │   ├── images/                 # Image assets
 │   │   └── flight-line.jpg    # Aviation section background
-│   ├── favicon.png            # Site favicon (PNG)
-│   └── favicon.svg            # Site favicon (SVG)
 ├── src/
 │   ├── components/            # Reusable Astro components
 │   │   └── Nav.astro         # Navigation with intelligent color switching (181 lines)
