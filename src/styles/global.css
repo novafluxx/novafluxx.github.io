@@ -923,14 +923,6 @@ button:focus-visible {
 }
 
 /* Section Backgrounds */
-#experience {
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        rgba(139, 92, 246, 0.05),
-        transparent
-    );
-}
 
 #aviation {
     position: relative;
