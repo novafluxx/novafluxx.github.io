@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <Layout title="Justin High - QA Analyst & Automation Engineer">
@@ -202,7 +203,7 @@ import Layout from "../layouts/Layout.astro";
 	<section id="aviation" class="py-24 relative min-h-screen flex items-center">
 		<div
 			class="parallax-bg"
-			style="background-image: url('/images/flight-line.jpg');"
+			style={`background-image: url('${baseUrl}/images/flight-line.jpg');`}
 		>
 		</div>
 
