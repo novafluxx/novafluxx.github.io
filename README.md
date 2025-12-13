@@ -2,14 +2,14 @@
 
 A modern, responsive portfolio website for Justin High (QA Analyst & Automation Engineer) built with Astro and styled with Tailwind CSS v4.
 
-🌐 **Live Site**: [novafluxx.org](https://novafluxx.org)
+🌐 **Live Site**: [novafluxx.github.io/astro-personal-website](https://novafluxx.github.io/astro-personal-website)
 
 ## 🚀 Tech Stack
 
-- **Framework**: Astro 5.16.3
-- **Styling**: Tailwind CSS v4.1.17
-- **Deployment**: Cloudflare Workers
-- **Package Manager**: pnpm
+- **Framework**: Astro 5.16.5
+- **Styling**: Tailwind CSS v4.1.18
+- **Deployment**: GitHub Pages
+- **Package Manager**: Bun
 - **Icons**: Font Awesome 7.0.1
 - **Fonts**: Google Fonts (Inter)
 
@@ -23,14 +23,13 @@ astro-personal-website/
 │   ├── layouts/          # Layout templates (Layout.astro)
 │   ├── pages/            # File-based routing
 │   │   ├── index.astro       # Home page
-│   │   ├── experience.astro  # Experience/resume
-│   │   ├── aviation.astro    # Aviation interests
-│   │   ├── contact.astro     # Contact information
 │   │   └── 404.astro         # Custom error page
-│   ├── styles/           # Global CSS styles
-│   └── index.js          # Cloudflare Workers entry
+│   ├── scripts/          # Client-side TypeScript
+│   └── styles/           # Global CSS styles
+├── .github/
+│   └── workflows/
+│       └── deploy.yml    # GitHub Actions deployment
 ├── astro.config.mjs      # Astro configuration
-├── wrangler.toml         # Cloudflare Workers config
 └── package.json
 ```
 
@@ -40,13 +39,11 @@ All commands are run from the root of the project:
 
 | Command                | Action                                              |
 | :--------------------- | :-------------------------------------------------- |
-| `pnpm install`         | Install dependencies                                |
-| `pnpm dev`             | Start local dev server at `localhost:4321`          |
-| `pnpm build`           | Build production site to `./dist/`                  |
-| `pnpm preview`         | Preview build locally before deploying              |
-| `pnpm preview:worker`  | Build and preview with Wrangler (Cloudflare)        |
-| `pnpm deploy:cf`       | Build and deploy to Cloudflare Workers              |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check`    |
+| `bun install`          | Install dependencies                                |
+| `bun dev`              | Start local dev server at `localhost:4321`          |
+| `bun build`            | Build production site to `./dist/`                  |
+| `bun preview`          | Preview build locally before deploying              |
+| `bun astro check`      | Run TypeScript type checking                        |
 
 ## ✨ Features
 
@@ -55,7 +52,7 @@ All commands are run from the root of the project:
 - **Responsive Navigation**: Mobile-friendly navigation with Font Awesome icons
 - **Custom 404 Page**: Branded error handling
 - **Optimized Performance**: Static site generation with Astro
-- **Custom Domain**: Deployed to novafluxx.org via Cloudflare Workers
+- **Automated Deployment**: GitHub Actions workflow with official Astro action
 
 ## 🎨 Design System
 
@@ -66,11 +63,12 @@ All commands are run from the root of the project:
 
 ## 🚢 Deployment
 
-The site is deployed to Cloudflare Workers with custom domain configuration:
-- Primary domain: `novafluxx.org`
-- Alternate domain: `www.novafluxx.org`
+The site is deployed to GitHub Pages via GitHub Actions:
+- **Live URL**: [novafluxx.github.io/astro-personal-website](https://novafluxx.github.io/astro-personal-website)
+- **Workflow**: Automatic deployment on push to `main` branch
+- **Manual Trigger**: Available via GitHub Actions tab
 
-Deploy with: `pnpm deploy:cf`
+Deployment happens automatically when you push to the `main` branch.
 
 ## 📝 Adding New Pages
 
