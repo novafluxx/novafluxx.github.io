@@ -46,21 +46,21 @@ const year = new Date().getFullYear();
         <div class="page-orb page-orb-3"></div>
 
         <header
-            class="fixed w-full top-0 z-100 h-[60px] transition-colors duration-300 pointer-events-none"
+            class="fixed w-full top-0 z-100 h-15 transition-colors duration-300 pointer-events-none"
         >
             <div class="pointer-events-auto w-full h-full">
                 <Nav />
             </div>
         </header>
 
-        <main class="flex-1 mt-[60px] w-full max-w-[1200px] mx-auto p-8">
+        <main class="flex-1 mt-15 w-full max-w-300 mx-auto p-8">
             <slot />
         </main>
 
         <footer
             class="bg-slate-800 dark:bg-slate-950 text-white py-8 mt-auto border-t border-slate-700 transition-colors duration-300"
         >
-            <div class="max-w-[1200px] mx-auto px-4 text-center text-slate-300">
+            <div class="max-w-300 mx-auto px-4 text-center text-slate-300">
                 <p>&copy; {year} Justin High. All rights reserved.</p>
                 <div class="mt-4 flex justify-center gap-6">
                     <a
