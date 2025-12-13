@@ -1,3 +1,4 @@
+[![Deploy to GitHub Pages](https://github.com/novafluxx/astro-personal-website/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/novafluxx/astro-personal-website/actions/workflows/deploy.yml)
 # Personal Portfolio Website
 
 A modern, responsive portfolio website for Justin High (QA Analyst & Automation Engineer) built with Astro and styled with Tailwind CSS v4.
