@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://novafluxx.github.io',
-  base: '/astro-personal-website',
+  base: import.meta.env.PROD ? '/astro-personal-website/' : '/',
   vite: {
     plugins: [tailwindcss()]
   }
