@@ -4,14 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal portfolio website for Justin High (QA Analyst & Automation Engineer) built with Astro 5 and Tailwind CSS 4. Deployed to Cloudflare Workers at novafluxx.org.
+Personal portfolio website for Justin High (QA Analyst & Automation Engineer) built with Astro 5 and Tailwind CSS 4. Deployed to GitHub Pages.
 
 **Tech Stack:**
 - Astro 5.16.4 (static site generator)
 - Tailwind CSS 4.1.17 (via Vite plugin)
 - TypeScript 5.9.3
-- Cloudflare Workers (deployment)
-- Wrangler 4.53.0 (deployment CLI)
+- GitHub Pages (deployment)
 - Bun (package manager)
 
 ## Development Commands
@@ -22,9 +21,6 @@ Personal portfolio website for Justin High (QA Analyst & Automation Engineer) bu
 | `bun dev` | Start dev server at localhost:4321 |
 | `bun build` | Build production site to ./dist/ |
 | `bun preview` | Preview build locally |
-| `bun preview:worker` | Build and preview with Wrangler (Cloudflare) |
-| `bun deploy:cf` | Build and deploy to Cloudflare Workers |
-| `bun deploy:pages` | Build and deploy to Cloudflare Pages (alternative) |
 | `bun astro check` | Run TypeScript type checking |
 
 **Note:** Use `bun` commands, not `npm` or `pnpm`. The project uses Bun as its package manager.
@@ -106,12 +102,13 @@ Located in `src/scripts/`:
 
 These scripts are imported in the Layout component using `<script>` tags with `is:inline` for immediate execution.
 
-### Cloudflare Workers
+### GitHub Pages Deployment
 
-`src/index.js` is the Workers entry point:
-- Minimal implementation that delegates to ASSETS binding
-- Serves static files from ./dist/
-- Configured via `wrangler.toml` with custom domains
+Automated deployment via GitHub Actions:
+- Workflow file: `.github/workflows/deploy.yml`
+- Uses official Astro action (`withastro/action@v5`)
+- Configured with `site` and `base` in `astro.config.mjs`
+- Serves static files from ./dist/ via GitHub Pages CDN
 
 ## Design Patterns
 
@@ -149,19 +146,31 @@ These scripts are imported in the Layout component using `<script>` tags with `i
 
 ## Deployment
 
-**Primary Method:** Cloudflare Workers via Wrangler
-- Configured in `wrangler.toml`
-- Custom domains: novafluxx.org, www.novafluxx.org
-- Deploy with `bun deploy:cf`
+**Method:** GitHub Pages via GitHub Actions
+- Workflow: `.github/workflows/deploy.yml`
+- Triggers: Automatic on push to `main`, or manual via Actions tab
+- Site URL: `https://novafluxx.github.io/astro-personal-website/`
 
-**Alternative:** Cloudflare Pages
-- Deploy with `bun deploy:pages`
-- Uses same ./dist/ output directory
+**Build Process:**
+1. GitHub Actions runner checks out code
+2. Uses official Astro action (`withastro/action@v5`) with Bun
+3. Builds site to ./dist/
+4. Uploads artifact to GitHub Pages
+5. Deploys to GitHub Pages CDN with automatic HTTPS
 
 **Build Output:**
 - Astro builds static HTML/CSS/JS to ./dist/
 - No server-side rendering (pure static site)
-- Assets served through Workers ASSETS binding
+- Assets served through GitHub Pages CDN
+
+**Manual Deployment:**
+- Navigate to Actions tab in GitHub repository
+- Select "Deploy to GitHub Pages" workflow
+- Click "Run workflow" button
+
+**Configuration:**
+- `astro.config.mjs` includes `site: 'https://novafluxx.github.io'` and `base: '/astro-personal-website'`
+- GitHub Pages source set to "GitHub Actions" in repository settings
 
 ## Important Considerations
 

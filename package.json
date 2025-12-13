@@ -6,10 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "preview:worker": "bun build && wrangler dev",
-    "astro": "astro",
-    "deploy:cf": "bun build && wrangler deploy",
-    "deploy:pages": "astro build && wrangler pages deploy dist --project-name=astro-personal-website"
+    "astro": "astro"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
@@ -18,7 +15,6 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
-    "typescript": "^5.9.3",
-    "wrangler": "^4.54.0"
+    "typescript": "^5.9.3"
   }
 }
