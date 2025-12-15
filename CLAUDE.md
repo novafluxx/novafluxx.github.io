@@ -7,8 +7,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Personal portfolio website for Justin High (QA Analyst & Automation Engineer) built with Astro 5 and Tailwind CSS 4. Deployed to GitHub Pages.
 
 **Tech Stack:**
-- Astro 5.16.4 (static site generator)
-- Tailwind CSS 4.1.17 (via Vite plugin)
+- Astro 5.16.5 (static site generator)
+- Tailwind CSS 4.1.18 (via Vite plugin)
 - TypeScript 5.9.3
 - GitHub Pages (deployment)
 - Bun (package manager)
