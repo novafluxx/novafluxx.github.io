@@ -5,10 +5,25 @@ const THEME_COLORS = {
 } as const;
 
 // Update Safari iOS status bar color via theme-color meta tag
+// Safari iOS requires removing and re-inserting the meta tag to reliably update
 function updateThemeColor(isDark: boolean): void {
     const themeColorMeta = document.getElementById('theme-color-meta');
     if (themeColorMeta) {
-        themeColorMeta.setAttribute('content', isDark ? THEME_COLORS.dark : THEME_COLORS.light);
+        const newColor = isDark ? THEME_COLORS.dark : THEME_COLORS.light;
+
+        // Safari iOS caches theme-color and doesn't respond to setAttribute alone
+        // Remove and re-insert the meta tag to force Safari to recognize the change
+        const parent = themeColorMeta.parentNode;
+        if (parent) {
+            const newMeta = document.createElement('meta');
+            newMeta.name = 'theme-color';
+            newMeta.id = 'theme-color-meta';
+            newMeta.content = newColor;
+
+            parent.removeChild(themeColorMeta);
+            // Insert at the beginning of head to maintain precedence
+            parent.insertBefore(newMeta, parent.firstChild);
+        }
     }
 }
 
