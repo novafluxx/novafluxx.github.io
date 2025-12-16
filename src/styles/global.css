@@ -5,25 +5,25 @@
 @theme {
     --font-display: 'Syne', system-ui, -apple-system, sans-serif;
     --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
-    --color-primary: #0f172a;
-    --color-secondary: #3b82f6;
-    --color-accent: #8b5cf6;
+    --color-primary: #BE185D;
+    --color-secondary: #FB923C;
+    --color-accent: #EC4899;
 }
 
-/* Base Variables */
+/* Base Variables - Sunrise Theme */
 :root {
-    --primary-color: #0f172a;
-    --secondary-color: #3b82f6;
-    --accent-color: #8b5cf6;
-    --text-color: #1e293b;
-    --text-muted: #64748b;
-    --background-color: #f8fafc;
-    --card-bg: rgba(255, 255, 255, 0.8);
-    --card-border: rgba(255, 255, 255, 0.5);
+    --primary-color: #BE185D;
+    --secondary-color: #FB923C;
+    --accent-color: #EC4899;
+    --text-color: #881337;
+    --text-muted: #9F1239;
+    --background-color: #FFF5F7;
+    --card-bg: rgba(255, 245, 247, 0.85);
+    --card-border: rgba(251, 113, 133, 0.2);
     --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --hero-gradient-start: #4f46e5;
-    --hero-gradient-end: #06b6d4;
-    --hero-text: #0f172a;
+    --hero-gradient-start: #FB7185;
+    --hero-gradient-end: #FBBF24;
+    --hero-text: #881337;
 
     /* Fluid Typography Scale */
     --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
@@ -181,7 +181,7 @@ body::before {
     position: fixed;
     inset: 0;
     z-index: -10;
-    background: linear-gradient(180deg, #e0e7ff 0%, #f1f5f9 50%, #e0e7ff 100%);
+    background: linear-gradient(180deg, #FFE4E6 0%, #FFF5F0 50%, #FFFBEB 100%);
     pointer-events: none;
 }
 
@@ -197,10 +197,10 @@ body::after {
     inset: 0;
     z-index: -9;
     background:
-        radial-gradient(ellipse 800px 600px at 20% 30%, rgba(96, 165, 250, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse 600px 700px at 80% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-        radial-gradient(ellipse 700px 500px at 50% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-        radial-gradient(circle 400px at 10% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 50%);
+        radial-gradient(ellipse 800px 600px at 20% 30%, rgba(251, 113, 133, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 600px 700px at 80% 70%, rgba(251, 146, 60, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse 700px 500px at 50% 50%, rgba(236, 72, 153, 0.08) 0%, transparent 50%),
+        radial-gradient(circle 400px at 10% 80%, rgba(251, 191, 36, 0.08) 0%, transparent 50%);
     animation: mesh-float 20s ease-in-out infinite;
     pointer-events: none;
 }
@@ -220,9 +220,9 @@ body::after {
     inset: 0;
     z-index: -8;
     background:
-        radial-gradient(circle 350px at 30% 40%, rgba(96, 165, 250, 0.08), transparent 65%),
-        radial-gradient(circle 300px at 70% 60%, rgba(139, 92, 246, 0.06), transparent 65%),
-        radial-gradient(circle 280px at 50% 80%, rgba(14, 165, 233, 0.05), transparent 60%);
+        radial-gradient(circle 350px at 30% 40%, rgba(251, 113, 133, 0.08), transparent 65%),
+        radial-gradient(circle 300px at 70% 60%, rgba(251, 146, 60, 0.06), transparent 65%),
+        radial-gradient(circle 280px at 50% 80%, rgba(251, 191, 36, 0.05), transparent 60%);
     animation: glow-pulse 12s ease-in-out infinite;
     pointer-events: none;
 }
@@ -256,8 +256,8 @@ body::after {
     inset: 0;
     z-index: -6;
     background-image:
-        linear-gradient(rgba(96, 165, 250, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(96, 165, 250, 0.02) 1px, transparent 1px);
+        linear-gradient(rgba(251, 113, 133, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(251, 113, 133, 0.02) 1px, transparent 1px);
     background-size: 50px 50px;
     opacity: 0.4;
     pointer-events: none;
@@ -281,11 +281,11 @@ body::after {
     mix-blend-mode: screen;
 }
 
-/* Light mode orbs - softer */
+/* Light mode orbs - sunrise tones */
 .page-orb-1 {
     width: 350px;
     height: 350px;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 70%);
+    background: radial-gradient(circle, rgba(251, 113, 133, 0.15), transparent 70%);
     top: 15%;
     left: 8%;
     opacity: 0.3;
@@ -295,7 +295,7 @@ body::after {
 .page-orb-2 {
     width: 280px;
     height: 280px;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.12), transparent 70%);
+    background: radial-gradient(circle, rgba(251, 146, 60, 0.12), transparent 70%);
     top: 55%;
     right: 12%;
     opacity: 0.3;
@@ -306,7 +306,7 @@ body::after {
 .page-orb-3 {
     width: 320px;
     height: 320px;
-    background: radial-gradient(circle, rgba(96, 165, 250, 0.1), transparent 70%);
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.1), transparent 70%);
     bottom: 18%;
     left: 45%;
     opacity: 0.3;
@@ -452,7 +452,7 @@ body::after {
     content: '';
     position: absolute;
     inset: -2px;
-    background: linear-gradient(45deg, #60a5fa, #a78bfa, #06b6d4, #60a5fa);
+    background: linear-gradient(45deg, #FB7185, #FB923C, #FBBF24, #FB7185);
     border-radius: inherit;
     opacity: 0;
     transition: opacity 0.5s;
@@ -488,7 +488,7 @@ body::after {
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(135deg, var(--hero-gradient-start) 0%, var(--hero-gradient-end) 100%);
+    background: linear-gradient(135deg, #FB7185 0%, #FB923C 50%, #FBBF24 100%);
     padding: 6rem 2rem;
     text-align: center;
     border-radius: 1.5rem;
@@ -754,11 +754,18 @@ button:focus-visible {
 
 /* Gradient Text Utility */
 .gradient-text {
-    background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+    background: linear-gradient(135deg, #FB7185 0%, #FB923C 50%, #FBBF24 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 200% 200%;
+}
+
+/* Dark mode gradient text - use light color for readability */
+:root.dark .gradient-text {
+    background: none;
+    -webkit-text-fill-color: var(--text-color);
+    color: var(--text-color);
 }
 
 /* Hero Entrance Animations */
@@ -766,10 +773,10 @@ button:focus-visible {
     animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     line-height: 1.4 !important;
     padding-bottom: 0.2em !important;
-    /* Light mode text shadow - subtle glow */
+    /* Light mode text shadow - sunrise glow */
     text-shadow:
-        0 0 30px rgba(96, 165, 250, 0.3),
-        0 0 60px rgba(139, 92, 246, 0.2),
+        0 0 30px rgba(251, 113, 133, 0.3),
+        0 0 60px rgba(251, 146, 60, 0.2),
         0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -812,8 +819,8 @@ button:focus-visible {
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(rgba(96, 165, 250, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(96, 165, 250, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(251, 113, 133, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(251, 113, 133, 0.03) 1px, transparent 1px);
     background-size: 50px 50px;
     opacity: 0.5;
     z-index: 1;
@@ -832,7 +839,7 @@ button:focus-visible {
 .hero-orb-1 {
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle, rgba(96, 165, 250, 0.6), transparent);
+    background: radial-gradient(circle, rgba(251, 113, 133, 0.6), transparent);
     top: 10%;
     left: 10%;
     animation: float-orb 20s ease-in-out infinite;
@@ -841,7 +848,7 @@ button:focus-visible {
 .hero-orb-2 {
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(167, 139, 250, 0.5), transparent);
+    background: radial-gradient(circle, rgba(251, 146, 60, 0.5), transparent);
     top: 60%;
     right: 10%;
     animation: float-orb 25s ease-in-out infinite reverse;
@@ -850,7 +857,7 @@ button:focus-visible {
 .hero-orb-3 {
     width: 250px;
     height: 250px;
-    background: radial-gradient(circle, rgba(6, 182, 212, 0.4), transparent);
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.4), transparent);
     bottom: 20%;
     left: 50%;
     animation: float-orb 18s ease-in-out infinite;
@@ -872,7 +879,7 @@ button:focus-visible {
 /* Geometric accent shapes */
 .hero-shape {
     position: absolute;
-    border: 2px solid rgba(96, 165, 250, 0.2);
+    border: 2px solid rgba(251, 113, 133, 0.2);
     z-index: 1;
     pointer-events: none;
 }
@@ -932,9 +939,9 @@ button:focus-visible {
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(circle 350px at 30% 40%, rgba(59, 130, 246, 0.12), transparent 65%),
-        radial-gradient(circle 300px at 70% 60%, rgba(139, 92, 246, 0.1), transparent 65%),
-        radial-gradient(circle 280px at 50% 80%, rgba(14, 165, 233, 0.08), transparent 60%);
+        radial-gradient(circle 350px at 30% 40%, rgba(251, 113, 133, 0.12), transparent 65%),
+        radial-gradient(circle 300px at 70% 60%, rgba(251, 146, 60, 0.1), transparent 65%),
+        radial-gradient(circle 280px at 50% 80%, rgba(251, 191, 36, 0.08), transparent 60%);
     animation: glow-pulse 12s ease-in-out infinite;
     pointer-events: none;
 }
@@ -1114,7 +1121,7 @@ button:focus-visible {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #60a5fa, #a78bfa);
+    background: linear-gradient(90deg, #FB7185, #FB923C);
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -1125,7 +1132,7 @@ button:focus-visible {
 /* Navigation Glow Effect on Hover */
 .nav-link:hover,
 button#theme-toggle:hover {
-    text-shadow: 0 0 20px rgba(96, 165, 250, 0.6);
+    text-shadow: 0 0 20px rgba(251, 113, 133, 0.6);
 }
 
 /* Dark mode glow - more vibrant */
