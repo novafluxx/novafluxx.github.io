@@ -1,3 +1,17 @@
+// Theme color constants for Safari iOS status bar
+const THEME_COLORS = {
+    light: '#fdf2f8', // Warm rose/pink for sunrise theme
+    dark: '#0f172a',  // Slate-900 for dark mode
+} as const;
+
+// Update Safari iOS status bar color via theme-color meta tag
+function updateThemeColor(isDark: boolean): void {
+    const themeColorMeta = document.getElementById('theme-color-meta');
+    if (themeColorMeta) {
+        themeColorMeta.setAttribute('content', isDark ? THEME_COLORS.dark : THEME_COLORS.light);
+    }
+}
+
 // Theme Management
 function initTheme(): void {
     const themeToggle = document.getElementById('theme-toggle');
@@ -13,6 +27,9 @@ function initTheme(): void {
     } else {
         html.classList.add('dark');
     }
+
+    // Update Safari status bar color on initial load
+    updateThemeColor(html.classList.contains('dark'));
 
     // Update icon based on current theme
     function updateIcon(): void {
@@ -36,17 +53,21 @@ function initTheme(): void {
         if (!document.startViewTransition) {
             // Fallback: instant toggle (existing behavior)
             html.classList.toggle('dark');
-            const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
+            const isDark = html.classList.contains('dark');
+            const newTheme = isDark ? 'dark' : 'light';
             localStorage.setItem('theme', newTheme);
             updateIcon();
+            updateThemeColor(isDark);
             return;
         }
 
         // Use View Transitions API for smooth scan effect
         const transition = document.startViewTransition(() => {
             html.classList.toggle('dark');
-            const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
+            const isDark = html.classList.contains('dark');
+            const newTheme = isDark ? 'dark' : 'light';
             localStorage.setItem('theme', newTheme);
+            updateThemeColor(isDark);
         });
 
         // Update icon after transition completes

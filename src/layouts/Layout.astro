@@ -20,6 +20,14 @@ const year = new Date().getFullYear();
         />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
+        <!-- Safari iOS status bar color - updates dynamically via JS for theme toggle -->
+        <meta name="theme-color" id="theme-color-meta" content="#0f172a" />
+        <!-- Fallback theme-color for system preference before JS loads -->
+        <meta name="theme-color" content="#fdf2f8" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+        <!-- Apple-specific status bar styling -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -33,6 +41,16 @@ const year = new Date().getFullYear();
             rel="stylesheet"
         />
         <title>{title}</title>
+        <!-- Inline script to set theme-color immediately based on saved preference -->
+        <script is:inline>
+            (function() {
+                const theme = localStorage.getItem('theme') || 'dark';
+                const meta = document.getElementById('theme-color-meta');
+                if (meta) {
+                    meta.setAttribute('content', theme === 'dark' ? '#0f172a' : '#fdf2f8');
+                }
+            })();
+        </script>
     </head>
     <body
         class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-300"
