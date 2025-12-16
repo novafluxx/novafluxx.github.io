@@ -32,14 +32,27 @@ function initTheme(): void {
 
     // Toggle theme on button click
     themeToggle?.addEventListener('click', () => {
-        html.classList.toggle('dark');
+        // Check if browser supports View Transitions API
+        if (!document.startViewTransition) {
+            // Fallback: instant toggle (existing behavior)
+            html.classList.toggle('dark');
+            const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+            updateIcon();
+            return;
+        }
 
-        // Save preference to localStorage
-        const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
-        localStorage.setItem('theme', newTheme);
+        // Use View Transitions API for smooth scan effect
+        const transition = document.startViewTransition(() => {
+            html.classList.toggle('dark');
+            const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+        });
 
-        // Update icon
-        updateIcon();
+        // Update icon after transition completes
+        transition.finished.then(() => {
+            updateIcon();
+        });
     });
 }
 
