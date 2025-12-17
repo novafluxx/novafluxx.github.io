@@ -67,13 +67,15 @@ All styles are centralized in `src/styles/global.css` (~1,146 lines):
 
 **Background System:**
 The site uses a multi-layer full-page animated background:
-1. Base gradient (`body::before`, `body::after`)
-2. Glow spots (`.page-glow-spots`)
-3. Noise texture (`.page-noise`)
-4. Grid overlay (`.page-grid`)
-5. Floating orbs (`.page-orb-1`, `.page-orb-2`, `.page-orb-3`)
+1. HTML element - Solid background-color (for Safari iOS status bar detection)
+2. Body element - **Transparent background** (allows layers below to show)
+3. Base gradient (`body::before`, `body::after`)
+4. Glow spots (`.page-glow-spots`)
+5. Noise texture (`.page-noise`)
+6. Grid overlay (`.page-grid`)
+7. Floating orbs (`.page-orb-1`, `.page-orb-2`, `.page-orb-3`)
 
-All layers animate independently with different timing and blend modes.
+All layers animate independently with different timing and blend modes. The body must remain transparent to allow the background layers (which use negative z-index) to be visible.
 
 **Key Animations:**
 - `fadeInUp` - Scroll-triggered entrance animations
@@ -88,6 +90,7 @@ Located in `src/scripts/`:
 
 **nav.ts** (Theme & Navigation):
 - Manages dark/light theme toggle with localStorage persistence
+- Updates Safari iOS status bar color via `updateThemeColor()` function (see Safari iOS Status Bar Theming section)
 - Detects active section using IntersectionObserver
 - Applies adaptive navigation styling based on section background
 - Adds `.nav-over-dark` or `.nav-over-light` classes to nav element
@@ -117,6 +120,27 @@ Automated deployment via GitHub Actions:
 - HTML element gets `'dark'` or `'light'` class
 - CSS uses `:root.dark` selector for dark mode overrides
 - Theme is initialized before page render to prevent flash
+
+### Safari iOS Status Bar Theming
+**CRITICAL:** Safari iOS 18.1+ changed how it detects status bar colors. The implementation uses a three-pronged approach:
+
+1. **HTML background-color** - Solid opaque color (`#fdf2f8` light, `#0f172a` dark) set on `<html>` element
+2. **theme-color meta tag** - Updated dynamically and re-inserted into DOM to force Safari recognition
+3. **Fixed header background-color** - Semi-transparent rgba color (0.01 opacity) on `#site-header` element
+
+**Why this approach:**
+- Safari iOS 18.1+ reads `background-color` of fixed position elements for status bar theming
+- The header uses very low opacity (0.01) so Safari detects it without creating visible artifacts
+- All three values must be synchronized when theme toggles
+
+**Implementation locations:**
+- Inline script in `Layout.astro` (sets initial state before render)
+- `updateThemeColor()` function in `nav.ts` (updates on theme toggle)
+
+**DO NOT:**
+- Make body background opaque (breaks parallax and background layers)
+- Remove background-color from fixed header (breaks Safari iOS 18.1+ detection)
+- Increase header background opacity above 0.02 (creates visible block at top)
 
 ### Section-Based Navigation
 - Navigation links are anchor links to section IDs
