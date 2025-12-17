@@ -1,0 +1,79 @@
+name: Feature Request
+description: Suggest a new feature or enhancement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature! Please provide details below.
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feature Category
+      description: What type of feature is this?
+      options:
+        - New Section/Page
+        - UI/Design Enhancement
+        - Animation/Visual Effect
+        - Functionality Enhancement
+        - Accessibility Improvement
+        - Performance Optimization
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or Use Case
+      description: Is your feature request related to a problem? Describe the use case.
+      placeholder: "e.g., I'm always frustrated when... or It would be helpful to have..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe the solution or feature you'd like to see
+      placeholder: A clear description of what you want to happen
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Describe any alternative solutions or features you've considered
+    validations:
+      required: false
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples or Mockups
+      description: Provide any examples, mockups, or references that illustrate your idea
+      placeholder: Links to similar implementations or screenshots
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add any other context about the feature request here
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Compatibility
+      description: This feature should
+      options:
+        - label: Work on mobile devices
+        - label: Work in dark and light mode
+        - label: Be accessible (keyboard navigation, screen readers)
+        - label: Maintain site performance
