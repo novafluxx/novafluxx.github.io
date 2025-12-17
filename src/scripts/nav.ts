@@ -8,14 +8,17 @@ const THEME_COLORS = {
 // Safari iOS 18.1+ also reads background-color of fixed position elements for status bar
 function updateThemeColor(isDark: boolean): void {
     const newColor = isDark ? THEME_COLORS.dark : THEME_COLORS.light;
+    // Semi-transparent version for header (Safari detects it but keeps UI clean)
+    const headerColor = isDark ? 'rgba(15, 23, 42, 0.01)' : 'rgba(253, 242, 248, 0.01)';
 
     // Update HTML background-color (Safari's primary detection method)
     document.documentElement.style.backgroundColor = newColor;
 
     // Update fixed header background-color (iOS 18.1+ Safari requirement)
+    // Use very low opacity so Safari detects it without visual interference
     const header = document.getElementById('site-header');
     if (header) {
-        header.style.backgroundColor = newColor;
+        header.style.backgroundColor = headerColor;
     }
 
     // Update meta tag as well
