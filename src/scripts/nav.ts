@@ -5,12 +5,18 @@ const THEME_COLORS = {
 } as const;
 
 // Update Safari iOS status bar color via theme-color meta tag and HTML background-color
-// Safari iOS often uses the HTML element's background-color for status bar detection
+// Safari iOS 18.1+ also reads background-color of fixed position elements for status bar
 function updateThemeColor(isDark: boolean): void {
     const newColor = isDark ? THEME_COLORS.dark : THEME_COLORS.light;
 
     // Update HTML background-color (Safari's primary detection method)
     document.documentElement.style.backgroundColor = newColor;
+
+    // Update fixed header background-color (iOS 18.1+ Safari requirement)
+    const header = document.getElementById('site-header');
+    if (header) {
+        header.style.backgroundColor = newColor;
+    }
 
     // Update meta tag as well
     const themeColorMeta = document.getElementById('theme-color-meta');

@@ -53,11 +53,20 @@ const year = new Date().getFullYear();
                 if (meta) {
                     meta.setAttribute('content', color);
                 }
+
+                // iOS 18.1+ Safari uses fixed element background-color for status bar
+                // Set this after DOM is ready
+                document.addEventListener('DOMContentLoaded', function() {
+                    const header = document.getElementById('site-header');
+                    if (header) {
+                        header.style.backgroundColor = color;
+                    }
+                });
             })();
         </script>
     </head>
     <body
-        class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-300"
+        class="min-h-screen flex flex-col text-slate-800 dark:text-slate-100 transition-colors duration-300"
     >
         <!-- Full-page animated background layers -->
         <div class="page-glow-spots"></div>
@@ -68,6 +77,7 @@ const year = new Date().getFullYear();
         <div class="page-orb page-orb-3"></div>
 
         <header
+            id="site-header"
             class="fixed w-full top-0 z-100 h-15 transition-colors duration-300 pointer-events-none"
         >
             <div class="pointer-events-auto w-full h-full">
