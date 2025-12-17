@@ -4,13 +4,17 @@ const THEME_COLORS = {
     dark: '#0f172a',  // Slate-900 for dark mode
 } as const;
 
-// Update Safari iOS status bar color via theme-color meta tag
-// Safari iOS requires removing and re-inserting the meta tag to reliably update
+// Update Safari iOS status bar color via theme-color meta tag and HTML background-color
+// Safari iOS often uses the HTML element's background-color for status bar detection
 function updateThemeColor(isDark: boolean): void {
+    const newColor = isDark ? THEME_COLORS.dark : THEME_COLORS.light;
+
+    // Update HTML background-color (Safari's primary detection method)
+    document.documentElement.style.backgroundColor = newColor;
+
+    // Update meta tag as well
     const themeColorMeta = document.getElementById('theme-color-meta');
     if (themeColorMeta) {
-        const newColor = isDark ? THEME_COLORS.dark : THEME_COLORS.light;
-
         // Safari iOS caches theme-color and doesn't respond to setAttribute alone
         // Remove and re-insert the meta tag to force Safari to recognize the change
         const parent = themeColorMeta.parentNode;

@@ -159,6 +159,13 @@
 /* Global Styles */
 html {
     scroll-behavior: smooth;
+    /* Safari iOS uses html background-color for status bar color detection */
+    background-color: #fdf2f8;
+    transition: background-color 0.3s ease;
+}
+
+html.dark {
+    background-color: #0f172a;
 }
 
 body {
