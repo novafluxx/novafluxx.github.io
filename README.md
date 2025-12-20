@@ -7,11 +7,11 @@ A modern, responsive portfolio website for Justin High (QA Analyst & Automation 
 
 ## 🚀 Tech Stack
 
-- **Framework**: Astro 5.16.5
-- **Styling**: Tailwind CSS v4.1.18
+- **Framework**: Astro 5
+- **Styling**: Tailwind CSS v4
 - **Deployment**: GitHub Pages
 - **Package Manager**: Bun
-- **Icons**: Font Awesome 7.0.1
+- **Icons**: Font Awesome 7
 - **Fonts**: Google Fonts (Inter)
 
 ## 📁 Project Structure
