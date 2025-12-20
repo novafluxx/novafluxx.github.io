@@ -1,6 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getImage } from "astro:assets";
+import flightLineImg from "../images/flight-line.jpg";
+
 const baseUrl = import.meta.env.BASE_URL;
+
+// Optimize aviation background image - convert to WebP and compress
+const aviationBg = await getImage({
+	src: flightLineImg,
+	format: "webp",
+	quality: 85,
+	width: 2048,
+	height: 1536,
+});
 ---
 
 <Layout title="Justin High - QA Analyst & Automation Engineer">
@@ -203,7 +215,7 @@ const baseUrl = import.meta.env.BASE_URL;
 	<section id="aviation" class="py-24 relative min-h-screen flex items-center">
 		<div
 			class="parallax-bg"
-			style={`background-image: url('${baseUrl}images/flight-line.jpg');`}
+			style={`background-image: url('${aviationBg.src}');`}
 		>
 		</div>
 
