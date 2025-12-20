@@ -1,35 +1,24 @@
 # AGENTS.md
 
-Quick reference for AI coding agents working in this repository.
+Quick reference for agentic coding agents working in this repository.
 
 ## Commands
-- `bun dev` - Start dev server (localhost:4321)
-- `bun build` - Build for production
-- `bun preview` - Preview production build
-- `bun astro check` - TypeScript type checking
-- **No test suite configured** - This is a static portfolio site
+- `bun install` - Install dependencies (use Bun, not npm/pnpm)
+- `bun dev` - Start dev server at localhost:4321
+- `bun build` - Build production site to ./dist/
+- `bun astro check` - Run TypeScript type checking
+- No test suite configured
 
 ## Code Style
-- **Package Manager**: Use `bun` only (not npm/pnpm/yarn)
-- **TypeScript**: Strict mode (`astro/tsconfigs/strict`), explicit `:void` return types
-- **Imports**: Relative paths only (no aliases) - `../components/Nav.astro`, `../scripts/nav.ts`
-- **Formatting**: Astro frontmatter uses `---`, scripts included with `<script src="../scripts/file.ts">`
-- **CSS**: Centralized in `src/styles/global.css`, uses CSS custom properties (`--variable-name`) for theming
-- **Naming**: kebab-case for files/classes, camelCase for JS/TS variables, PascalCase for components
-- **Theme System**: `:root` and `:root.dark` for light/dark modes, localStorage key is `'theme'`
-- **Error Handling**: Use optional chaining (`?.`) for ALL DOM queries, early returns for guards
-- **Comments**: Inline for complex logic, section headers for major blocks (CSS: `/* ======== SECTION ======== */`)
-- **Responsive**: Mobile breakpoint at 768px, use `clamp()` for fluid typography with CSS variables
-- **Inline Styles**: Mix Tailwind classes (spacing/colors) + inline styles for typography using CSS vars
-
-## Architecture Patterns
-- **Astro Lifecycle**: Re-initialize interactive features on `astro:page-load` event for view transitions
-- **Animations**: Use Intersection Observer + CSS classes pattern - add `.animated` class when in viewport
-- **View Transitions API**: Always check `document.startViewTransition` support, provide instant fallback
-- **CSS Animations**: Wrap modern features in `@supports` checks, respect `prefers-reduced-motion`
-- **Base URL**: Use `import.meta.env.BASE_URL` for asset paths (GitHub Pages deployment support)
-
-## Progressive Enhancement
-- **Feature Detection**: Check browser API support before use, never assume availability
-- **Fallback Pattern**: Modern browsers get animations/transitions, older browsers get functional instant changes
-- **View Transitions**: 600ms duration with `cubic-bezier(0.4, 0, 0.2, 1)` easing for smooth feel
+- **Package Manager**: Always use `bun` commands, never npm/pnpm
+- **TypeScript**: Extends `astro/tsconfigs/strict`, type all functions and parameters
+- **Imports**: Use relative imports for local files (`../components/Nav.astro`)
+- **Formatting**: Tailwind classes inline, CSS in `src/styles/global.css` only
+- **Naming**: camelCase for functions/variables, PascalCase for components, kebab-case for CSS classes
+- **Types**: Prefer explicit types over inference, use `const` assertions for readonly objects
+- **Error Handling**: Use optional chaining (`?.`) and nullish coalescing (`??`)
+- **Comments**: Document complex logic (especially Safari iOS workarounds), avoid obvious comments
+- **CSS**: Use CSS custom properties for theming, prefix animations with purpose (e.g., `float-orb-refined`)
+- **HTML**: Keep body background transparent (allows negative z-index layers), maintain semantic structure
+- **Scripts**: Use `is:inline` for immediate execution, TypeScript for all client-side code
+- **Astro**: Place pages in `src/pages/`, use Layout component, follow file-based routing
