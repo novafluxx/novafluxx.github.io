@@ -446,44 +446,11 @@ body::after {
     background: rgba(30, 41, 59, 0.8);
 }
 
-/* Hero Section */
-.hero-section {
-    background: linear-gradient(135deg, #FB7185 0%, #FB923C 50%, #FBBF24 100%);
-    padding: 6rem 2rem;
-    text-align: center;
-    border-radius: 1.5rem;
-    margin-bottom: 3rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
-    pointer-events: none;
-}
-
 .hero-content {
     position: relative;
     z-index: 1;
 }
 
-.hero-section h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-    font-weight: 800;
-    letter-spacing: -0.025em;
-    line-height: 1.4;
-    padding-bottom: 0.2em;
-    color: var(--hero-text);
-}
-
-.hero-section h2,
 .hero-subtitle {
     font-size: 1.5rem;
     font-weight: 500;
@@ -534,11 +501,6 @@ button:focus-visible {
     outline: 2px solid var(--secondary-color);
     outline-offset: 2px;
     border-radius: 0.25rem;
-}
-
-/* Experience & Aviation Specific Styles */
-.timeline-item {
-    margin-bottom: 2rem;
 }
 
 .timeline-period {
