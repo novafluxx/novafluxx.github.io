@@ -1,0 +1,32 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import MarkdownLayout from "../layouts/MarkdownLayout.astro";
+
+export async function getStaticPaths() {
+    const pages = await getCollection("pages");
+
+    return pages.map((page) => ({
+        params: { slug: page.slug.split("/") },
+        props: { page },
+    }));
+}
+
+interface Props {
+    page: CollectionEntry<"pages">;
+}
+
+const { page } = Astro.props as Props;
+const { Content, headings } = await page.render();
+const { title, description, published, updated, heroImage } = page.data;
+---
+
+<MarkdownLayout
+    title={title}
+    description={description}
+    published={published}
+    updated={updated}
+    heroImage={heroImage}
+    headings={headings}
+>
+    <Content />
+</MarkdownLayout>
