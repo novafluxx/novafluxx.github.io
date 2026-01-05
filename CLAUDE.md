@@ -173,7 +173,7 @@ Automated deployment via GitHub Actions:
 **Method:** GitHub Pages via GitHub Actions
 - Workflow: `.github/workflows/deploy.yml`
 - Triggers: Automatic on push to `main`, or manual via Actions tab
-- Site URL: `https://novafluxx.github.io/astro-personal-website/`
+- Site URL: `https://novafluxx.github.io/my-personal-website/`
 
 **Build Process:**
 1. GitHub Actions runner checks out code
@@ -193,7 +193,7 @@ Automated deployment via GitHub Actions:
 - Click "Run workflow" button
 
 **Configuration:**
-- `astro.config.mjs` includes `site: 'https://novafluxx.github.io'` and `base: '/astro-personal-website'`
+- `astro.config.mjs` includes `site: 'https://novafluxx.github.io'` and `base: '/my-personal-website'`
 - GitHub Pages source set to "GitHub Actions" in repository settings
 
 ## Important Considerations
