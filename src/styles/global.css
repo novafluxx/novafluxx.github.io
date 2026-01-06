@@ -5,9 +5,6 @@
 @theme {
     --font-display: 'Syne', system-ui, -apple-system, sans-serif;
     --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
-    --color-primary: #BE185D;
-    --color-secondary: #FB923C;
-    --color-accent: #EC4899;
 }
 
 /* Base Variables - Sunrise Theme */
@@ -17,12 +14,9 @@
     --accent-color: #EC4899;
     --text-color: #881337;
     --text-muted: #9F1239;
-    --background-color: #FFF5F7;
     --card-bg: rgba(255, 245, 247, 0.85);
     --card-border: rgba(251, 113, 133, 0.2);
     --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --hero-gradient-start: #FB7185;
-    --hero-gradient-end: #FBBF24;
     --hero-text: #881337;
 
     /* Fluid Typography Scale */
@@ -44,13 +38,9 @@
     --accent-color: #a78bfa;
     --text-color: #f1f5f9;
     --text-muted: #94a3b8;
-    --background-color: #0a0f1e;
-    --background-secondary: #0f172a;
     --card-bg: rgba(30, 41, 59, 0.5);
     --card-border: rgba(255, 255, 255, 0.15);
     --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    --hero-gradient-start: #1e3a8a;
-    --hero-gradient-end: #312e81;
     --hero-text: #f1f5f9;
 }
 
@@ -451,17 +441,6 @@ body::after {
     z-index: 1;
 }
 
-.hero-subtitle {
-    font-size: 1.5rem;
-    font-weight: 500;
-    opacity: 0.9;
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
-    padding-bottom: 0.15em;
-    color: var(--hero-text);
-}
-
 /* Icon Styles */
 i {
     color: var(--secondary-color);
@@ -471,7 +450,9 @@ i {
     transition: transform 0.3s ease;
 }
 
-.glass-card:hover i {
+.glass-card-primary:hover i,
+.glass-card-secondary:hover i,
+.glass-card-accent:hover i {
     transform: scale(1.1);
     color: var(--accent-color);
 }
@@ -634,9 +615,15 @@ button:focus-visible {
 }
 
 .hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 500;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
     animation: fadeIn 0.6s 0.4s cubic-bezier(0.4, 0, 0.2, 1) backwards;
     line-height: 1.6 !important;
     padding-bottom: 0.15em !important;
+    color: var(--hero-text);
     /* Light mode subtle shadow */
     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
 }
@@ -998,11 +985,11 @@ nav.nav-over-light > div {
     grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
 }
 
-.markdown-article__body :global(.markdown-article__content) {
+.markdown-article__body .markdown-article__content {
     max-width: 70ch;
 }
 
-.markdown-article__body :global(.markdown-article__content h2) {
+.markdown-article__body .markdown-article__content h2 {
     font-family: var(--font-display);
     font-size: var(--text-2xl);
     margin-top: 2rem;
@@ -1010,21 +997,21 @@ nav.nav-over-light > div {
     color: var(--text-color);
 }
 
-.markdown-article__body :global(.markdown-article__content h3) {
+.markdown-article__body .markdown-article__content h3 {
     font-size: var(--text-xl);
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
     color: var(--text-color);
 }
 
-.markdown-article__body :global(.markdown-article__content p) {
+.markdown-article__body .markdown-article__content p {
     line-height: 1.75;
     color: var(--text-color);
     margin-bottom: 1.25rem;
 }
 
-.markdown-article__body :global(.markdown-article__content ul),
-.markdown-article__body :global(.markdown-article__content ol) {
+.markdown-article__body .markdown-article__content ul,
+.markdown-article__body .markdown-article__content ol {
     margin: 0 0 1.5rem 1.25rem;
     padding: 0;
     color: var(--text-color);
@@ -1033,11 +1020,11 @@ nav.nav-over-light > div {
     gap: 0.5rem;
 }
 
-.markdown-article__body :global(.markdown-article__content li) {
+.markdown-article__body .markdown-article__content li {
     padding-left: 0.35rem;
 }
 
-.markdown-article__body :global(.markdown-article__content code) {
+.markdown-article__body .markdown-article__content code {
     background: rgba(0, 0, 0, 0.05);
     color: var(--text-color);
     padding: 0.125rem 0.35rem;
@@ -1045,7 +1032,7 @@ nav.nav-over-light > div {
     font-size: 0.95em;
 }
 
-.markdown-article__body :global(.markdown-article__content pre) {
+.markdown-article__body .markdown-article__content pre {
     background: linear-gradient(135deg, rgba(251, 113, 133, 0.08), rgba(236, 72, 153, 0.05));
     color: var(--text-color);
     padding: 1rem;
@@ -1056,7 +1043,7 @@ nav.nav-over-light > div {
     margin-bottom: 1.5rem;
 }
 
-.markdown-article__body :global(.markdown-article__content blockquote) {
+.markdown-article__body .markdown-article__content blockquote {
     border-left: 4px solid var(--accent-color);
     padding-left: 1rem;
     color: var(--text-muted);
