@@ -6,7 +6,7 @@
       "name": "astro-personal-website",
       "dependencies": {
         "@tailwindcss/vite": "^4.1.18",
-        "astro": "^5.16.8",
+        "astro": "^5.16.9",
         "tailwindcss": "^4.1.18",
       },
       "devDependencies": {
