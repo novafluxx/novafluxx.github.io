@@ -18,6 +18,7 @@ export default defineConfig({
             styleDirective: {
                 resources: [
                     "'self'",
+                    "'unsafe-inline'",
                     "https://cdnjs.cloudflare.com",
                     "https://fonts.googleapis.com",
                 ],
