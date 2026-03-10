@@ -1,12 +1,12 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection, render, type CollectionEntry } from "astro:content";
 import MarkdownLayout from "../layouts/MarkdownLayout.astro";
 
 export async function getStaticPaths() {
     const pages = await getCollection("pages");
 
     return pages.map((page) => ({
-        params: { slug: page.slug },
+        params: { slug: page.id },
         props: { page },
     }));
 }
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const { page } = Astro.props as Props;
-const { Content, headings } = await page.render();
+const { Content, headings } = await render(page);
 const { title, description, published, updated, heroImage } = page.data;
 ---
 
