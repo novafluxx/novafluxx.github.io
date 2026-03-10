@@ -1,9 +1,9 @@
-[![Deploy to GitHub Pages](https://github.com/novafluxx/astro-personal-website/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/novafluxx/astro-personal-website/actions/workflows/deploy.yml)
+[![Deploy to GitHub Pages](https://github.com/novafluxx/my-personal-website/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/novafluxx/my-personal-website/actions/workflows/deploy.yml)
 # Personal Portfolio Website
 
 A modern, responsive portfolio website for Justin High (QA Analyst & Automation Engineer) built with Astro and styled with Tailwind CSS v4.
 
-🌐 **Live Site**: [novafluxx.github.io/astro-personal-website](https://novafluxx.github.io/astro-personal-website)
+🌐 **Live Site**: [novafluxx.github.io/my-personal-website](https://novafluxx.github.io/my-personal-website)
 
 ## 🚀 Tech Stack
 
@@ -65,7 +65,7 @@ All commands are run from the root of the project:
 ## 🚢 Deployment
 
 The site is deployed to GitHub Pages via GitHub Actions:
-- **Live URL**: [novafluxx.github.io/astro-personal-website](https://novafluxx.github.io/astro-personal-website)
+- **Live URL**: [novafluxx.github.io/my-personal-website](https://novafluxx.github.io/my-personal-website)
 - **Workflow**: Automatic deployment on push to `main` branch
 - **Manual Trigger**: Available via GitHub Actions tab
 
