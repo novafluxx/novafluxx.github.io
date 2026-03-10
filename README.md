@@ -7,7 +7,7 @@ A modern, responsive portfolio website for Justin High (QA Analyst & Automation 
 
 ## 🚀 Tech Stack
 
-- **Framework**: Astro 5
+- **Framework**: Astro 6
 - **Styling**: Tailwind CSS v4
 - **Deployment**: GitHub Pages
 - **Package Manager**: Bun
@@ -84,4 +84,4 @@ Personal portfolio website © Justin High
 
 ---
 
-Built with [Astro](https://astro.build) 🚀
+Built with [Astro 6](https://astro.build) 🚀
