@@ -3,14 +3,14 @@
 Quick reference for agentic coding agents working in this repository.
 
 ## Commands
-- `bun install` - Install dependencies (use Bun, not npm/pnpm)
-- `bun dev` - Start dev server at localhost:4321
-- `bun build` - Build production site to ./dist/
-- `bun astro check` - Run TypeScript type checking
+- `pnpm install` - Install dependencies (use pnpm via Corepack, not Bun/npm)
+- `pnpm dev` - Start dev server at localhost:4321
+- `pnpm build` - Build production site to ./dist/
+- `pnpm exec astro check` - Run TypeScript type checking
 - No test suite configured
 
 ## Code Style
-- **Package Manager**: Always use `bun` commands, never npm/pnpm
+- **Package Manager**: Always use `pnpm` commands via Corepack, never Bun/npm
 - **TypeScript**: Extends `astro/tsconfigs/strict`, type all functions and parameters
 - **Imports**: Use relative imports for local files (`../components/Nav.astro`)
 - **Formatting**: Tailwind classes inline, CSS in `src/styles/global.css` only
