@@ -11,19 +11,19 @@ Personal portfolio website for Justin High (QA Analyst & Automation Engineer) bu
 - Tailwind CSS 4 (via Vite plugin)
 - TypeScript 5.9.3
 - GitHub Pages (deployment)
-- Bun (package manager)
+- pnpm (package manager)
 
 ## Development Commands
 
 | Command | Purpose |
 |---------|---------|
-| `bun install` | Install dependencies |
-| `bun dev` | Start dev server at localhost:4321 |
-| `bun build` | Build production site to ./dist/ |
-| `bun preview` | Preview build locally |
-| `bun astro check` | Run TypeScript type checking |
+| `pnpm install` | Install dependencies |
+| `pnpm dev` | Start dev server at localhost:4321 |
+| `pnpm build` | Build production site to ./dist/ |
+| `pnpm preview` | Preview build locally |
+| `pnpm exec astro check` | Run TypeScript type checking |
 
-**Note:** Use `bun` commands, not `npm` or `pnpm`. The project uses Bun as its package manager.
+**Note:** Use `pnpm` commands via Corepack, not Bun or npm. The project uses pnpm as its package manager.
 
 ## Architecture
 
@@ -188,7 +188,7 @@ Automated deployment via GitHub Actions:
 
 **Build Process:**
 1. GitHub Actions runner checks out code
-2. Uses official Astro action (`withastro/action@v5`) with Bun
+2. Uses official Astro action (`withastro/action@v5`) with pnpm
 3. Builds site to ./dist/
 4. Uploads artifact to GitHub Pages
 5. Deploys to GitHub Pages CDN with automatic HTTPS
@@ -211,7 +211,7 @@ Automated deployment via GitHub Actions:
 
 **TypeScript:**
 - Configuration extends `astro/tsconfigs/strict`
-- Type checking available via `bun astro check`
+- Type checking available via `pnpm exec astro check`
 - All TypeScript files in src/scripts/ are client-side only
 
 **Accessibility:**

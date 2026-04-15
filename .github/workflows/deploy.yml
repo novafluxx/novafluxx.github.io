@@ -29,8 +29,6 @@ jobs:
 
       - name: Build and deploy
         uses: withastro/action@v5
-        with:
-          package-manager: bun
 
   deploy:
     needs: build

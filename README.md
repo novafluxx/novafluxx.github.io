@@ -10,7 +10,7 @@ A modern, responsive portfolio website for Justin High (QA Analyst & Automation 
 - **Framework**: Astro 6
 - **Styling**: Tailwind CSS v4
 - **Deployment**: GitHub Pages
-- **Package Manager**: Bun
+- **Package Manager**: pnpm
 - **Icons**: Font Awesome 7
 - **Fonts**: Google Fonts (Inter)
 
@@ -40,11 +40,11 @@ All commands are run from the root of the project:
 
 | Command                | Action                                              |
 | :--------------------- | :-------------------------------------------------- |
-| `bun install`          | Install dependencies                                |
-| `bun dev`              | Start local dev server at `localhost:4321`          |
-| `bun build`            | Build production site to `./dist/`                  |
-| `bun preview`          | Preview build locally before deploying              |
-| `bun astro check`      | Run TypeScript type checking                        |
+| `pnpm install`         | Install dependencies                                |
+| `pnpm dev`             | Start local dev server at `localhost:4321`          |
+| `pnpm build`           | Build production site to `./dist/`                  |
+| `pnpm preview`         | Preview build locally before deploying              |
+| `pnpm exec astro check` | Run TypeScript type checking                       |
 
 ## ✨ Features
 
