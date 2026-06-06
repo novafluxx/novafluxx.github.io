@@ -1,0 +1,22 @@
+version: 2
+updates:
+  # Keep GitHub Actions pinned versions up to date (and surface security updates)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Wait until a release has been public for a while before opening a PR,
+    # so a freshly-published malicious version is more likely to be caught first.
+    cooldown:
+      default-days: 7
+
+  # Keep npm/pnpm dependencies up to date
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+      semver-major-days: 30
+      semver-minor-days: 14
+      semver-patch-days: 7
