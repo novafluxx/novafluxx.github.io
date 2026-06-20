@@ -46,8 +46,10 @@ function initTheme(): void {
     const themeIcon = document.getElementById('theme-icon');
     const html = document.documentElement;
 
-    // Check for saved theme preference or default to 'dark'
-    const currentTheme = localStorage.getItem('theme') || 'dark';
+    // Check for saved theme preference, otherwise fall back to OS preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    const currentTheme = savedTheme || (prefersLight ? 'light' : 'dark');
 
     // Apply the theme on page load
     if (currentTheme === 'light') {

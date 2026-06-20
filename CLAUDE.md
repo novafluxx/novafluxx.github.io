@@ -32,19 +32,8 @@ Personal portfolio website for Justin High (QA Analyst & Automation Engineer) bu
 Pages are located in `src/pages/` and use Astro's file-based routing:
 - `index.astro` - Main portfolio page (home)
 - `404.astro` - Custom error page
-- `[...slug].astro` - Dynamic routes for content collection pages (markdown)
 
 Each page imports and uses the Layout component from `src/layouts/Layout.astro`.
-
-### Content Collections (Astro 6 API)
-
-Config file: `src/content.config.ts` (NOT `src/content/config.ts` — moved in Astro 6)
-
-- Collections use the `glob()` loader from `astro/loaders` (not `type: "content"`)
-- Zod schemas import `z` from `astro/zod` (not from `astro:content`)
-- Render entries with `render(entry)` imported from `astro:content` (not `entry.render()`)
-- Entry identifier is `entry.id` (not `entry.slug`)
-- Markdown content lives in `src/content/pages/`
 
 ### Component Structure
 
