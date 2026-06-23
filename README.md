@@ -7,20 +7,21 @@ A modern, responsive portfolio website for Justin High (QA Analyst & Automation 
 
 ## 🚀 Tech Stack
 
-- **Framework**: Astro 6
+- **Framework**: Astro 7
 - **Styling**: Tailwind CSS v4
 - **Deployment**: GitHub Pages
-- **Package Manager**: pnpm
+- **Package Manager**: pnpm 11.8.0
 - **Icons**: Font Awesome 7
-- **Fonts**: Google Fonts (Inter)
+- **Fonts**: Google Fonts (Syne and Manrope)
 
 ## 📁 Project Structure
 
 ```text
 astro-personal-website/
-├── public/                 # Static assets (images, favicons)
+├── public/                 # Static assets served as-is (favicons)
 ├── src/
 │   ├── components/        # Reusable components (Nav.astro)
+│   ├── images/            # Source images optimized by Astro
 │   ├── layouts/          # Layout templates (Layout.astro)
 │   ├── pages/            # File-based routing
 │   │   ├── index.astro       # Home page
@@ -44,7 +45,8 @@ All commands are run from the root of the project:
 | `pnpm dev`             | Start local dev server at `localhost:4321`          |
 | `pnpm build`           | Build production site to `./dist/`                  |
 | `pnpm preview`         | Preview build locally before deploying              |
-| `pnpm exec astro check` | Run TypeScript type checking                       |
+
+No lint, formatter, test, or typecheck command is configured. Treat `pnpm build` as the verification step before deploying.
 
 ## ✨ Features
 
@@ -52,21 +54,25 @@ All commands are run from the root of the project:
 - **Dark Mode**: Theme toggle with localStorage persistence
 - **Responsive Navigation**: Mobile-friendly navigation with Font Awesome icons
 - **Custom 404 Page**: Branded error handling
+- **Optimized Images**: Astro image optimization with `sharp`
 - **Optimized Performance**: Static site generation with Astro
-- **Automated Deployment**: GitHub Actions workflow with official Astro action
+- **Automated Deployment**: GitHub Actions workflow with `withastro/action@v6`
 
 ## 🎨 Design System
 
-- **Color Scheme**: Slate/Blue tones with dark mode default
-- **Typography**: Inter font family from Google Fonts
+- **Color Scheme**: Rose/slate theme with dark mode support
+- **Typography**: Syne display font and Manrope body font from Google Fonts
 - **Max Width**: 1200px content container
-- **Components**: Reusable glass card styling via `.glass-card` class
+- **Components**: Reusable glass card variants via `.glass-card-primary`, `.glass-card-secondary`, and `.glass-card-accent`
 
 ## 🚢 Deployment
 
 The site is deployed to GitHub Pages via GitHub Actions:
 - **Live URL**: [novafluxx.github.io/my-personal-website](https://novafluxx.github.io/my-personal-website)
-- **Workflow**: Automatic deployment on push to `main` branch
+- **Workflow**: `.github/workflows/deploy.yml`
+- **Build Action**: `withastro/action@v6`
+- **Deploy Action**: `actions/deploy-pages@v5`
+- **Trigger**: Automatic deployment on push to `main` branch
 - **Manual Trigger**: Available via GitHub Actions tab
 
 Deployment happens automatically when you push to the `main` branch.
@@ -84,4 +90,4 @@ Personal portfolio website © Justin High
 
 ---
 
-Built with [Astro 6](https://astro.build) 🚀
+Built with [Astro 7](https://astro.build) 🚀
