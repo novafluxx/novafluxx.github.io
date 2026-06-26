@@ -4,12 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal portfolio website for Justin High (QA Analyst & Automation Engineer) built with Astro 6 and Tailwind CSS 4. Deployed to GitHub Pages.
+Personal portfolio website for Justin High (QA Analyst & Automation Engineer) built with Astro 7 and Tailwind CSS 4. Deployed to GitHub Pages.
 
 **Tech Stack:**
-- Astro 6 (static site generator)
+- Astro 7 (static site generator)
 - Tailwind CSS 4 (via Vite plugin)
-- TypeScript 5.9.3
+- TypeScript 6
 - GitHub Pages (deployment)
 - pnpm (package manager)
 
@@ -52,7 +52,7 @@ Each page imports and uses the Layout component from `src/layouts/Layout.astro`.
 
 ### Styling System
 
-All styles are centralized in `src/styles/global.css` (~1,146 lines):
+All styles are centralized in `src/styles/global.css` (~1,113 lines):
 
 **CSS Custom Properties:**
 - Theme variables defined in `:root` and `:root.dark` for dark mode
@@ -109,7 +109,7 @@ These scripts are imported in the Layout component using `<script>` tags with `i
 
 Automated deployment via GitHub Actions:
 - Workflow file: `.github/workflows/deploy.yml`
-- Uses official Astro action (`withastro/action@v5`)
+- Uses official Astro action (`withastro/action@v6`)
 - Configured with `site` and `base` in `astro.config.mjs`
 - Serves static files from ./dist/ via GitHub Pages CDN
 
@@ -177,7 +177,7 @@ Automated deployment via GitHub Actions:
 
 **Build Process:**
 1. GitHub Actions runner checks out code
-2. Uses official Astro action (`withastro/action@v5`) with pnpm
+2. Uses official Astro action (`withastro/action@v6`) with pnpm
 3. Builds site to ./dist/
 4. Uploads artifact to GitHub Pages
 5. Deploys to GitHub Pages CDN with automatic HTTPS
@@ -193,7 +193,7 @@ Automated deployment via GitHub Actions:
 - Click "Run workflow" button
 
 **Configuration:**
-- `astro.config.mjs` includes `site: 'https://novafluxx.github.io'` and `base: '/my-personal-website'`
+- `astro.config.mjs` includes `site: 'https://novafluxx.github.io'` and a conditional `base` (`'/my-personal-website/'` in production, `'/'` in dev)
 - GitHub Pages source set to "GitHub Actions" in repository settings
 
 ## Important Considerations
