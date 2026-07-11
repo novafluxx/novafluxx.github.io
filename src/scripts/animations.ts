@@ -13,9 +13,22 @@ function initScrollAnimations() {
         (entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
+                    const element = entry.target as HTMLElement;
+                    element.classList.add('animated');
+
+                    // The animation uses `forwards`, which otherwise leaves the
+                    // element on a retained compositing layer. Clear that layer
+                    // once the entrance finishes so responsive resizes repaint
+                    // the final layout normally.
+                    const settleAnimation = (event: AnimationEvent): void => {
+                        if (event.target !== element) return;
+
+                        element.classList.add('animation-settled');
+                        element.removeEventListener('animationend', settleAnimation);
+                    };
+                    element.addEventListener('animationend', settleAnimation);
                     // Unobserve after animation to prevent re-triggering
-                    observer.unobserve(entry.target);
+                    observer.unobserve(element);
                 }
             });
         },
