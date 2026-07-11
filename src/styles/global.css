@@ -844,9 +844,33 @@ button:focus-visible {
     }
 }
 
-/* Always inline-block so toggling the glitch jitter never reflows the line */
+/* Keep each word intact so narrow viewports never split a name mid-word. */
 .hero-letters {
     display: inline-block;
+}
+
+.hero-word {
+    display: inline-block;
+}
+
+.hero-word + .hero-word {
+    margin-left: 0.25em;
+}
+
+@media (max-width: 640px) {
+    .hero-word {
+        display: block;
+    }
+
+    .hero-word + .hero-word {
+        margin-left: 0;
+    }
+
+    .hero-name::before,
+    .hero-name::after {
+        content: attr(data-mobile-text);
+        white-space: pre-line;
+    }
 }
 
 /* The real letters jitter slightly while the split copies flash */
