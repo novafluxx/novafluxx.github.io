@@ -599,7 +599,6 @@ button:focus-visible {
 
 /* Hero Entrance Animations */
 .hero-name {
-    animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     line-height: 1.4 !important;
     padding-bottom: 0.2em !important;
     /* Light mode text shadow - sunrise glow */
@@ -623,7 +622,6 @@ button:focus-visible {
     opacity: 0.9;
     max-width: 600px;
     margin: 0 auto;
-    animation: fadeIn 0.6s 0.4s cubic-bezier(0.4, 0, 0.2, 1) backwards;
     line-height: 1.6 !important;
     padding-bottom: 0.15em !important;
     color: var(--hero-text);
@@ -648,6 +646,66 @@ button:focus-visible {
 }
 
 /* Hero Section Enhancements */
+
+/* ========================================
+   3D HERO
+   ======================================== */
+
+/* Perspective container for the tilting hero content */
+#hero {
+    perspective: 1100px;
+}
+
+/* Particle field canvas behind the hero text. The radial mask fades
+   particles out toward the section edges so they never cut off hard
+   against the main column boundary. */
+.hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, black 50%, transparent 98%);
+    mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, black 50%, transparent 98%);
+}
+
+/* Pointer-driven tilt (custom properties set from hero-3d.ts).
+   preserve-3d lets child layers sit at real depths via translateZ. */
+.hero-content {
+    transform-style: preserve-3d;
+    transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    will-change: transform;
+}
+
+/* Depth layers: each hero child floats at its own translateZ (--depth,
+   set inline in markup) so the tilt reads as true parallax depth. */
+.hero-layer {
+    transform: translateZ(var(--depth, 0px));
+    animation: hero-enter 0.9s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.hero-content > .hero-layer:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.hero-content > .hero-layer:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+/* Entrance keeps translateZ in both keyframes so depth never pops.
+   `backwards` fill only — after the animation the static .hero-layer
+   transform takes over, keeping the depth live for the tilt effect. */
+@keyframes hero-enter {
+    from {
+        opacity: 0;
+        transform: translateY(30px) translateZ(var(--depth, 0px));
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) translateZ(var(--depth, 0px));
+    }
+}
 
 /* Organic Mesh Gradient Animation */
 @keyframes mesh-float {

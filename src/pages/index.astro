@@ -20,23 +20,28 @@ const aviationBg = await getImage({
 		class="min-h-screen flex items-center justify-center relative overflow-hidden"
 		style="margin-top: 0;"
 	>
+		<!-- 3D particle field (decorative) -->
+		<canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+
 		<!-- Hero Content -->
 		<div class="hero-content text-center z-10 px-4">
 			<h1
-				class="hero-name text-rose-700 dark:text-white mb-6"
-				style="font-family: var(--font-display); font-size: var(--text-5xl); font-weight: 800; letter-spacing: -0.04em; line-height: 1.4; padding-bottom: 0.2em;"
+				class="hero-name hero-layer text-rose-700 dark:text-white mb-6"
+				style="--depth: 70px; font-family: var(--font-display); font-size: var(--text-5xl); font-weight: 800; letter-spacing: -0.04em; line-height: 1.4; padding-bottom: 0.2em;"
 			>
 				Justin High
 			</h1>
 			<h2
-				class="hero-subtitle text-rose-600 dark:text-slate-100 mb-12"
-				style="font-family: var(--font-sans); font-size: var(--text-2xl); font-weight: 500; opacity: 0.95; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6; padding-bottom: 0.15em;"
+				class="hero-subtitle hero-layer text-rose-600 dark:text-slate-100 mb-12"
+				style="--depth: 35px; font-family: var(--font-sans); font-size: var(--text-2xl); font-weight: 500; opacity: 0.95; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6; padding-bottom: 0.15em;"
 			>
 				Quality Assurance Analyst & Automation Engineer
 			</h2>
-			<a href="#about" class="scroll-indicator mt-16 inline-block" aria-label="Scroll to about section">
-				<i class="fas fa-chevron-down text-rose-600 dark:text-white text-3xl mb-0!"></i>
-			</a>
+			<div class="hero-layer" style="--depth: 20px;">
+				<a href="#about" class="scroll-indicator mt-16 inline-block" aria-label="Scroll to about section">
+					<i class="fas fa-chevron-down text-rose-600 dark:text-white text-3xl mb-0!"></i>
+				</a>
+			</div>
 		</div>
 	</section>
 
@@ -388,3 +393,4 @@ const aviationBg = await getImage({
 <!-- Animation Scripts -->
 <script src="../scripts/animations.ts"></script>
 <script src="../scripts/smooth-scroll.ts"></script>
+<script src="../scripts/hero-3d.ts"></script>
