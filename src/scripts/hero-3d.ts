@@ -25,6 +25,14 @@ const DRIFT_SPEED = 128; // world units/sec particles drift toward the viewer
 const CAM_RANGE = 80; // max world-space camera shift from pointer
 const LINK_DIST = 130; // screen-space px within which particles connect
 
+const SECTION_STRENGTHS: Readonly<Record<string, number>> = {
+    hero: 1,
+    work: 0.22,
+    experience: 0.17,
+    aviation: 0.035,
+    contact: 0.3,
+};
+
 // Glitch accent timing
 const GLITCH_MIN_DELAY = 4000; // ms
 const GLITCH_DELAY_RANGE = 5000; // ms of extra random delay
@@ -58,7 +66,7 @@ function initHero3D(): void {
     cleanup = null;
 
     const section = document.getElementById('hero');
-    const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement | null;
+    const canvas = document.getElementById('constellation-canvas') as HTMLCanvasElement | null;
     const content = section?.querySelector<HTMLElement>('.hero-content') ?? null;
     if (!section || !canvas || !content) return;
 
@@ -79,6 +87,8 @@ function initHero3D(): void {
     let running = false;
     let inView = true;
     let lastTime = 0;
+    let fieldStrength = 1;
+    let targetFieldStrength = 1;
 
     // Pointer position normalized to [-1, 1]; the camera eases toward it
     let pointerX = 0;
@@ -111,9 +121,8 @@ function initHero3D(): void {
     }
 
     function resize(): void {
-        const rect = section!.getBoundingClientRect();
-        width = Math.round(rect.width);
-        height = Math.round(rect.height);
+        width = Math.round(window.innerWidth);
+        height = Math.round(window.innerHeight - 60);
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         canvas!.width = Math.round(width * dpr);
         canvas!.height = Math.round(height * dpr);
@@ -167,7 +176,7 @@ function initHero3D(): void {
                 const d2 = dx * dx + dy * dy;
                 if (d2 > LINK_DIST * LINK_DIST) continue;
                 const closeness = 1 - Math.sqrt(d2) / LINK_DIST;
-                const alpha = closeness * 0.45 * Math.min(a.scale, b.scale, 1);
+                const alpha = closeness * 0.45 * Math.min(a.scale, b.scale, 1) * fieldStrength;
                 if (alpha < 0.02) continue;
                 ctx!.strokeStyle = `rgba(${lr}, ${lg}, ${lb}, ${alpha.toFixed(3)})`;
                 ctx!.beginPath();
@@ -190,7 +199,7 @@ function initHero3D(): void {
             }
             const [r, g, b] = palette[p.colorIndex];
             const twinkle = 0.7 + 0.3 * Math.sin(time * 1.7 + p.twinkle);
-            const alpha = twinkle * Math.min(1, Math.max(0.3, pr.scale));
+            const alpha = twinkle * Math.min(1, Math.max(0.3, pr.scale)) * fieldStrength;
             // Soft halo behind near particles for a glow effect
             if (pr.scale > 0.7) {
                 ctx!.fillStyle = `rgba(${r}, ${g}, ${b}, ${(alpha * 0.18).toFixed(3)})`;
@@ -211,6 +220,7 @@ function initHero3D(): void {
 
         camX += (pointerX - camX) * Math.min(1, dt * 3.5);
         camY += (pointerY - camY) * Math.min(1, dt * 3.5);
+        fieldStrength += (targetFieldStrength - fieldStrength) * Math.min(1, dt * 4);
 
         if (finePointer) {
             content!.style.setProperty('--tilt-y', `${(camX * 6).toFixed(3)}deg`);
@@ -226,7 +236,7 @@ function initHero3D(): void {
     }
 
     function syncRunning(): void {
-        const shouldRun = inView && !document.hidden && !reducedMotion;
+        const shouldRun = !document.hidden && !reducedMotion;
         if (shouldRun && !running) {
             running = true;
             lastTime = performance.now();
@@ -258,6 +268,23 @@ function initHero3D(): void {
         }, 150);
     };
     window.addEventListener('resize', onResize);
+
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('main section[id]'));
+    const syncSectionStrength = (): void => {
+        const sampleY = window.innerHeight * 0.5;
+        const active = sections.find((candidate) => {
+            const rect = candidate.getBoundingClientRect();
+            return rect.top <= sampleY && rect.bottom > sampleY;
+        });
+        targetFieldStrength = active ? (SECTION_STRENGTHS[active.id] ?? 0.18) : 0.18;
+
+        if (!running) {
+            fieldStrength = targetFieldStrength;
+            drawStatic();
+        }
+    };
+    syncSectionStrength();
+    window.addEventListener('scroll', syncSectionStrength, { passive: true });
 
     const onPointerMove = (e: PointerEvent): void => {
         pointerX = (e.clientX / window.innerWidth) * 2 - 1;
@@ -328,6 +355,7 @@ function initHero3D(): void {
         window.clearTimeout(glitchOffTimer);
         nameEl?.classList.remove('glitching');
         window.removeEventListener('resize', onResize);
+        window.removeEventListener('scroll', syncSectionStrength);
         window.removeEventListener('pointermove', onPointerMove);
         document.documentElement.removeEventListener('mouseleave', onPointerReset);
         window.removeEventListener('blur', onPointerReset);

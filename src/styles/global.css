@@ -665,18 +665,17 @@ button:focus-visible {
     perspective: 1100px;
 }
 
-/* Particle field canvas behind the hero text. The radial mask fades
-   particles out toward the section edges so they never cut off hard
-   against the main column boundary. */
-.hero-canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+/* Fixed particle field shared by the full page. Section-aware intensity is
+   controlled in hero-3d.ts so it recedes behind dense content and photography. */
+.constellation-canvas {
+    position: fixed;
+    inset: 3.75rem 0 0;
+    width: 100vw;
+    height: calc(100svh - 3.75rem);
     z-index: 0;
     pointer-events: none;
-    -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, black 50%, transparent 98%);
-    mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, black 50%, transparent 98%);
+    -webkit-mask-image: radial-gradient(ellipse 115% 100% at 50% 50%, black 62%, transparent 100%);
+    mask-image: radial-gradient(ellipse 115% 100% at 50% 50%, black 62%, transparent 100%);
 }
 
 /* Pointer-driven tilt (custom properties set from hero-3d.ts).
