@@ -25,6 +25,11 @@ const DRIFT_SPEED = 128; // world units/sec particles drift toward the viewer
 const CAM_RANGE = 80; // max world-space camera shift from pointer
 const LINK_DIST = 130; // screen-space px within which particles connect
 
+// Glitch accent timing
+const GLITCH_MIN_DELAY = 4000; // ms
+const GLITCH_DELAY_RANGE = 5000; // ms of extra random delay
+const GLITCH_DURATION = 380; // ms — must cover the CSS glitch keyframes
+
 // Particles pick a color by index so the palette can swap on theme toggle
 const PALETTES: Record<'dark' | 'light', readonly RGB[]> = {
     dark: [
@@ -59,6 +64,8 @@ function initHero3D(): void {
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    const nameEl = section.querySelector<HTMLElement>('.hero-name');
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const finePointer = window.matchMedia('(pointer: fine)').matches;
@@ -289,12 +296,37 @@ function initHero3D(): void {
         attributeFilter: ['class'],
     });
 
+    // Occasional glitch flicker on the name: toggle .glitching (CSS runs the
+    // RGB-split keyframes) at random intervals while the tab is visible
+    let glitchOnTimer = 0;
+    let glitchOffTimer = 0;
+    function scheduleGlitch(): void {
+        glitchOnTimer = window.setTimeout(
+            () => {
+                if (document.hidden || !inView) {
+                    scheduleGlitch();
+                    return;
+                }
+                nameEl!.classList.add('glitching');
+                glitchOffTimer = window.setTimeout(() => {
+                    nameEl!.classList.remove('glitching');
+                    scheduleGlitch();
+                }, GLITCH_DURATION);
+            },
+            GLITCH_MIN_DELAY + Math.random() * GLITCH_DELAY_RANGE,
+        );
+    }
+    if (!reducedMotion && nameEl) scheduleGlitch();
+
     syncRunning();
 
     cleanup = () => {
         running = false;
         cancelAnimationFrame(rafId);
         window.clearTimeout(resizeTimer);
+        window.clearTimeout(glitchOnTimer);
+        window.clearTimeout(glitchOffTimer);
+        nameEl?.classList.remove('glitching');
         window.removeEventListener('resize', onResize);
         window.removeEventListener('pointermove', onPointerMove);
         document.documentElement.removeEventListener('mouseleave', onPointerReset);

@@ -11,6 +11,8 @@ const aviationBg = await getImage({
 	width: 2048,
 	height: 1536,
 });
+
+const heroName = "Justin High";
 ---
 
 <Layout title="Justin High - QA Analyst & Automation Engineer">
@@ -26,10 +28,18 @@ const aviationBg = await getImage({
 		<!-- Hero Content -->
 		<div class="hero-content text-center z-10 px-4">
 			<h1
-				class="hero-name hero-layer text-rose-700 dark:text-white mb-6"
+				class="hero-name hero-layer mb-6"
 				style="--depth: 70px; font-family: var(--font-display); font-size: var(--text-5xl); font-weight: 800; letter-spacing: -0.04em; line-height: 1.4; padding-bottom: 0.2em;"
+				aria-label={heroName}
+				data-text={heroName}
 			>
-				Justin High
+				<span class="hero-letters" aria-hidden="true">
+					{heroName.split("").map((ch, i) =>
+						ch === " "
+							? <span class="hero-letter hero-letter-space" style={`--i: ${i}`}>&nbsp;</span>
+							: <span class="hero-letter" style={`--i: ${i}`}>{ch}</span>
+					)}
+				</span>
 			</h1>
 			<h2
 				class="hero-subtitle hero-layer text-rose-600 dark:text-slate-100 mb-12"

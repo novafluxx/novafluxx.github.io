@@ -598,22 +598,25 @@ button:focus-visible {
 }
 
 /* Hero Entrance Animations */
+/* The name uses gradient text (background-clip: text on each letter), so the
+   old text-shadow glow is replaced with drop-shadow filters — text-shadow
+   paints visibly through transparent-fill glyphs and would ruin the gradient.
+   The h1's own `perspective` gives the per-letter rotateX entrance real
+   foreshortening (the filter flattens any inherited preserve-3d). */
 .hero-name {
     line-height: 1.4 !important;
     padding-bottom: 0.2em !important;
-    /* Light mode text shadow - sunrise glow */
-    text-shadow:
-        0 0 30px rgba(251, 113, 133, 0.3),
-        0 0 60px rgba(251, 146, 60, 0.2),
-        0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    perspective: 800px;
+    /* Light mode sunrise glow */
+    filter: drop-shadow(0 0 22px rgba(251, 113, 133, 0.35))
+        drop-shadow(0 2px 8px rgba(0, 0, 0, 0.12));
 }
 
-/* Dark mode text shadow - more vibrant glow */
+/* Dark mode glow - more vibrant */
 :root.dark .hero-name {
-    text-shadow:
-        0 0 40px rgba(96, 165, 250, 0.5),
-        0 0 80px rgba(167, 139, 250, 0.3),
-        0 4px 20px rgba(0, 0, 0, 0.3);
+    filter: drop-shadow(0 0 26px rgba(96, 165, 250, 0.45))
+        drop-shadow(0 4px 14px rgba(0, 0, 0, 0.3));
 }
 
 .hero-subtitle {
@@ -704,6 +707,162 @@ button:focus-visible {
     to {
         opacity: 1;
         transform: translateY(0) translateZ(var(--depth, 0px));
+    }
+}
+
+/* --- Per-letter name treatment --- */
+
+/* Each letter carries the gradient individually (parent-level
+   background-clip: text doesn't survive per-child 3D transforms). The
+   per-letter background-position offset (via --i) makes the gradient read
+   as one continuous flow across the word; the gradient repeats its first
+   color so the 12em shift loops seamlessly. */
+.hero-letter {
+    display: inline-block;
+    background-image: linear-gradient(90deg, #be123c, #ea580c, #d97706, #db2777, #be123c);
+    background-size: 12em 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation:
+        letter-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) backwards,
+        letter-gradient 9s linear infinite;
+    animation-delay: calc(var(--i, 0) * 50ms + 0.1s), 0s;
+}
+
+:root.dark .hero-letter {
+    background-image: linear-gradient(90deg, #60a5fa, #a78bfa, #67e8f9, #e2e8f0, #60a5fa);
+}
+
+@keyframes letter-enter {
+    from {
+        opacity: 0;
+        transform: translateY(0.6em) rotateX(-70deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+    }
+}
+
+/* Both frames bake in the per-letter --i offset; the 12em travel matches
+   background-size, so the loop is seamless. */
+@keyframes letter-gradient {
+    from {
+        background-position-x: calc(var(--i, 0) * -0.6em);
+    }
+    to {
+        background-position-x: calc(var(--i, 0) * -0.6em - 12em);
+    }
+}
+
+/* --- Glitch accent (QA-themed RGB split) --- */
+
+/* Solid-color copies of the name (via data-text) that flash in short
+   clipped slices when hero-3d.ts toggles .glitching. Hidden otherwise.
+   The h1's aria-label keeps the accessible name unaffected. */
+.hero-name::before,
+.hero-name::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hero-name::before {
+    color: #22d3ee;
+    z-index: 2;
+}
+
+.hero-name::after {
+    color: #f43f5e;
+    z-index: 3;
+}
+
+.hero-name.glitching::before {
+    animation: glitch-slice-a 0.38s linear both;
+}
+
+.hero-name.glitching::after {
+    animation: glitch-slice-b 0.38s linear both;
+}
+
+@keyframes glitch-slice-a {
+    0% {
+        opacity: 0.9;
+        clip-path: inset(8% 0 62% 0);
+        transform: translate(-7px, -2px);
+    }
+    30% {
+        clip-path: inset(48% 0 22% 0);
+        transform: translate(6px, 1px);
+    }
+    60% {
+        clip-path: inset(70% 0 4% 0);
+        transform: translate(-5px, 2px);
+    }
+    85% {
+        opacity: 0.9;
+        clip-path: inset(20% 0 55% 0);
+        transform: translate(4px, -1px);
+    }
+    100% {
+        opacity: 0;
+        clip-path: inset(50% 0 50% 0);
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes glitch-slice-b {
+    0% {
+        opacity: 0.9;
+        clip-path: inset(55% 0 18% 0);
+        transform: translate(7px, 2px);
+    }
+    30% {
+        clip-path: inset(10% 0 68% 0);
+        transform: translate(-6px, -1px);
+    }
+    60% {
+        clip-path: inset(35% 0 40% 0);
+        transform: translate(5px, -2px);
+    }
+    85% {
+        opacity: 0.9;
+        clip-path: inset(65% 0 8% 0);
+        transform: translate(-4px, 1px);
+    }
+    100% {
+        opacity: 0;
+        clip-path: inset(50% 0 50% 0);
+        transform: translate(0, 0);
+    }
+}
+
+/* Always inline-block so toggling the glitch jitter never reflows the line */
+.hero-letters {
+    display: inline-block;
+}
+
+/* The real letters jitter slightly while the split copies flash */
+.hero-name.glitching .hero-letters {
+    animation: glitch-base 0.38s steps(3, jump-none) both;
+}
+
+@keyframes glitch-base {
+    0% {
+        transform: translate(2px, 0);
+    }
+    50% {
+        transform: translate(-3px, 1px);
+    }
+    100% {
+        transform: translate(0, 0);
     }
 }
 
