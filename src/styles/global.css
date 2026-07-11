@@ -1464,8 +1464,6 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
     overflow: hidden;
     perspective: 1100px;
 }
-.hero-section::after { content: ''; position: absolute; inset: auto 0 0; height: 24%; background: linear-gradient(to bottom, transparent, rgba(9, 13, 24, 0.04)); pointer-events: none; }
-:root.dark .hero-section::after { background: linear-gradient(to bottom, transparent, rgba(9, 13, 24, 0.48)); }
 .hero-content {
     width: min(1050px, 100%);
     z-index: 2;
