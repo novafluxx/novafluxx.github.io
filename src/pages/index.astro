@@ -3,33 +3,48 @@ import Layout from "../layouts/Layout.astro";
 import { getImage } from "astro:assets";
 import flightLineImg from "../images/flight-line.jpg";
 
-// Optimize aviation background image - convert to WebP and compress
 const aviationBg = await getImage({
 	src: flightLineImg,
 	format: "webp",
-	quality: 85,
+	quality: 88,
 	width: 2048,
 	height: 1536,
 });
 
 const heroName = "Justin High";
+
+const toolGroups = [
+	{
+		label: "Test systems",
+		tools: ["UI automation", "API testing", "Performance", "Manual testing"],
+	},
+	{
+		label: "Engineering",
+		tools: ["JavaScript", "Python", "C# / .NET", "Rust", "SQL"],
+	},
+	{
+		label: "Delivery",
+		tools: ["Azure DevOps", "GitHub Actions", "Jira", "Git", "CI/CD"],
+	},
+];
 ---
 
-<Layout title="Justin High - QA Analyst & Automation Engineer">
-	<!-- Hero Section -->
-	<section
-		id="hero"
-		class="min-h-screen flex items-center justify-center relative overflow-hidden"
-		style="margin-top: 0;"
-	>
-		<!-- 3D particle field (decorative) -->
+<Layout title="Justin High — Quality Engineer & Automation Builder">
+	<section id="hero" class="hero-section" aria-labelledby="hero-title">
 		<canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
 
-		<!-- Hero Content -->
-		<div class="hero-content text-center z-10 px-4">
+		<div class="hero-content">
+			<div class="hero-layer hero-kicker" style="--depth: 45px;">
+				<span class="status-dot" aria-hidden="true"></span>
+				Quality systems online
+				<span class="kicker-divider" aria-hidden="true"></span>
+				Private pilot
+			</div>
+
 			<h1
-				class="hero-name hero-layer mb-6"
-				style="--depth: 70px; font-family: var(--font-display); font-size: var(--text-5xl); font-weight: 800; letter-spacing: -0.04em; line-height: 1.4; padding-bottom: 0.2em;"
+				id="hero-title"
+				class="hero-name hero-layer"
+				style="--depth: 70px;"
 				aria-label={heroName}
 				data-text={heroName}
 				data-mobile-text={heroName.replace(" ", "\n")}
@@ -48,366 +63,295 @@ const heroName = "Justin High";
 					})}
 				</span>
 			</h1>
-			<h2
-				class="hero-subtitle hero-layer text-rose-600 dark:text-slate-100 mb-12"
-				style="--depth: 35px; font-family: var(--font-sans); font-size: var(--text-2xl); font-weight: 500; opacity: 0.95; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6; padding-bottom: 0.15em;"
-			>
-				Quality Assurance Analyst & Automation Engineer
-			</h2>
-			<div class="hero-layer" style="--depth: 20px;">
-				<a href="#about" class="scroll-indicator mt-16 inline-block" aria-label="Scroll to about section">
-					<i class="fas fa-chevron-down text-rose-600 dark:text-white text-3xl mb-0!"></i>
+
+			<p class="hero-subtitle hero-layer" style="--depth: 38px;">
+				I engineer confidence into software.
+			</p>
+			<p class="hero-intro hero-layer" style="--depth: 28px;">
+				Quality assurance, automation, and resilient product engineering—built with the precision of a preflight check.
+			</p>
+
+			<div class="hero-actions hero-layer" style="--depth: 22px;">
+				<a href="#work" class="button button-primary">
+					Explore selected work
+					<i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+				</a>
+				<a
+					href="https://github.com/novafluxx"
+					class="button button-quiet"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<i class="fa-brands fa-github" aria-hidden="true"></i>
+					GitHub
 				</a>
 			</div>
 		</div>
+
+		<a href="#work" class="hero-scroll" aria-label="Scroll to selected work">
+			<span>Scroll to inspect</span>
+			<span class="scroll-track"><span></span></span>
+		</a>
 	</section>
 
-	<!-- About Section -->
-	<section id="about" class="py-24 relative">
-		<div class="container mx-auto px-4 max-w-300">
-			<h2
-				class="gradient-text text-center mb-16"
-				style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: 700;"
-			>
-				What I Do
-			</h2>
-			<div
-				class="grid grid-cols-1 xl:grid-cols-3 gap-6 stagger-children"
-			>
-				<div class="glass-card-primary p-10 text-center">
-					<i
-						class="fa-solid fa-code text-5xl mb-6 text-blue-400"
-						style="margin-bottom: 1.5rem;"
-					></i>
-					<h3
-						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 1rem; color: var(--text-color);"
-					>
-						QA Engineering
-					</h3>
-					<p
-						style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
-					>
-						Specialized in developing and implementing comprehensive
-						test strategies to ensure software quality and
-						reliability.
-					</p>
+	<section id="work" class="site-section work-section" aria-labelledby="work-title">
+		<div class="section-shell">
+			<header class="section-heading animate-on-scroll">
+				<div>
+					<p class="section-index"><span>01</span> Selected work</p>
+					<h2 id="work-title">Built to survive the edge cases.</h2>
 				</div>
-				<div class="glass-card-primary p-10 text-center">
-					<i
-						class="fa-solid fa-robot text-5xl mb-6 text-purple-400"
-						style="margin-bottom: 1.5rem;"
-					></i>
-					<h3
-						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 1rem; color: var(--text-color);"
-					>
-						Automation
-					</h3>
-					<p
-						style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
-					>
-						Expert in creating efficient automated testing
-						frameworks and continuous integration pipelines to speed
-						up delivery.
-					</p>
-				</div>
-				<div class="glass-card-primary p-10 text-center">
-					<i
-						class="fa-solid fa-plane-up text-5xl mb-6 text-cyan-400"
-						style="margin-bottom: 1.5rem;"
-					></i>
-					<h3
-						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 1rem; color: var(--text-color);"
-					>
-						Aviation
-					</h3>
-					<p
-						style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
-					>
-						Licensed private pilot with a passion for aviation and
-						aerial photography, bringing a detail-oriented mindset
-						to all projects.
-					</p>
-				</div>
-			</div>
-		</div>
-	</section>
+				<p class="section-lede">
+					I like products where quality is structural—not a final checkbox. These projects combine thoughtful interfaces with dependable systems underneath.
+				</p>
+			</header>
 
-	<!-- Experience Section -->
-	<section id="experience" class="py-24 relative">
-		<div class="container mx-auto px-4 max-w-300">
-			<h2
-				class="gradient-text text-center mb-16"
-				style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: 700;"
-			>
-				Professional Experience
-			</h2>
-
-			<!-- Timeline -->
-			<div class="max-w-4xl mx-auto mb-20 animate-on-scroll">
-				<div class="glass-card-primary p-10">
-					<h3
-						style="font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 700; margin-bottom: 0.5rem; color: var(--text-color);"
-					>
-						Quality Assurance Analyst & Automation Engineer
-					</h3>
-					<p
-						class="timeline-period mb-6"
-						style="font-family: var(--font-sans); font-weight: 600; color: var(--secondary-color); font-size: var(--text-lg);"
-					>
-						Current Role
-					</p>
-					<ul class="responsibility-list">
-						<li>
-							Design and implement comprehensive test strategies
-							for complex software applications
-						</li>
-						<li>
-							Develop and maintain automated test frameworks using
-							industry-standard tools
-						</li>
-						<li>
-							Lead test automation initiatives and continuous
-							integration practices
-						</li>
-						<li>
-							Collaborate with development teams to ensure
-							software quality throughout the SDLC
-						</li>
-					</ul>
-				</div>
-			</div>
-
-			<!-- Technical Skills -->
-			<h3
-				class="gradient-text text-center mb-12"
-				style="font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 700;"
-			>
-				Technical Skills
-			</h3>
-			<div
-				class="skills-grid grid grid-cols-1 xl:grid-cols-3 gap-6 stagger-children"
-			>
-				<div class="glass-card-secondary p-8">
-					<h4
-						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 1rem; color: var(--text-color);"
-					>
-						Testing
-					</h4>
-					<ul class="skill-list">
-						<li>Test Automation</li>
-						<li>Manual Testing</li>
-						<li>Performance Testing</li>
-						<li>API Testing</li>
-					</ul>
-				</div>
-				<div class="glass-card-secondary p-8">
-					<h4
-						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 1rem; color: var(--text-color);"
-					>
-						Tools & Frameworks
-					</h4>
-					<ul class="skill-list">
-						<li>Taiko</li>
-						<li>Gauge</li>
-						<li>Azure DevOps</li>
-						<li>Jira</li>
-						<li>Git</li>
-					</ul>
-				</div>
-				<div class="glass-card-secondary p-8">
-					<h4
-						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 1rem; color: var(--text-color);"
-					>
-						Programming
-					</h4>
-					<ul class="skill-list">
-						<li>JavaScript</li>
-						<li>Python</li>
-						<li>C# with .NET</li>
-						<li>SQL</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Aviation Section -->
-	<section id="aviation" class="py-24 relative min-h-screen flex items-center">
-		<div
-			class="parallax-bg"
-			style={`background-image: url('${aviationBg.src}');`}
-		>
-		</div>
-
-		<div class="container mx-auto px-4 max-w-300 relative z-10">
-			<h2
-				class="gradient-text text-center mb-16"
-				style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: 700;"
-			>
-				Aviation Journey
-			</h2>
-
-			<!-- License Card -->
-			<div class="max-w-3xl mx-auto mb-16 animate-on-scroll">
-				<div class="glass-card-accent p-10 flex items-center gap-8">
-					<div class="text-6xl text-blue-400 shrink-0">
-						<i
-							class="fas fa-plane"
-							style="margin-bottom: 0; font-size: 4rem;"
-						></i>
-					</div>
-					<div>
-						<h3
-							style="font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 700; margin-bottom: 0.5rem; color: var(--text-color);"
-						>
-							Private Pilot License
-						</h3>
-						<p
-							style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
-						>
-							Achieved the dream of becoming a licensed private pilot,
-							opening up new horizons and perspectives.
+			<div class="project-grid">
+				<article class="project-card project-card-featured animate-on-scroll">
+					<div class="project-copy">
+						<div class="project-meta">
+							<span class="project-number">01 / 02</span>
+							<span class="live-chip"><span></span> Public project</span>
+						</div>
+						<p class="project-type">Cross-platform security utility</p>
+						<h3>FileCrypter</h3>
+						<p class="project-description">
+							A desktop encryption app with a Vue interface and a Rust/Tauri core. Files move through authenticated encryption, memory-hard key derivation, optional compression, and crash-safe streaming writes.
 						</p>
+						<ul class="project-tags" aria-label="FileCrypter technologies">
+							<li>Rust</li>
+							<li>Tauri 2</li>
+							<li>Vue 3</li>
+							<li>AES-256-GCM</li>
+						</ul>
+						<a
+							href="https://github.com/novafluxx/filecrypter"
+							class="text-link"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							View repository <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+						</a>
+					</div>
+
+					<div class="crypto-console" aria-label="FileCrypter encryption flow illustration">
+						<div class="console-bar">
+							<span>encryption.pipeline</span>
+							<span class="console-lights" aria-hidden="true"><i></i><i></i><i></i></span>
+						</div>
+						<div class="console-body">
+							<div class="file-node source-node">
+								<i class="fa-regular fa-file" aria-hidden="true"></i>
+								<span>source.data</span>
+							</div>
+							<div class="flow-line"><span></span></div>
+							<div class="cipher-core">
+								<span class="core-ring ring-one"></span>
+								<span class="core-ring ring-two"></span>
+								<i class="fa-solid fa-fingerprint" aria-hidden="true"></i>
+							</div>
+							<div class="flow-line"><span></span></div>
+							<div class="file-node output-node">
+								<i class="fa-solid fa-lock" aria-hidden="true"></i>
+								<span>secured.enc</span>
+							</div>
+						</div>
+						<div class="console-status">
+							<span><i></i> AES-256-GCM</span>
+							<span><i></i> Argon2id</span>
+							<span><i></i> Atomic writes</span>
+						</div>
+					</div>
+				</article>
+
+				<article class="project-card project-card-notes animate-on-scroll">
+					<div class="project-meta">
+						<span class="project-number">02 / 02</span>
+						<span class="live-chip"><span></span> Public project</span>
+					</div>
+					<div class="notes-visual" aria-hidden="true">
+						<div class="note-sheet note-sheet-back"></div>
+						<div class="note-sheet note-sheet-middle"></div>
+						<div class="note-sheet note-sheet-front">
+							<span class="note-dot"></span>
+							<span class="note-line note-line-title"></span>
+							<span class="note-line"></span>
+							<span class="note-line note-line-short"></span>
+							<span class="sync-pill"><i class="fa-solid fa-arrows-rotate"></i> synced</span>
+						</div>
+					</div>
+					<p class="project-type">Offline-first progressive web app</p>
+					<h3>High Notes</h3>
+					<p class="project-description">
+						A fast note-taking PWA with rich-text editing, local caching, queued offline mutations, secure cloud sync, and realtime updates across devices.
+					</p>
+					<ul class="project-tags" aria-label="High Notes technologies">
+						<li>Nuxt 4</li>
+						<li>TypeScript</li>
+						<li>Supabase</li>
+						<li>IndexedDB</li>
+					</ul>
+					<a
+						href="https://github.com/novafluxx/HighNotes"
+						class="text-link"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						View repository <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+					</a>
+				</article>
+			</div>
+
+			<div class="proof-strip animate-on-scroll" aria-label="Engineering principles">
+				<div><span>01</span><strong>Security-minded</strong><small>Threats considered early</small></div>
+				<div><span>02</span><strong>Cross-platform</strong><small>Desktop and web systems</small></div>
+				<div><span>03</span><strong>Offline-ready</strong><small>Resilient when networks fail</small></div>
+				<div><span>04</span><strong>Pipeline-tested</strong><small>Automation in the delivery loop</small></div>
+			</div>
+		</div>
+	</section>
+
+	<section id="experience" class="site-section experience-section" aria-labelledby="experience-title">
+		<div class="section-shell">
+			<header class="section-heading section-heading-compact animate-on-scroll">
+				<div>
+					<p class="section-index"><span>02</span> Quality practice</p>
+					<h2 id="experience-title">Turn risk into signal.</h2>
+				</div>
+			</header>
+
+			<div class="experience-layout">
+				<div class="experience-narrative animate-on-scroll">
+					<p class="experience-role">Quality Assurance Analyst & Automation Engineer</p>
+					<h3>Quality should make teams move faster, not make them afraid to ship.</h3>
+					<p>
+						My work connects exploratory testing, maintainable automation, and continuous delivery. The goal is a clear picture of product risk that developers can act on while the context is still fresh.
+					</p>
+					<div class="practice-flow" aria-label="Quality engineering workflow">
+						<div><span>01</span><strong>Observe</strong><small>Map behavior and risk</small></div>
+						<div><span>02</span><strong>Automate</strong><small>Protect critical paths</small></div>
+						<div><span>03</span><strong>Integrate</strong><small>Move checks into CI</small></div>
+						<div><span>04</span><strong>Improve</strong><small>Learn from every run</small></div>
+					</div>
+				</div>
+
+				<div class="quality-console animate-on-scroll" aria-label="Quality system status">
+					<div class="quality-console-header">
+						<div>
+							<span class="status-dot" aria-hidden="true"></span>
+							Quality signal
+						</div>
+						<span>LIVE</span>
+					</div>
+					<div class="signal-orbit" aria-hidden="true">
+						<span class="orbit orbit-a"></span>
+						<span class="orbit orbit-b"></span>
+						<span class="orbit orbit-c"></span>
+						<div class="signal-center"><i class="fa-solid fa-wave-square"></i></div>
+						<span class="signal-node node-ui">UI</span>
+						<span class="signal-node node-api">API</span>
+						<span class="signal-node node-perf">PERF</span>
+						<span class="signal-node node-ci">CI</span>
+					</div>
+					<div class="signal-list">
+						<div><span><i></i> Critical paths</span><strong>MONITORED</strong></div>
+						<div><span><i></i> Feedback loops</span><strong>CONNECTED</strong></div>
+						<div><span><i></i> Release confidence</span><strong>VISIBLE</strong></div>
 					</div>
 				</div>
 			</div>
 
-			<!-- Aviation Skills -->
-			<div class="grid grid-cols-1 xl:grid-cols-3 gap-6 stagger-children">
-				<div class="glass-card-secondary p-8 text-center">
-					<i
-						class="fas fa-compass text-5xl mb-6 text-blue-400"
-						style="margin-bottom: 1.5rem;"
-					></i>
-					<h3
-						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 0.75rem; color: var(--text-color);"
-					>
-						Navigation
-					</h3>
-					<p
-						style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
-					>
-						Proficient in VFR navigation and flight planning
-					</p>
+			<div class="toolkit animate-on-scroll">
+				<div class="toolkit-intro">
+					<p class="section-index"><span>STACK</span> Working toolkit</p>
+					<p>Practical tools chosen for the system in front of me—not for the résumé keyword count.</p>
 				</div>
-				<div class="glass-card-secondary p-8 text-center">
-					<i
-						class="fas fa-cloud text-5xl mb-6 text-slate-400"
-						style="margin-bottom: 1.5rem;"
-					></i>
-					<h3
-						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 0.75rem; color: var(--text-color);"
-					>
-						Weather
-					</h3>
-					<p
-						style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
-					>
-						Experienced in weather analysis and decision making
-					</p>
-				</div>
-				<div class="glass-card-secondary p-8 text-center">
-					<i
-						class="fas fa-tower-broadcast text-5xl mb-6 text-red-400"
-						style="margin-bottom: 1.5rem;"
-					></i>
-					<h3
-						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 0.75rem; color: var(--text-color);"
-					>
-						Communications
-					</h3>
-					<p
-						style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
-					>
-						Fluent in aviation radio communications
-					</p>
+				<div class="tool-groups">
+					{toolGroups.map((group) => (
+						<div class="tool-group">
+							<h3>{group.label}</h3>
+							<ul>
+								{group.tools.map((tool) => <li>{tool}</li>)}
+							</ul>
+						</div>
+					))}
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- Contact Section -->
-	<section id="contact" class="py-24 relative">
-		<div class="container mx-auto px-4 max-w-300">
-			<h2
-				class="gradient-text text-center mb-8"
-				style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: 700;"
-			>
-				Get in Touch
-			</h2>
-			<p
-				class="text-center mb-16 max-w-2xl mx-auto"
-				style="font-family: var(--font-sans); font-size: var(--text-lg); line-height: 1.7; color: var(--text-muted);"
-			>
-				I'm always interested in discussing new opportunities, sharing
-				aviation experiences, or talking about quality assurance and
-				automation.
-			</p>
+	<section
+		id="aviation"
+		class="aviation-section section-breakout"
+		style={`--aviation-image: url('${aviationBg.src}');`}
+		aria-labelledby="aviation-title"
+	>
+		<div class="aviation-vignette" aria-hidden="true"></div>
+		<div class="section-shell aviation-shell">
+			<div class="aviation-copy animate-on-scroll">
+				<p class="section-index section-index-light"><span>03</span> Beyond the screen</p>
+				<h2 id="aviation-title">Precision is a habit.</h2>
+				<p>
+					Aviation taught me to prepare carefully, communicate clearly, and stay curious when conditions change. Those habits follow me into every product I test and every system I build.
+				</p>
+			</div>
 
-			<div
-				class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto animate-on-scroll"
-			>
-				<div class="glass-card-primary p-10 text-center">
-					<i
-						class="fab fa-linkedin text-6xl mb-6 text-blue-500"
-						aria-hidden="true"
-						style="margin-bottom: 1.5rem;"
-					></i>
-					<h3
-						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 1rem; color: var(--text-color);"
-					>
-						LinkedIn
-					</h3>
-					<p
-						class="mb-6"
-						style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
-					>
-						Connect with me professionally on LinkedIn
+			<div class="flight-panel animate-on-scroll">
+				<div class="flight-panel-top">
+					<span>PERSONAL LOG / JH</span>
+					<i class="fa-solid fa-plane" aria-hidden="true"></i>
+				</div>
+				<div class="flight-route" aria-hidden="true">
+					<span class="route-point route-start"></span>
+					<span class="route-line"></span>
+					<i class="fa-solid fa-plane-up route-plane"></i>
+					<span class="route-point route-end"></span>
+				</div>
+				<div class="flight-stats">
+					<div><span>Certification</span><strong>Private Pilot</strong></div>
+					<div><span>Navigation</span><strong>VFR</strong></div>
+					<div><span>Mindset</span><strong>Always learning</strong></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="contact" class="site-section contact-section" aria-labelledby="contact-title">
+		<div class="section-shell">
+			<div class="contact-panel animate-on-scroll">
+				<div class="contact-radar" aria-hidden="true"><span></span><span></span><i></i></div>
+				<div class="contact-copy">
+					<p class="section-index"><span>04</span> Open channel</p>
+					<h2 id="contact-title">Let’s build something dependable.</h2>
+					<p>
+						I’m always interested in thoughtful software, quality engineering, automation, and a good aviation story.
 					</p>
+				</div>
+				<div class="contact-actions">
 					<a
 						href="https://www.linkedin.com/in/justin-high-4977598b"
+						class="button button-primary"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all font-semibold"
-						aria-label="Visit Justin's LinkedIn profile"
-						style="font-family: var(--font-sans);"
-						>LinkedIn Profile</a
 					>
-				</div>
-
-				<div class="glass-card-primary p-10 text-center">
-					<i
-						class="fab fa-github text-6xl mb-6 text-slate-300 dark:text-white"
-						aria-hidden="true"
-						style="margin-bottom: 1.5rem;"
-					></i>
-					<h3
-						style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin-bottom: 1rem; color: var(--text-color);"
-					>
-						GitHub
-					</h3>
-					<p
-						class="mb-6"
-						style="font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.7; color: var(--text-muted);"
-					>
-						Check out my automation projects and contributions
-					</p>
+						<i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+						Connect on LinkedIn
+					</a>
 					<a
 						href="https://github.com/novafluxx"
+						class="button button-quiet"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="inline-block bg-slate-800 text-white px-8 py-3 rounded-full hover:bg-slate-900 focus:ring-2 focus:ring-slate-700 focus:ring-offset-2 transition-all dark:bg-slate-700 dark:hover:bg-slate-600 font-semibold"
-						aria-label="Visit Justin's GitHub profile"
-						style="font-family: var(--font-sans);"
-						>GitHub Profile</a
 					>
+						<i class="fa-brands fa-github" aria-hidden="true"></i>
+						Explore GitHub
+					</a>
 				</div>
 			</div>
 		</div>
 	</section>
 </Layout>
 
-<!-- Animation Scripts -->
 <script src="../scripts/animations.ts"></script>
 <script src="../scripts/smooth-scroll.ts"></script>
 <script src="../scripts/hero-3d.ts"></script>

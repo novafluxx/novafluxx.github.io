@@ -1,6 +1,6 @@
 // Theme color constants for Safari iOS status bar
 const THEME_COLORS = {
-    light: '#fdf2f8', // Warm rose/pink for sunrise theme
+    light: '#f5f7fb', // Cool pearl for the daylight theme
     dark: '#0f172a',  // Slate-900 for dark mode
 } as const;
 
@@ -9,7 +9,7 @@ const THEME_COLORS = {
 function updateThemeColor(isDark: boolean): void {
     const newColor = isDark ? THEME_COLORS.dark : THEME_COLORS.light;
     // Semi-transparent version for header (Safari detects it but keeps UI clean)
-    const headerColor = isDark ? 'rgba(15, 23, 42, 0.01)' : 'rgba(253, 242, 248, 0.01)';
+    const headerColor = isDark ? 'rgba(15, 23, 42, 0.01)' : 'rgba(245, 247, 251, 0.01)';
 
     // Update HTML background-color (Safari's primary detection method)
     document.documentElement.style.backgroundColor = newColor;
