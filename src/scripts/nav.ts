@@ -108,34 +108,73 @@ function initTheme(): void {
 }
 
 // Active Section Detection
+let activeSectionCleanup: (() => void) | undefined;
+
 function initActiveSection(): void {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
+    activeSectionCleanup?.();
+
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('section[id]'));
+    const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav-link'));
 
     if (!sections.length || !navLinks.length) return;
 
-    const observerOptions: IntersectionObserverInit = {
-        root: null,
-        rootMargin: '-20% 0px -80% 0px',
-        threshold: 0,
-    };
+    function setActiveSection(section: HTMLElement): void {
+        navLinks.forEach((link) => {
+            const isActive = link.getAttribute('href') === `#${section.id}`;
+            link.classList.toggle('active', isActive);
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-
-                navLinks.forEach((link) => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${id}`) {
-                        link.classList.add('active');
-                    }
-                });
+            if (isActive) {
+                link.setAttribute('aria-current', 'location');
+            } else {
+                link.removeAttribute('aria-current');
             }
         });
-    }, observerOptions);
+    }
 
-    sections.forEach((section) => observer.observe(section));
+    function updateActiveSection(): void {
+        const activationLine = window.innerHeight * 0.2;
+        const pageBottom = window.scrollY + window.innerHeight;
+        const documentBottom = document.documentElement.scrollHeight;
+        let activeSection = sections[0];
+
+        // The final section cannot always reach the activation line on short mobile
+        // viewports, so reaching the end of the document must select it explicitly.
+        if (Math.ceil(pageBottom) >= documentBottom - 2) {
+            activeSection = sections[sections.length - 1];
+        } else {
+            sections.forEach((section) => {
+                if (section.getBoundingClientRect().top <= activationLine) {
+                    activeSection = section;
+                }
+            });
+        }
+
+        setActiveSection(activeSection);
+    }
+
+    let animationFrameId: number | undefined;
+
+    function scheduleUpdate(): void {
+        if (animationFrameId !== undefined) return;
+
+        animationFrameId = window.requestAnimationFrame(() => {
+            animationFrameId = undefined;
+            updateActiveSection();
+        });
+    }
+
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
+    updateActiveSection();
+
+    activeSectionCleanup = () => {
+        window.removeEventListener('scroll', scheduleUpdate);
+        window.removeEventListener('resize', scheduleUpdate);
+
+        if (animationFrameId !== undefined) {
+            window.cancelAnimationFrame(animationFrameId);
+        }
+    };
 }
 
 // Adaptive Navigation - Change colors based on background section
