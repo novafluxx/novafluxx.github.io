@@ -598,14 +598,14 @@ button:focus-visible {
     background: none;
     -webkit-text-fill-color: var(--text-color);
     color: var(--text-color);
-    /* Keep padding-bottom to match light mode height — prevents layout shift on theme toggle.
+    /* Keep padding-bottom to match light mode height; this prevents layout shift on theme toggle.
        The visual "float" from background-clip:text vs solid text is a perceptual difference
        inherent to the technique, not a layout problem. */
 }
 
 /* Hero Entrance Animations */
 /* The name uses gradient text (background-clip: text on each letter), so the
-   old text-shadow glow is replaced with drop-shadow filters — text-shadow
+   old text-shadow glow is replaced with drop-shadow filters because text-shadow
    paints visibly through transparent-fill glyphs and would ruin the gradient.
    The h1's own `perspective` gives the per-letter rotateX entrance real
    foreshortening (the filter flattens any inherited preserve-3d). */
@@ -703,7 +703,7 @@ button:focus-visible {
 }
 
 /* Entrance keeps translateZ in both keyframes so depth never pops.
-   `backwards` fill only — after the animation the static .hero-layer
+   `backwards` fill only; after the animation the static .hero-layer
    transform takes over, keeping the depth live for the tilt effect. */
 @keyframes hero-enter {
     from {
@@ -1360,7 +1360,7 @@ nav.nav-over-light > div {
 }
 
 /* ========================================
-   PORTFOLIO REDESIGN — SIGNAL / FLIGHT
+   PORTFOLIO REDESIGN: SIGNAL / FLIGHT
    ======================================== */
 
 :root {

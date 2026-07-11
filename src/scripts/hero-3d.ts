@@ -1,6 +1,6 @@
 // 3D hero effect: a perspective-projected particle field with constellation
 // lines drawn on a canvas, plus pointer-driven camera parallax and content
-// tilt. No dependencies — plain canvas 2D with manual 3D projection.
+// tilt. No dependencies: plain canvas 2D with manual 3D projection.
 
 type RGB = readonly [number, number, number];
 
@@ -28,7 +28,7 @@ const LINK_DIST = 130; // screen-space px within which particles connect
 // Glitch accent timing
 const GLITCH_MIN_DELAY = 4000; // ms
 const GLITCH_DELAY_RANGE = 5000; // ms of extra random delay
-const GLITCH_DURATION = 380; // ms — must cover the CSS glitch keyframes
+const GLITCH_DURATION = 380; // ms; must cover the CSS glitch keyframes
 
 // Particles pick a color by index so the palette can swap on theme toggle
 const PALETTES: Record<'dark' | 'light', readonly RGB[]> = {
@@ -143,7 +143,7 @@ function initHero3D(): void {
         const cx = width / 2;
         const cy = height / 2;
         // Camera moves opposite the pointer so the scene recedes as content
-        // tilts toward the cursor — perspective handles per-depth shift
+        // tilts toward the cursor; perspective handles per-depth shift
         const camWorldX = camX * CAM_RANGE;
         const camWorldY = camY * CAM_RANGE * 0.7;
 
