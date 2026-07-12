@@ -1853,6 +1853,19 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
     .project-shot-tauri .project-shot-image { width: 100%; transform: none; }
     .desktop-window { transform: none; }
     .project-card-featured { grid-template-columns: 1fr; }
+    /* Stacked layout: keep meta in flow so it no longer overlays .project-type */
+    .project-card-featured .project-meta {
+        position: relative;
+        inset: auto;
+        z-index: 3;
+        width: 100%;
+        max-width: none;
+        flex-wrap: wrap;
+        margin-bottom: 0;
+        padding: clamp(2rem, 5vw, 4rem) clamp(2rem, 5vw, 4rem) 0;
+    }
+    .project-card-featured .project-copy { padding-top: 1rem; }
+    .project-card-featured .project-type { margin-top: 0.5rem; }
     .crypto-console { margin: 0 1.25rem 1.25rem; padding: 0 1.25rem 1.25rem; }
     .project-card-notes { grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr); }
     .proof-strip { grid-template-columns: repeat(2, 1fr); }
@@ -1900,6 +1913,20 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
     .desktop-dropzone { min-height: 130px; }
     .desktop-options { grid-template-columns: 1fr; }
     .project-card-featured { min-height: auto; }
+    /* Absolute meta collides with .project-type once the card stacks; match .NET / notes. */
+    .project-card-featured .project-meta {
+        position: relative;
+        inset: auto;
+        z-index: 3;
+        width: 100%;
+        max-width: none;
+        flex-wrap: wrap;
+        margin-bottom: 0;
+        padding: 1.5rem 1.5rem 0;
+    }
+    .project-card-featured .project-copy { padding-top: 0.75rem; }
+    .project-card-featured .project-type { margin-top: 0.35rem; }
+    .project-card-featured h3 { white-space: normal; }
     .project-copy { padding: 1.5rem; }
     .project-card h3 { font-size: 2.75rem; }
     .project-type { margin-top: 2.5rem; }
