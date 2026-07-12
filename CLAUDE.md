@@ -23,16 +23,16 @@ Personal portfolio website for Justin High (QA Analyst & Automation Engineer) bu
 | `pnpm dev` | Start dev server at localhost:4321 |
 | `pnpm build` | Build production site to ./dist/ |
 | `pnpm preview` | Preview build locally |
-| `pnpm exec astro check` | Run TypeScript type checking |
+| `pnpm check` | Run TypeScript type checking (`astro check`) |
 
-**Note:** Use `pnpm` commands via Corepack, not Bun or npm. The project uses pnpm as its package manager.
+**Note:** Use `pnpm` commands via Corepack, not Bun or npm. The project uses pnpm as its package manager. Treat `pnpm build` and `pnpm check` as the verification steps.
 
 ## Architecture
 
 ### File-Based Routing
 
 Pages are located in `src/pages/` and use Astro's file-based routing:
-- `index.astro` - Main portfolio page (home)
+- `index.astro` - Main portfolio page (home): `#hero`, `#work`, `#experience`, `#aviation`, `#contact`
 - `404.astro` - Custom error page
 
 Each page imports and uses the Layout component from `src/layouts/Layout.astro`.
@@ -40,32 +40,32 @@ Each page imports and uses the Layout component from `src/layouts/Layout.astro`.
 ### Component Structure
 
 **Layout System:**
-- `src/layouts/Layout.astro` - Master layout with header, footer, and full-page animated background
-  - Includes fixed navigation header (60px height)
-  - Main content area with max-width of 1200px
+- `src/layouts/Layout.astro` - Master layout with skip link, header, footer, and full-page animated background
+  - Optional `description` prop (default meta/OG description)
+  - Open Graph / Twitter meta when `Astro.site` is set (Pages deploy)
+  - Fixed navigation header (60px height)
   - Footer with social links (GitHub, LinkedIn)
   - Full-page animated background layers (orbs, gradients, grid, noise)
 
 **Components:**
-- `src/components/Nav.astro` - Navigation bar with glassmorphism design
-  - Theme toggle button (dark/light mode)
+- `src/components/Nav.astro` - Navigation bar
+  - Theme toggle (dynamic `aria-label` / `aria-pressed` via `nav.ts`)
   - Section anchor links with FontAwesome icons
   - Responsive mobile-friendly layout
 
 ### Styling System
 
-All styles are centralized in `src/styles/global.css` (~1,600 lines):
+All styles are centralized in `src/styles/global.css` (~1,750 lines):
 
 **CSS Custom Properties:**
 - Theme variables defined in `:root` and `:root.dark` for dark mode
 - Fluid typography scale using `clamp()` (--text-xs through --text-5xl)
-- Color palette: blues (#60a5fa), purples (#a78bfa), slate grays
+- Dual palette: sunrise/rose light theme and cosmic blue/slate dark theme
 
-**Glass Card Variants:**
-- `.glass-card` - Standard glassmorphic card with backdrop blur
-- `.glass-card-primary` - Enhanced blur for main content
-- `.glass-card-secondary` - Lighter variant for supporting content
-- `.glass-card-accent` - Featured cards with animated gradient border
+**Homepage surfaces (current):**
+- Section shells, project cards (`.project-card`, featured/dotnet/notes variants), toolkit, experience highlights, practice flow, quality console
+- Prefer matching those patterns for new work/experience UI
+- Legacy `.glass-card*` rules may remain in CSS; they are not the primary homepage pattern
 
 **Background System:**
 The site uses a multi-layer full-page animated background:
@@ -91,10 +91,11 @@ All layers animate independently with different timing and blend modes. The body
 Located in `src/scripts/`. Loading: `nav.ts` is loaded from `Nav.astro`; `animations.ts`, `smooth-scroll.ts`, and `hero-3d.ts` are loaded from `index.astro`. `Layout.astro` contains only a small inline (`is:inline`) pre-paint script that sets the theme and Safari status-bar color before render. There is no client framework.
 
 **nav.ts** (Theme & Navigation):
-- Manages dark/light theme toggle with localStorage persistence
+- Manages dark/light theme toggle with localStorage persistence and View Transitions when available
 - Updates Safari iOS status bar color via `updateThemeColor()` function (see Safari iOS Status Bar Theming section)
-- Detects active section using IntersectionObserver
-- Applies adaptive navigation styling based on section background
+- Syncs theme control accessible name/state (`aria-label`, `aria-pressed`)
+- Active section via scroll position (activation line ~20% of viewport height), with end-of-document handling for the last section
+- Applies adaptive navigation styling based on section background (e.g. aviation)
 - Adds `.nav-over-dark` or `.nav-over-light` classes to nav element
 
 **animations.ts** (Scroll Animations):
@@ -103,7 +104,7 @@ Located in `src/scripts/`. Loading: `nav.ts` is loaded from `Nav.astro`; `animat
 - Re-initializes on Astro page transitions
 
 **smooth-scroll.ts**:
-- Handles smooth scrolling behavior for anchor links
+- Handles smooth scrolling behavior for anchor links (accounts for fixed header offset)
 
 **hero-3d.ts** (Constellation Background):
 - Dependency-free canvas 2D particle field with perspective projection, constellation lines, pointer-driven camera parallax, and hero content tilt
@@ -112,6 +113,12 @@ Located in `src/scripts/`. Loading: `nav.ts` is loaded from `Nav.astro`; `animat
 - Also drives the occasional RGB-split "glitch" flicker on the hero name
 
 All scripts self-initialize on load and re-initialize on `astro:page-load` transitions.
+
+### Images
+
+- `src/images/` holds sources optimized at build time with `sharp` via `astro:assets`
+- Examples: aviation background (`flight-line.jpg`), FileCrypter product stills
+- Prefer `Image` / `getImage` from `astro:assets` for new assets
 
 ### GitHub Pages Deployment
 
@@ -132,13 +139,13 @@ Automated deployment via GitHub Actions:
 ### Safari iOS Status Bar Theming
 **CRITICAL:** Safari iOS 18.1+ changed how it detects status bar colors. The implementation uses a three-pronged approach:
 
-1. **HTML background-color** - Solid opaque color (`#fdf2f8` light, `#0f172a` dark) set on `<html>` element
+1. **HTML background-color** - Solid opaque color (light pearl / dark slate; see `THEME_COLORS` in `nav.ts` and the inline script in `Layout.astro`) set on `<html>`
 2. **theme-color meta tag** - Updated dynamically and re-inserted into DOM to force Safari recognition
-3. **Fixed header background-color** - Semi-transparent rgba color (0.01 opacity) on `#site-header` element
+3. **Fixed header background-color** - Semi-transparent rgba color (~0.01 opacity) on `#site-header` element
 
 **Why this approach:**
 - Safari iOS 18.1+ reads `background-color` of fixed position elements for status bar theming
-- The header uses very low opacity (0.01) so Safari detects it without creating visible artifacts
+- The header uses very low opacity so Safari detects it without creating visible artifacts
 - All three values must be synchronized when theme toggles
 
 **Implementation locations:**
@@ -151,15 +158,14 @@ Automated deployment via GitHub Actions:
 - Increase header background opacity above 0.02 (creates visible block at top)
 
 ### Section-Based Navigation
-- Navigation links are anchor links to section IDs
-- Active section detected via IntersectionObserver with 50% threshold
-- Navigation style adapts to background (light text over dark sections, vice versa)
+- Navigation links are anchor links to section IDs (`#hero`, `#work`, `#experience`, `#aviation`, `#contact`)
+- Active section is derived from scroll position (not a fixed 50% IntersectionObserver threshold)
+- Navigation style adapts to background (light text over dark sections such as aviation)
 
 ### Responsive Design
-- Mobile breakpoint: 768px
-- Parallax backgrounds disabled on mobile for performance
-- Touch-optimized backdrop-filter blur values (reduced from 20px to 12px)
-- Navigation icons displayed prominently on mobile
+- Mobile breakpoint: 768px (additional layout breakpoints exist for project cards, etc.)
+- Touch-optimized backdrop-filter blur values where glass-like surfaces remain
+- Navigation icons displayed prominently on mobile; labels hide except on the active link
 
 ## Adding New Pages
 
@@ -173,8 +179,8 @@ Automated deployment via GitHub Actions:
      <!-- content here -->
    </Layout>
    ```
-3. Add navigation link to `src/components/Nav.astro` with appropriate FontAwesome icon
-4. Follow existing glass card patterns for consistent styling
+3. Add navigation link to `src/components/Nav.astro` with appropriate FontAwesome icon if it should appear in the shell
+4. Follow existing section / project-card / surface patterns in `global.css` (prefer matching nearby homepage styles)
 
 ## Deployment
 
@@ -209,21 +215,23 @@ Automated deployment via GitHub Actions:
 
 **TypeScript:**
 - Configuration extends `astro/tsconfigs/strict`
-- Type checking available via `pnpm exec astro check`
+- Type checking available via `pnpm check`
 - All TypeScript files in src/scripts/ are client-side only
 
 **Accessibility:**
+- Skip link to `#main-content` in `Layout.astro`
 - Maintain focus-visible states on interactive elements
-- Respect prefers-reduced-motion media query (animations disabled if set)
+- Respect prefers-reduced-motion media query (animations / constellation behavior reduced)
 - Use semantic HTML and ARIA labels where appropriate
+- Theme toggle exposes current mode via accessible name and `aria-pressed`
 
 **Performance:**
 - Keep backdrop-filter usage optimized (reduce blur on mobile)
-- Avoid adding heavy images without optimization
-- Test parallax backgrounds on mobile devices
+- Avoid adding heavy images without `astro:assets` optimization
+- Constellation canvas caps particle count and DPR; pauses when appropriate
 
 **Image Optimization (sharp):**
-- Astro's default image service uses `sharp` at build time to optimize images from `src/images/` (e.g. `flight-line.jpg` → optimized `.webp`)
+- Astro's default image service uses `sharp` at build time to optimize images from `src/images/`
 - `sharp` is listed as a **direct dependency** in `package.json` even though it's only consumed by Astro. This is intentional: Astro declares `sharp` as an `optionalDependency`, and pnpm's strict `node_modules` layout can leave that optional dep unresolvable. Astro's docs recommend installing `sharp` manually when using pnpm
 - **Keep `sharp`'s version range aligned with Astro's** (Astro 7.0.6 accepts `^0.34.0 || ^0.35.0`; the direct dep uses `^0.35.3`). Don't bump `sharp` outside Astro's accepted range; the 0.x minors are disjoint, so pnpm would install a second, unused copy while Astro keeps using its own. Move them together when Astro widens its range, and run `pnpm dedupe` after changing the range — a stale lockfile can otherwise keep two resolved copies even when the ranges overlap
 

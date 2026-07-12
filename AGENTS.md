@@ -1,18 +1,18 @@
 # AGENTS.md
 
 Quick reference for agentic coding agents working in this repository.
-For deeper architecture prose (animated background layering, Safari iOS status-bar theming, glass-card variants), see `CLAUDE.md`; however, trust the code over `CLAUDE.md` when versions/details conflict.
+For deeper architecture prose (animated background layering, Safari iOS status-bar theming, constellation canvas), see `CLAUDE.md`; however, trust the code over `CLAUDE.md` when versions/details conflict.
 
 ## Commands
 - `pnpm install`: install deps. Use pnpm (Corepack-pinned in `package.json`); never Bun/npm.
 - `pnpm dev`: dev server at `localhost:4321` (served from base `/`).
-- `pnpm build`: production build to `./dist/` (served from base `/my-personal-website/`).
+- `pnpm build`: production build to `./dist/` (served from base `/my-personal-website/` when `DEPLOY_TARGET=pages`).
 - `pnpm preview`: preview the production build locally before pushing.
-- `pnpm exec astro check`: typecheck (`@astrojs/check` is installed as a devDependency).
-- No lint, formatter, or test command is configured. Treat `pnpm build` plus `astro check` as the verification steps.
+- `pnpm check`: typecheck via `astro check` (`@astrojs/check` is a devDependency).
+- No lint, formatter, or test command is configured. Treat `pnpm build` plus `pnpm check` as the verification steps.
 
 ## Dev vs prod base path
-`astro.config.mjs` sets `base` to `/my-personal-website/` in production but `/` in dev. Use `import.meta.env.BASE_URL` for internal links/paths; never hardcode `/my-personal-website/...` or assume `/`.
+`astro.config.mjs` sets `base` to `/my-personal-website/` when `DEPLOY_TARGET=pages`, otherwise `/`. Use `import.meta.env.BASE_URL` for internal links/paths; never hardcode `/my-personal-website/...` or assume `/`.
 
 ## Astro version
 This repo currently uses Astro 7 (`astro@^7.0.0`) with Tailwind CSS v4 via `@tailwindcss/vite`.
@@ -20,16 +20,25 @@ This repo currently uses Astro 7 (`astro@^7.0.0`) with Tailwind CSS v4 via `@tai
 There are no Astro content collections or markdown-driven routes in the current tree. If content collections are reintroduced later, verify the current Astro APIs before copying older Astro 4/6 patterns.
 
 ## Routing & layouts
-- `src/pages/index.astro`: home page.
+- `src/pages/index.astro`: single-page portfolio (sections: `#hero`, `#work`, `#experience`, `#aviation`, `#contact`).
 - `src/pages/404.astro`: custom error page.
-- `src/layouts/Layout.astro`: master layout (fixed header, footer, full-page animated background). Every page must use it.
-- `src/components/Nav.astro`: navigation links and theme-toggle button.
-- Client-side TS lives in `src/scripts/{nav,animations,smooth-scroll}.ts`: `nav.ts` is loaded from `Nav.astro`, while `animations.ts` and `smooth-scroll.ts` are loaded from `index.astro`. `Layout.astro` also contains a small inline pre-paint theme/status-bar script. There is no client framework.
+- `src/layouts/Layout.astro`: master layout (skip link, fixed header, footer, full-page animated background, SEO/OG meta). Every page must use it. Optional `description` prop for meta/OG text.
+- `src/components/Nav.astro`: section anchor links and theme-toggle button.
+- Client-side TS in `src/scripts/`:
+  - `nav.ts` — loaded from `Nav.astro` (theme, active section, adaptive nav).
+  - `animations.ts`, `smooth-scroll.ts`, `hero-3d.ts` — loaded from `index.astro`.
+  - `Layout.astro` also has a small inline pre-paint theme/status-bar script.
+- There is no client framework.
 
 ## Styling
 - Tailwind CSS v4 via `@tailwindcss/vite`; apply utility classes inline.
-- All custom CSS lives in `src/styles/global.css` (~1100 lines); do not scatter component-scoped CSS files.
+- All custom CSS lives in `src/styles/global.css` (~1750 lines); do not scatter component-scoped CSS files.
+- Homepage surfaces use `.project-card`, `.section-shell`, toolkit/experience patterns, etc. Legacy `.glass-card*` rules may still exist in CSS; prefer matching nearby section styles rather than reintroducing glass-card as the default.
 - Theming via CSS custom properties on `:root` / `:root.dark`; dark mode is toggled by adding the `dark` class to `<html>` (see `src/scripts/nav.ts`). Animations are prefixed by purpose (e.g. `float-orb-refined`, `mesh-float`).
+
+## Images
+- Source assets under `src/images/` (e.g. `flight-line.jpg`, FileCrypter screenshots). Optimize via `astro:assets` (`Image` / `getImage`) and `sharp`.
+- Prefer `astro:assets` for new product stills and section backgrounds.
 
 ## Critical constraint: keep `<body>` transparent
 The animated background uses negative `z-index` layers that are only visible because `body` has a transparent background. Do NOT set an opaque `background-color` on `body`; it breaks the parallax/background stack. Safari iOS 18.1+ status-bar theming is handled separately via `<html>` background + a near-transparent fixed `#site-header`; read `CLAUDE.md`'s "Safari iOS Status Bar Theming" section before touching `updateThemeColor()` in `nav.ts`, and do not raise header background opacity above 0.02.
