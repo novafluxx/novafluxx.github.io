@@ -216,7 +216,7 @@ Automated deployment via GitHub Actions:
 **Image Optimization (sharp):**
 - Astro's default image service uses `sharp` at build time to optimize images from `src/images/` (e.g. `flight-line.jpg` → optimized `.webp`)
 - `sharp` is listed as a **direct dependency** in `package.json` even though it's only consumed by Astro. This is intentional: Astro declares `sharp` as an `optionalDependency`, and pnpm's strict `node_modules` layout can leave that optional dep unresolvable. Astro's docs recommend installing `sharp` manually when using pnpm
-- **Keep `sharp`'s version range aligned with Astro's** (Astro 7 pins `^0.34.0`). Don't bump `sharp` ahead of Astro; the ranges are disjoint across 0.x minors, so pnpm would install a second, unused copy while Astro keeps using its own. Move them together when Astro widens its range
+- **Keep `sharp`'s version range aligned with Astro's** (Astro 7.0.6 accepts `^0.34.0 || ^0.35.0`; the direct dep uses `^0.35.3`). Don't bump `sharp` outside Astro's accepted range; the 0.x minors are disjoint, so pnpm would install a second, unused copy while Astro keeps using its own. Move them together when Astro widens its range, and run `pnpm dedupe` after changing the range — a stale lockfile can otherwise keep two resolved copies even when the ranges overlap
 
 **Browser Compatibility:**
 - Uses modern CSS features (backdrop-filter, custom properties, clamp())
