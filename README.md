@@ -5,8 +5,6 @@ Portfolio site for Justin High (QA Analyst & Automation Engineer) — Astro 7, T
 
 🌐 **Live Site**: [novafluxx.github.io/my-personal-website](https://novafluxx.github.io/my-personal-website)
 
-Ideas backlog: see [`IMPROVEMENT_PLAN.md`](./IMPROVEMENT_PLAN.md).
-
 ## Tech Stack
 
 - **Framework**: Astro 7 (static)
