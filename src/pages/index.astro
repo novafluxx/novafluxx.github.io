@@ -26,7 +26,7 @@ const toolGroups = [
 	},
 	{
 		label: "Delivery",
-		tools: ["Azure DevOps", "GitHub Actions", "Jira", "Git", "CI/CD"],
+		tools: ["Azure DevOps", "Jira", "Git", "Test planning"],
 	},
 ];
 
@@ -231,7 +231,7 @@ const pageDescription =
 				<div><span>01</span><strong>Security-minded</strong><small>Threats considered early</small></div>
 				<div><span>02</span><strong>Cross-platform</strong><small>Desktop and web systems</small></div>
 				<div><span>03</span><strong>Offline-ready</strong><small>Resilient when networks fail</small></div>
-				<div><span>04</span><strong>Pipeline-tested</strong><small>Automation in the delivery loop</small></div>
+				<div><span>04</span><strong>Suite-maintained</strong><small>Coverage kept current as products change</small></div>
 			</div>
 		</div>
 	</section>
@@ -248,15 +248,26 @@ const pageDescription =
 			<div class="experience-layout">
 				<div class="experience-narrative animate-on-scroll">
 					<p class="experience-role">Quality Assurance Analyst & Automation Engineer</p>
+					<p class="experience-domain">Healthcare · Release of Information</p>
 					<h3>Quality should make teams move faster, not make them afraid to ship.</h3>
 					<p>
-						My work connects exploratory testing, maintainable automation, and continuous delivery. The goal is a clear picture of product risk that developers can act on while the context is still fresh.
+						In healthcare Release of Information (ROI), I work quality into the core ROI web application and a FHIR-compliant API built for faster information requests and document delivery. I established the API test suite so contract and behavior stay trustworthy as the integration evolves, and I help maintain a broad automation suite over the main web product—updating coverage when the app changes so regressions surface early in delivery.
 					</p>
+					<ul class="experience-highlights" aria-label="Current focus areas">
+						<li>
+							<strong>FHIR ROI API</strong>
+							<span>Built and run automated checks for a FHIR-compliant API that handles ROI requests and document delivery.</span>
+						</li>
+						<li>
+							<strong>ROI web automation</strong>
+							<span>Help maintain and extend a suite covering the main application’s critical workflows as the product changes.</span>
+						</li>
+					</ul>
 					<div class="practice-flow" aria-label="Quality engineering workflow">
 						<div><span>01</span><strong>Observe</strong><small>Map behavior and risk</small></div>
-						<div><span>02</span><strong>Automate</strong><small>Protect critical paths</small></div>
-						<div><span>03</span><strong>Integrate</strong><small>Move checks into CI</small></div>
-						<div><span>04</span><strong>Improve</strong><small>Learn from every run</small></div>
+						<div><span>02</span><strong>Automate</strong><small>Cover critical paths</small></div>
+						<div><span>03</span><strong>Validate</strong><small>Prove API and UI behavior</small></div>
+						<div><span>04</span><strong>Maintain</strong><small>Keep suites current as the product changes</small></div>
 					</div>
 				</div>
 
@@ -275,13 +286,13 @@ const pageDescription =
 						<div class="signal-center"><i class="fa-solid fa-wave-square"></i></div>
 						<span class="signal-node node-ui">UI</span>
 						<span class="signal-node node-api">API</span>
-						<span class="signal-node node-perf">PERF</span>
-						<span class="signal-node node-ci">CI</span>
+						<span class="signal-node node-perf">FHIR</span>
+						<span class="signal-node node-ci">SUITE</span>
 					</div>
 					<div class="signal-list">
 						<div><span><i></i> Critical paths</span><strong>MONITORED</strong></div>
-						<div><span><i></i> Feedback loops</span><strong>CONNECTED</strong></div>
-						<div><span><i></i> Release confidence</span><strong>VISIBLE</strong></div>
+						<div><span><i></i> API contracts</span><strong>CHECKED</strong></div>
+						<div><span><i></i> Suite health</span><strong>MAINTAINED</strong></div>
 					</div>
 				</div>
 			</div>
