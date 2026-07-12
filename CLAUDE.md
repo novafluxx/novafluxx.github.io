@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+A condensed quick-reference for coding agents also exists at `AGENTS.md`; when the two conflict, trust the code.
+
 ## Project Overview
 
 Personal portfolio website for Justin High (QA Analyst & Automation Engineer) built with Astro 7 and Tailwind CSS 4. Deployed to GitHub Pages.
@@ -52,7 +54,7 @@ Each page imports and uses the Layout component from `src/layouts/Layout.astro`.
 
 ### Styling System
 
-All styles are centralized in `src/styles/global.css` (~1,113 lines):
+All styles are centralized in `src/styles/global.css` (~1,600 lines):
 
 **CSS Custom Properties:**
 - Theme variables defined in `:root` and `:root.dark` for dark mode
@@ -86,7 +88,7 @@ All layers animate independently with different timing and blend modes. The body
 
 ### JavaScript/TypeScript
 
-Located in `src/scripts/`:
+Located in `src/scripts/`. Loading: `nav.ts` is loaded from `Nav.astro`; `animations.ts`, `smooth-scroll.ts`, and `hero-3d.ts` are loaded from `index.astro`. `Layout.astro` contains only a small inline (`is:inline`) pre-paint script that sets the theme and Safari status-bar color before render. There is no client framework.
 
 **nav.ts** (Theme & Navigation):
 - Manages dark/light theme toggle with localStorage persistence
@@ -103,7 +105,13 @@ Located in `src/scripts/`:
 **smooth-scroll.ts**:
 - Handles smooth scrolling behavior for anchor links
 
-These scripts are imported in the Layout component using `<script>` tags with `is:inline` for immediate execution.
+**hero-3d.ts** (Constellation Background):
+- Dependency-free canvas 2D particle field with perspective projection, constellation lines, pointer-driven camera parallax, and hero content tilt
+- Renders to `#constellation-canvas` but is visible across the whole homepage; per-section intensity comes from the `SECTION_STRENGTHS` map keyed by section ID — update it when adding or renaming sections
+- Theme-aware palettes (swaps when the `dark` class on `<html>` changes, via MutationObserver); pauses when the tab is hidden or the hero is off-screen; respects `prefers-reduced-motion` by painting a single static frame
+- Also drives the occasional RGB-split "glitch" flicker on the hero name
+
+All scripts self-initialize on load and re-initialize on `astro:page-load` transitions.
 
 ### GitHub Pages Deployment
 
@@ -193,7 +201,8 @@ Automated deployment via GitHub Actions:
 - Click "Run workflow" button
 
 **Configuration:**
-- `astro.config.mjs` includes `site: 'https://novafluxx.github.io'` and a conditional `base` (`'/my-personal-website/'` in production, `'/'` in dev)
+- `astro.config.mjs` switches on the `DEPLOY_TARGET` env var: when set to `pages` (done in `deploy.yml`), `site` is `https://novafluxx.github.io` and `base` is `/my-personal-website/`; otherwise (dev, or root deploys like Coolify) `base` is `/` and `site` comes from the optional `SITE_URL` env var
+- Because `base` differs between dev and Pages, use `import.meta.env.BASE_URL` for internal links/paths — never hardcode `/my-personal-website/...`
 - GitHub Pages source set to "GitHub Actions" in repository settings
 
 ## Important Considerations

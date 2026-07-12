@@ -4,11 +4,12 @@ Quick reference for agentic coding agents working in this repository.
 For deeper architecture prose (animated background layering, Safari iOS status-bar theming, glass-card variants), see `CLAUDE.md`; however, trust the code over `CLAUDE.md` when versions/details conflict.
 
 ## Commands
-- `pnpm install`: install deps. Use pnpm (Corepack-pinned to `pnpm@11.8.0` in `package.json`); never Bun/npm, even though `.claude/settings.json` happens to allow `bun run build`.
+- `pnpm install`: install deps. Use pnpm (Corepack-pinned in `package.json`); never Bun/npm.
 - `pnpm dev`: dev server at `localhost:4321` (served from base `/`).
 - `pnpm build`: production build to `./dist/` (served from base `/my-personal-website/`).
 - `pnpm preview`: preview the production build locally before pushing.
-- No lint, formatter, test, or typecheck command is configured. `astro check` is not set up either (`@astrojs/check` is not installed); running it prompts to install the package. Treat `pnpm build` as the de-facto verification step. A clean build is the signal that types and templates are valid.
+- `pnpm exec astro check`: typecheck (`@astrojs/check` is installed as a devDependency).
+- No lint, formatter, or test command is configured. Treat `pnpm build` plus `astro check` as the verification steps.
 
 ## Dev vs prod base path
 `astro.config.mjs` sets `base` to `/my-personal-website/` in production but `/` in dev. Use `import.meta.env.BASE_URL` for internal links/paths; never hardcode `/my-personal-website/...` or assume `/`.
@@ -38,7 +39,7 @@ The animated background uses negative `z-index` layers that are only visible bec
 - `sharp` is required for Astro's image optimization and needs install scripts to run (already allow-listed).
 
 ## Deploy
-- GitHub Pages via `.github/workflows/deploy.yml` using `withastro/action@v6` (note: v6, not v5 as `CLAUDE.md` states).
+- GitHub Pages via `.github/workflows/deploy.yml` using `withastro/action@v6`, which sets `DEPLOY_TARGET=pages` to select the Pages base path in `astro.config.mjs`.
 - Triggers on push to `main` and via manual `workflow_dispatch`.
 - Live URL: https://novafluxx.github.io/my-personal-website/
 
