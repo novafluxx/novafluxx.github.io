@@ -1,7 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getImage } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 import flightLineImg from "../images/flight-line.jpg";
+import fileCrypter2Img from "../images/FileCrypter2_Dotnet.png";
+import fileCrypterImg from "../images/FileCrypter_Tauri.png";
 
 const aviationBg = await getImage({
 	src: flightLineImg,
@@ -27,9 +29,15 @@ const toolGroups = [
 		tools: ["Azure DevOps", "GitHub Actions", "Jira", "Git", "CI/CD"],
 	},
 ];
+
+const pageDescription =
+	"Justin High — quality engineer and automation builder. QA, automation, and resilient product systems, with the discipline of a private pilot.";
 ---
 
-<Layout title="Justin High | Quality Engineer & Automation Builder">
+<Layout
+	title="Justin High | Quality Engineer & Automation Builder"
+	description={pageDescription}
+>
 	<canvas id="constellation-canvas" class="constellation-canvas" aria-hidden="true"></canvas>
 	<section id="hero" class="hero-section" aria-labelledby="hero-title">
 		<div class="hero-content">
@@ -111,35 +119,15 @@ const toolGroups = [
 						<span class="project-number">01 / 03</span>
 						<span class="live-chip"><span></span> Public project</span>
 					</div>
-					<div class="dotnet-visual" aria-label="FileCrypter2 desktop application illustration">
-						<div class="desktop-window">
-							<div class="desktop-titlebar">
-								<span class="desktop-title"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> FileCrypter</span>
-								<span class="desktop-controls" aria-hidden="true"><i></i><i></i><i></i></span>
-							</div>
-							<div class="desktop-app">
-								<div class="desktop-sidebar" aria-hidden="true">
-									<span class="active"><i class="fa-solid fa-lock"></i></span>
-									<span><i class="fa-solid fa-lock-open"></i></span>
-									<span><i class="fa-solid fa-layer-group"></i></span>
-									<span><i class="fa-solid fa-gear"></i></span>
-								</div>
-								<div class="desktop-workspace">
-									<div class="desktop-eyebrow">Encrypt a file</div>
-									<div class="desktop-heading">Protect it locally.</div>
-									<div class="desktop-dropzone">
-										<i class="fa-regular fa-file" aria-hidden="true"></i>
-										<span>Drop a file to begin</span>
-									</div>
-									<div class="desktop-options" aria-hidden="true">
-										<span><i></i> AES-256-GCM</span>
-										<span><i></i> Argon2id</span>
-										<span><i></i> Local only</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					<figure class="dotnet-visual project-shot">
+						<Image
+							src={fileCrypter2Img}
+							alt="FileCrypter2 Avalonia desktop app: Encrypt a file workflow with drop zone, passphrase panel, and local-only preview"
+							widths={[640, 960, 1280]}
+							sizes="(max-width: 980px) 100vw, 55vw"
+							class="project-shot-image"
+						/>
+					</figure>
 					<div class="project-copy">
 						<p class="project-type">Local-first encryption suite</p>
 						<h3>FileCrypter2</h3>
@@ -190,34 +178,15 @@ const toolGroups = [
 						</a>
 					</div>
 
-					<div class="crypto-console" aria-label="FileCrypter encryption flow illustration">
-						<div class="console-bar">
-							<span>encryption.pipeline</span>
-							<span class="console-lights" aria-hidden="true"><i></i><i></i><i></i></span>
-						</div>
-						<div class="console-body">
-							<div class="file-node source-node">
-								<i class="fa-regular fa-file" aria-hidden="true"></i>
-								<span>source.data</span>
-							</div>
-							<div class="flow-line"><span></span></div>
-							<div class="cipher-core">
-								<span class="core-ring ring-one"></span>
-								<span class="core-ring ring-two"></span>
-								<i class="fa-solid fa-fingerprint" aria-hidden="true"></i>
-							</div>
-							<div class="flow-line"><span></span></div>
-							<div class="file-node output-node">
-								<i class="fa-solid fa-lock" aria-hidden="true"></i>
-								<span>secured.enc</span>
-							</div>
-						</div>
-						<div class="console-status">
-							<span><i></i> AES-256-GCM</span>
-							<span><i></i> Argon2id</span>
-							<span><i></i> Atomic writes</span>
-						</div>
-					</div>
+					<figure class="crypto-console project-shot project-shot-tauri">
+						<Image
+							src={fileCrypterImg}
+							alt="FileCrypter Tauri desktop app: Encrypt tab with file pickers, compression option, password, and key file fields"
+							widths={[640, 960, 1200]}
+							sizes="(max-width: 980px) 100vw, 50vw"
+							class="project-shot-image"
+						/>
+					</figure>
 				</article>
 
 				<article class="project-card project-card-notes animate-on-scroll">

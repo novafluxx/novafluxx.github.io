@@ -1,93 +1,78 @@
 [![Deploy to GitHub Pages](https://github.com/novafluxx/my-personal-website/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/novafluxx/my-personal-website/actions/workflows/deploy.yml)
 # Personal Portfolio Website
 
-A modern, responsive portfolio website for Justin High (QA Analyst & Automation Engineer) built with Astro and styled with Tailwind CSS v4.
+Portfolio site for Justin High (QA Analyst & Automation Engineer) — Astro 7, Tailwind CSS v4, static deploy to GitHub Pages.
 
 🌐 **Live Site**: [novafluxx.github.io/my-personal-website](https://novafluxx.github.io/my-personal-website)
 
-## 🚀 Tech Stack
+Ideas backlog: see [`IMPROVEMENT_PLAN.md`](./IMPROVEMENT_PLAN.md).
 
-- **Framework**: Astro 7
-- **Styling**: Tailwind CSS v4
-- **Deployment**: GitHub Pages
-- **Package Manager**: pnpm 11.8.0
-- **Icons**: Font Awesome 7
-- **Fonts**: Google Fonts (Syne and Manrope)
+## Tech Stack
 
-## 📁 Project Structure
+- **Framework**: Astro 7 (static)
+- **Styling**: Tailwind CSS v4 + `src/styles/global.css`
+- **Package manager**: pnpm (Corepack-pinned in `package.json`)
+- **Icons**: Font Awesome 7 (CDN)
+- **Fonts**: Space Grotesk (display) + Manrope (body) via Google Fonts
+- **Images**: Astro assets + `sharp`
+- **Deploy**: GitHub Pages via `withastro/action`
+
+## Project structure
 
 ```text
-astro-personal-website/
-├── public/                 # Static assets served as-is (favicons)
-├── src/
-│   ├── components/        # Reusable components (Nav.astro)
-│   ├── images/            # Source images optimized by Astro
-│   ├── layouts/          # Layout templates (Layout.astro)
-│   ├── pages/            # File-based routing
-│   │   ├── index.astro       # Home page
-│   │   └── 404.astro         # Custom error page
-│   ├── scripts/          # Client-side TypeScript
-│   └── styles/           # Global CSS styles
-├── .github/
-│   └── workflows/
-│       └── deploy.yml    # GitHub Actions deployment
-├── astro.config.mjs      # Astro configuration
-└── package.json
+src/
+├── components/     # Nav.astro
+├── images/         # Source images (optimized at build)
+├── layouts/        # Layout.astro
+├── pages/          # index.astro, 404.astro
+├── scripts/        # Client TS (nav, animations, smooth-scroll, hero-3d)
+└── styles/         # global.css
 ```
 
-## 🧞 Commands
+## Commands
 
-All commands are run from the root of the project:
+| Command | Action |
+| :------ | :----- |
+| `pnpm install` | Install dependencies |
+| `pnpm dev` | Dev server at `localhost:4321` (base `/`) |
+| `pnpm build` | Production build to `./dist/` (Pages base when `DEPLOY_TARGET=pages`) |
+| `pnpm preview` | Preview the production build |
+| `pnpm check` | Typecheck via `astro check` |
 
-| Command                | Action                                              |
-| :--------------------- | :-------------------------------------------------- |
-| `pnpm install`         | Install dependencies                                |
-| `pnpm dev`             | Start local dev server at `localhost:4321`          |
-| `pnpm build`           | Build production site to `./dist/`                  |
-| `pnpm preview`         | Preview build locally before deploying              |
+Use **pnpm** (not npm/Bun). Treat `pnpm build` and `pnpm check` as the verification steps.
 
-No lint, formatter, test, or typecheck command is configured. Treat `pnpm build` as the verification step before deploying.
+## Features
 
-## ✨ Features
+- Dual theme (sunrise light / cosmic dark) with localStorage + OS preference
+- View-transition theme toggle where supported
+- Full-page animated background + constellation canvas (`hero-3d.ts`)
+- Section nav with active state + adaptive contrast over aviation
+- Selected work, quality practice, aviation, contact
+- Project screenshots via `astro:assets`
+- Custom 404
+- Safari iOS status-bar theming (html + meta + near-transparent fixed header)
 
-- **Glassmorphism Design**: Modern UI with frosted glass effects
-- **Dark Mode**: Theme toggle with localStorage persistence
-- **Responsive Navigation**: Mobile-friendly navigation with Font Awesome icons
-- **Custom 404 Page**: Branded error handling
-- **Optimized Images**: Astro image optimization with `sharp`
-- **Optimized Performance**: Static site generation with Astro
-- **Automated Deployment**: GitHub Actions workflow with `withastro/action@v6`
+## Dev vs prod base path
 
-## 🎨 Design System
+`astro.config.mjs` sets `base` to `/my-personal-website/` when `DEPLOY_TARGET=pages`, otherwise `/`. Use `import.meta.env.BASE_URL` for internal paths — never hardcode the Pages subpath.
 
-- **Color Scheme**: Rose/slate theme with dark mode support
-- **Typography**: Syne display font and Manrope body font from Google Fonts
-- **Max Width**: 1200px content container
-- **Components**: Reusable glass card variants via `.glass-card-primary`, `.glass-card-secondary`, and `.glass-card-accent`
+## Deployment
 
-## 🚢 Deployment
-
-The site is deployed to GitHub Pages via GitHub Actions:
-- **Live URL**: [novafluxx.github.io/my-personal-website](https://novafluxx.github.io/my-personal-website)
 - **Workflow**: `.github/workflows/deploy.yml`
-- **Build Action**: `withastro/action@v6`
-- **Deploy Action**: `actions/deploy-pages@v5`
-- **Trigger**: Automatic deployment on push to `main` branch
-- **Manual Trigger**: Available via GitHub Actions tab
+- **Triggers**: push to `main`, or manual `workflow_dispatch`
+- **Live URL**: https://novafluxx.github.io/my-personal-website/
 
-Deployment happens automatically when you push to the `main` branch.
+## Adding pages
 
-## 📝 Adding New Pages
+1. Add `.astro` under `src/pages/`
+2. Wrap content in `Layout`
+3. Link from `Nav.astro` if it should appear in the shell
+4. Prefer existing section / glass / surface patterns in `global.css`
 
-1. Create a new `.astro` file in `src/pages/`
-2. Import and use the Layout component
-3. Add navigation link in `src/components/Nav.astro`
-4. Follow existing page structure patterns
-
-## 📄 License
+## License
 
 Personal portfolio website © Justin High
 
 ---
 
-Built with [Astro 7](https://astro.build) 🚀
+Built with [Astro 7](https://astro.build)

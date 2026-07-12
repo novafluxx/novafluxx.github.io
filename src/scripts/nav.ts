@@ -61,21 +61,27 @@ function initTheme(): void {
     // Update Safari status bar color on initial load
     updateThemeColor(html.classList.contains('dark'));
 
-    // Update icon based on current theme
-    function updateIcon(): void {
-        if (html.classList.contains('dark')) {
+    // Sync icon + accessible name/state with the current theme
+    function updateThemeControl(): void {
+        const isDark = html.classList.contains('dark');
+
+        if (isDark) {
             // Dark mode: show sun (click to go light)
             themeIcon?.classList.remove('fa-moon');
             themeIcon?.classList.add('fa-sun');
+            themeToggle?.setAttribute('aria-label', 'Switch to light mode');
+            themeToggle?.setAttribute('aria-pressed', 'true');
         } else {
             // Light mode: show moon (click to go dark)
             themeIcon?.classList.remove('fa-sun');
             themeIcon?.classList.add('fa-moon');
+            themeToggle?.setAttribute('aria-label', 'Switch to dark mode');
+            themeToggle?.setAttribute('aria-pressed', 'false');
         }
     }
 
-    // Set initial icon
-    updateIcon();
+    // Set initial control state
+    updateThemeControl();
 
     // Toggle theme on button click
     themeToggle?.addEventListener('click', () => {
@@ -86,7 +92,7 @@ function initTheme(): void {
             const isDark = html.classList.contains('dark');
             const newTheme = isDark ? 'dark' : 'light';
             localStorage.setItem('theme', newTheme);
-            updateIcon();
+            updateThemeControl();
             updateThemeColor(isDark);
             return;
         }
@@ -100,9 +106,9 @@ function initTheme(): void {
             updateThemeColor(isDark);
         });
 
-        // Update icon after transition completes
+        // Update control after transition completes
         transition.finished.then(() => {
-            updateIcon();
+            updateThemeControl();
         });
     });
 }

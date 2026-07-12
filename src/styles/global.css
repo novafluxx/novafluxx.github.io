@@ -134,6 +134,31 @@
     }
 }
 
+/* Skip link — visible on keyboard focus only */
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    z-index: 200;
+    padding: 0.7rem 1rem;
+    border-radius: 0.75rem;
+    background: var(--primary-color, #0f172a);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transform: translateY(-160%);
+    transition: transform 0.2s ease;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+    transform: translateY(0);
+    outline: 2px solid var(--secondary-color, #60a5fa);
+    outline-offset: 3px;
+}
+
 /* Global Styles */
 html {
     scroll-behavior: smooth;
@@ -1524,10 +1549,29 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
 :root.dark .project-card { box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28); }
 .project-card::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.12), transparent 42%); }
 .project-card-featured { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: stretch; gap: 1.5rem; grid-column: 1 / -1; min-height: 570px; }
-.project-card-featured .project-meta { position: absolute; top: 2rem; left: 2rem; right: 2rem; z-index: 3; }
+/* Keep meta over the copy column so the live-chip does not sit on screenshots */
+.project-card-featured .project-meta {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    right: auto;
+    z-index: 3;
+    max-width: min(42%, 22rem);
+    justify-content: flex-start;
+    gap: 1rem;
+}
 .project-copy { position: relative; z-index: 2; display: flex; flex-direction: column; min-width: 0; padding: clamp(2rem, 5vw, 4rem); }
 .project-card-notes { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr); align-items: center; padding: clamp(2rem, 5vw, 4rem); }
-.project-card-notes .project-meta { position: absolute; top: 2rem; left: 2rem; right: 2rem; }
+.project-card-notes .project-meta {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    right: auto;
+    z-index: 3;
+    max-width: min(42%, 22rem);
+    justify-content: flex-start;
+    gap: 1rem;
+}
 .project-card-notes .notes-visual { grid-row: 2 / span 5; }
 .project-card-notes > :not(.notes-visual):not(.project-meta) { grid-column: 2; }
 .project-meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: auto; }
@@ -1538,7 +1582,16 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
 .project-card h3 { margin: 0; font-family: var(--font-display); font-size: clamp(2.3rem, 4vw, 4rem); font-weight: 700; letter-spacing: -0.045em; line-height: 1.02; }
 .project-card-featured h3 { font-size: clamp(2.6rem, 4.1vw, 3.8rem); white-space: nowrap; }
 .project-card-dotnet { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); align-items: stretch; grid-column: 1 / -1; min-height: 560px; }
-.project-card-dotnet .project-meta { position: absolute; top: 2rem; left: 2rem; right: 2rem; z-index: 4; }
+.project-card-dotnet .project-meta {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    right: auto;
+    z-index: 4;
+    max-width: min(42%, 22rem);
+    justify-content: flex-start;
+    gap: 1rem;
+}
 .project-card-dotnet .project-copy { grid-column: 2; }
 .project-card-dotnet h3 { font-size: clamp(2.6rem, 4vw, 3.8rem); white-space: nowrap; }
 .project-description { max-width: 620px; margin: 1.25rem 0 0; color: var(--text-muted); font-size: 1.05rem; font-weight: 500; line-height: 1.8; }
@@ -1551,6 +1604,22 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
 .text-link:hover i { transform: translate(3px, -3px); }
 
 .dotnet-visual { position: relative; z-index: 2; display: grid; place-items: center; min-width: 0; padding: 5.5rem 0.5rem 2rem 2rem; background: radial-gradient(circle at 45% 45%, rgba(124, 58, 237, 0.16), transparent 48%); }
+.project-shot { margin: 0; }
+.project-shot-image {
+    display: block;
+    width: min(100%, 640px);
+    height: auto;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 1.1rem;
+    box-shadow: 0 32px 85px rgba(2, 6, 23, 0.34);
+    background: #080d19;
+    transform: perspective(1200px) rotateY(3deg) rotateX(1deg);
+}
+.project-shot-tauri .project-shot-image {
+    width: min(100%, 560px);
+    margin-inline: auto;
+    transform: perspective(1200px) rotateY(-2deg) rotateX(1deg);
+}
 .desktop-window { width: min(100%, 590px); overflow: hidden; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 1.45rem; background: #080d19; box-shadow: 0 32px 85px rgba(2, 6, 23, 0.34); color: #dbeafe; transform: perspective(1200px) rotateY(3deg) rotateX(1deg); }
 .desktop-titlebar { display: flex; align-items: center; justify-content: space-between; min-height: 3.25rem; padding: 0.75rem 1rem; border-bottom: 1px solid rgba(148, 163, 184, 0.13); color: #9fb0ce; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.7rem; }
 .desktop-title { display: inline-flex; align-items: center; gap: 0.55rem; }
@@ -1572,7 +1641,8 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
 .desktop-options span { display: flex; align-items: center; gap: 0.35rem; min-width: 0; color: #8193b1; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.56rem; white-space: nowrap; }
 .desktop-options i { width: 0.33rem; height: 0.33rem; flex: 0 0 auto; border-radius: 50%; background: #5eead4; box-shadow: 0 0 8px #5eead4; }
 
-.crypto-console { position: relative; z-index: 2; align-self: center; margin: 1.25rem 1.25rem 1.25rem 0; overflow: hidden; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 1.45rem; background: #080d19; box-shadow: 0 30px 80px rgba(2, 6, 23, 0.35); color: #dbeafe; }
+.crypto-console { position: relative; z-index: 2; align-self: center; display: grid; place-items: center; margin: 1.25rem 1.25rem 1.25rem 0; padding: 1.25rem 0.5rem 1.25rem 0; background: radial-gradient(circle at 55% 45%, rgba(37, 99, 235, 0.14), transparent 50%); color: #dbeafe; }
+.crypto-console.project-shot { border: none; border-radius: 0; box-shadow: none; overflow: visible; }
 .console-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1rem; border-bottom: 1px solid rgba(148, 163, 184, 0.13); color: #8fa4c8; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.72rem; }
 .console-lights { display: flex; gap: 0.35rem; }
 .console-lights i { width: 0.42rem; height: 0.42rem; border-radius: 50%; background: #1e293b; }
@@ -1722,9 +1792,11 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
     .project-card-dotnet { grid-template-columns: 1fr; }
     .project-card-dotnet .project-copy { grid-column: auto; }
     .dotnet-visual { padding: 5.5rem 1.25rem 0; }
+    .project-shot-image,
+    .project-shot-tauri .project-shot-image { width: 100%; transform: none; }
     .desktop-window { transform: none; }
     .project-card-featured { grid-template-columns: 1fr; }
-    .crypto-console { margin: 0 1.25rem 1.25rem; }
+    .crypto-console { margin: 0 1.25rem 1.25rem; padding: 0 1.25rem 1.25rem; }
     .project-card-notes { grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr); }
     .proof-strip { grid-template-columns: repeat(2, 1fr); }
     .proof-strip > div:nth-child(3) { border-left: 0; }
@@ -1759,7 +1831,7 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
     .section-heading h2, .aviation-copy h2, .contact-copy h2 { font-size: clamp(2.6rem, 14vw, 4.2rem); }
     .project-card, .quality-console, .toolkit, .flight-panel { border-radius: 1.5rem; }
     .project-card-dotnet { display: flex; flex-direction: column; min-height: auto; }
-    .project-card-dotnet .project-meta { position: relative; inset: auto; width: 100%; padding: 1.5rem 1.5rem 0; }
+    .project-card-dotnet .project-meta { position: relative; inset: auto; width: 100%; max-width: none; padding: 1.5rem 1.5rem 0; }
     .dotnet-visual { order: 2; padding: 1.5rem; }
     .project-card-dotnet .project-copy { order: 1; padding-top: 0; }
     .project-card-dotnet .project-type { margin-top: 2.5rem; }
@@ -1785,6 +1857,7 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
         inset: auto;
         z-index: 4;
         width: 100%;
+        max-width: none;
         margin-bottom: 0;
     }
     .notes-visual {
