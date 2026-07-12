@@ -1085,7 +1085,7 @@ nav.nav-over-dark button:hover i {
 }
 
 nav.nav-over-dark > div {
-    background: rgba(15, 23, 42, 0.3) !important;
+    background: rgba(15, 23, 42, 0.8) !important;
     border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
@@ -1111,7 +1111,7 @@ nav.nav-over-light button:hover i {
 }
 
 nav.nav-over-light > div {
-    background: rgba(255, 255, 255, 0.3) !important;
+    background: rgba(255, 255, 255, 0.8) !important;
     border-color: rgba(0, 0, 0, 0.15) !important;
 }
 
@@ -1127,7 +1127,7 @@ nav.nav-over-light > div {
 }
 
 :root.dark nav.nav-over-light > div {
-    background: rgba(30, 41, 59, 0.3) !important;
+    background: rgba(30, 41, 59, 0.8) !important;
     border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
