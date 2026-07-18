@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v7.0.0
 
       - name: Build and deploy
-        uses: withastro/action@v6.1.1
+        uses: withastro/action@v6.1.2
         env:
           # Selects the GitHub Pages base path (/my-personal-website/) in astro.config.mjs.
           # Without this, the build defaults to serving from the domain root.
