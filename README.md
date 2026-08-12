@@ -9,7 +9,7 @@ Portfolio site for Justin High (QA Analyst & Automation Engineer) — Astro 7, T
 
 - **Framework**: Astro 7 (static)
 - **Styling**: Tailwind CSS v4 + `src/styles/global.css`
-- **Package manager**: pnpm (Corepack-pinned in `package.json`)
+- **Package manager**: pnpm (version pinned via `packageManager` in `package.json`)
 - **Icons**: Font Awesome 7 (CDN)
 - **Fonts**: Space Grotesk (display) + Manrope (body) via Google Fonts
 - **Images**: Astro assets + `sharp`

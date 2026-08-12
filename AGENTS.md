@@ -4,7 +4,7 @@ Quick reference for agentic coding agents working in this repository.
 For deeper architecture prose (animated background layering, Safari iOS status-bar theming, constellation canvas), see `CLAUDE.md`; however, trust the code over `CLAUDE.md` when versions/details conflict.
 
 ## Commands
-- `pnpm install`: install deps. Use pnpm (Corepack-pinned in `package.json`); never Bun/npm.
+- `pnpm install`: install deps. Use pnpm (version pinned via `packageManager` in `package.json`, honored by pnpm itself — no Corepack); never Bun/npm.
 - `pnpm dev`: dev server at `localhost:4321` (served from base `/`).
 - `pnpm build`: production build to `./dist/` (served from base `/`).
 - `pnpm preview`: preview the production build locally before pushing.

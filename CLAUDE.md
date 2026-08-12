@@ -25,7 +25,7 @@ Personal portfolio website for Justin High (QA Analyst & Automation Engineer) bu
 | `pnpm preview` | Preview build locally |
 | `pnpm check` | Run TypeScript type checking (`astro check`) |
 
-**Note:** Use `pnpm` commands via Corepack, not Bun or npm. The project uses pnpm as its package manager. Treat `pnpm build` and `pnpm check` as the verification steps.
+**Note:** Use `pnpm`, not Bun or npm. The version is pinned by the `packageManager` field in `package.json`, which pnpm honors natively via `managePackageManagerVersions` (on by default since pnpm 10) — Corepack is not required and is no longer bundled with Node 25+. Treat `pnpm build` and `pnpm check` as the verification steps.
 
 ## Architecture
 
