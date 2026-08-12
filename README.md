@@ -1,9 +1,9 @@
-[![Deploy to GitHub Pages](https://github.com/novafluxx/my-personal-website/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/novafluxx/my-personal-website/actions/workflows/deploy.yml)
+[![Deploy to GitHub Pages](https://github.com/novafluxx/novafluxx.github.io/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/novafluxx/novafluxx.github.io/actions/workflows/deploy.yml)
 # Personal Portfolio Website
 
 Portfolio site for Justin High (QA Analyst & Automation Engineer) — Astro 7, Tailwind CSS v4, static deploy to GitHub Pages.
 
-🌐 **Live Site**: [novafluxx.github.io/my-personal-website](https://novafluxx.github.io/my-personal-website)
+🌐 **Live Site**: [novafluxx.github.io](https://novafluxx.github.io)
 
 ## Tech Stack
 
@@ -52,15 +52,17 @@ Use **pnpm** (not npm/Bun). Treat `pnpm build` and `pnpm check` as the verificat
 - Custom 404
 - Safari iOS status-bar theming (html + meta + near-transparent fixed header)
 
-## Dev vs prod base path
+## Base path and deploy target
 
-`astro.config.mjs` sets `base` to `/my-personal-website/` when `DEPLOY_TARGET=pages`, otherwise `/`. Use `import.meta.env.BASE_URL` for internal paths — never hardcode the Pages subpath.
+The repo is a GitHub Pages **user site** (`novafluxx.github.io`), so it is served from the domain root: `base` is `/` for every target. `DEPLOY_TARGET=pages` only selects `site` (the canonical origin used for canonical/OG URLs); for root deploys elsewhere, set `SITE_URL`.
+
+Still use `import.meta.env.BASE_URL` for internal paths rather than a leading `/` — it keeps a future subpath deploy from breaking every asset.
 
 ## Deployment
 
 - **Workflow**: `.github/workflows/deploy.yml`
 - **Triggers**: push to `main`, or manual `workflow_dispatch`
-- **Live URL**: https://novafluxx.github.io/my-personal-website/
+- **Live URL**: https://novafluxx.github.io/
 
 ## Adding pages
 

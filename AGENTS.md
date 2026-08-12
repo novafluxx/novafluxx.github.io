@@ -6,13 +6,13 @@ For deeper architecture prose (animated background layering, Safari iOS status-b
 ## Commands
 - `pnpm install`: install deps. Use pnpm (Corepack-pinned in `package.json`); never Bun/npm.
 - `pnpm dev`: dev server at `localhost:4321` (served from base `/`).
-- `pnpm build`: production build to `./dist/` (served from base `/my-personal-website/` when `DEPLOY_TARGET=pages`).
+- `pnpm build`: production build to `./dist/` (served from base `/`).
 - `pnpm preview`: preview the production build locally before pushing.
 - `pnpm check`: typecheck via `astro check` (`@astrojs/check` is a devDependency).
 - No lint, formatter, or test command is configured. Treat `pnpm build` plus `pnpm check` as the verification steps.
 
-## Dev vs prod base path
-`astro.config.mjs` sets `base` to `/my-personal-website/` when `DEPLOY_TARGET=pages`, otherwise `/`. Use `import.meta.env.BASE_URL` for internal links/paths; never hardcode `/my-personal-website/...` or assume `/`.
+## Base path and deploy target
+This is a GitHub Pages user site (`novafluxx.github.io`), served from the domain root — `base` is `/` for every target. `DEPLOY_TARGET=pages` only selects `site` (canonical origin for canonical/OG URLs); root deploys elsewhere read `SITE_URL`. Still use `import.meta.env.BASE_URL` for internal links/paths rather than hardcoding `/`, so a future subpath deploy doesn't break every asset.
 
 ## Astro version
 This repo currently uses Astro 7 (`astro@^7.0.0`) with Tailwind CSS v4 via `@tailwindcss/vite`.
@@ -50,7 +50,7 @@ The animated background uses negative `z-index` layers that are only visible bec
 ## Deploy
 - GitHub Pages via `.github/workflows/deploy.yml` using `withastro/action@v6`, which sets `DEPLOY_TARGET=pages` to select the Pages base path in `astro.config.mjs`.
 - Triggers on push to `main` and via manual `workflow_dispatch`.
-- Live URL: https://novafluxx.github.io/my-personal-website/
+- Live URL: https://novafluxx.github.io/
 
 ## Conventions
 - Relative imports for local files (`../components/Nav.astro`); no TS path alias is configured.

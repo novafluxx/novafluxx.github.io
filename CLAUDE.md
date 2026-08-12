@@ -187,7 +187,7 @@ Automated deployment via GitHub Actions:
 **Method:** GitHub Pages via GitHub Actions
 - Workflow: `.github/workflows/deploy.yml`
 - Triggers: Automatic on push to `main`, or manual via Actions tab
-- Site URL: `https://novafluxx.github.io/my-personal-website/`
+- Site URL: `https://novafluxx.github.io/`
 
 **Build Process:**
 1. GitHub Actions runner checks out code
@@ -207,8 +207,8 @@ Automated deployment via GitHub Actions:
 - Click "Run workflow" button
 
 **Configuration:**
-- `astro.config.mjs` switches on the `DEPLOY_TARGET` env var: when set to `pages` (done in `deploy.yml`), `site` is `https://novafluxx.github.io` and `base` is `/my-personal-website/`; otherwise (dev, or root deploys like Coolify) `base` is `/` and `site` comes from the optional `SITE_URL` env var
-- Because `base` differs between dev and Pages, use `import.meta.env.BASE_URL` for internal links/paths — never hardcode `/my-personal-website/...`
+- The repo is a GitHub Pages **user site** (`novafluxx.github.io`), so it is served from the domain root: `base` is `/` for every target. `astro.config.mjs` switches on the `DEPLOY_TARGET` env var only to pick `site`: when set to `pages` (done in `deploy.yml`), `site` is `https://novafluxx.github.io`; otherwise (dev, or root deploys like Coolify) `site` comes from the optional `SITE_URL` env var
+- Use `import.meta.env.BASE_URL` for internal links/paths rather than hardcoding a leading `/`, so a future subpath deploy doesn't break every asset
 - GitHub Pages source set to "GitHub Actions" in repository settings
 
 ## Important Considerations

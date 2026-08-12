@@ -30,8 +30,8 @@ jobs:
       - name: Build and deploy
         uses: withastro/action@v6.1.2
         env:
-          # Selects the GitHub Pages base path (/my-personal-website/) in astro.config.mjs.
-          # Without this, the build defaults to serving from the domain root.
+          # Selects the GitHub Pages target in astro.config.mjs, which sets `site`
+          # to https://novafluxx.github.io for canonical/OG URLs.
           DEPLOY_TARGET: pages
 
   deploy:
