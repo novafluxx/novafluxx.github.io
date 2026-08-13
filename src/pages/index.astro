@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { Image, getImage } from "astro:assets";
 import flightLineImg from "../images/flight-line.jpg";
+import forThePeopleImg from "../images/ForThePeople.png";
 import fileCrypter2Img from "../images/FileCrypter2_Dotnet.png";
 import fileCrypterImg from "../images/FileCrypter_Tauri.png";
 
@@ -114,9 +115,46 @@ const pageDescription =
 			</header>
 
 			<div class="project-grid">
+				<article class="project-card project-card-featured project-card-people animate-on-scroll">
+					<div class="project-meta">
+						<span class="project-number">01 / 04</span>
+						<span class="live-chip"><span></span> Live · Civic data</span>
+					</div>
+					<div class="project-copy">
+						<p class="project-type">Near-real-time representation tracker</p>
+						<h3>For the People</h3>
+						<p class="project-description">
+							A live tracker of how many Americans each party represents in Congress—not just how many seats they hold. A tested Python pipeline recomputes membership from official sources every six hours; when the numbers change, the snapshot is committed and a static Astro site rebuilds to Cloudflare. No database and no app state: git is the timeline, and vacant seats stay unassigned instead of being folded into a party total.
+						</p>
+						<ul class="project-tags" aria-label="For the People technologies">
+							<li>Python</li>
+							<li>Astro 7</li>
+							<li>Cloudflare Workers</li>
+						</ul>
+						<a
+							href="https://forthepeople.wtf"
+							class="text-link"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Visit live site <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+						</a>
+					</div>
+
+					<figure class="people-visual project-shot">
+						<Image
+							src={forThePeopleImg}
+							alt="For the People homepage: Congress does not represent people equally, with a U.S. map and live-data navigation"
+							widths={[640, 960, 1280, 1600]}
+							sizes="(max-width: 980px) 100vw, 50vw"
+							class="project-shot-image"
+						/>
+					</figure>
+				</article>
+
 				<article class="project-card project-card-dotnet animate-on-scroll">
 					<div class="project-meta">
-						<span class="project-number">01 / 03</span>
+						<span class="project-number">02 / 04</span>
 						<span class="live-chip"><span></span> Cross-platform · .NET</span>
 					</div>
 					<figure class="dotnet-visual project-shot">
@@ -153,7 +191,7 @@ const pageDescription =
 
 				<article class="project-card project-card-featured animate-on-scroll">
 					<div class="project-meta">
-						<span class="project-number">02 / 03</span>
+						<span class="project-number">03 / 04</span>
 						<span class="live-chip"><span></span> Cross-platform · Tauri</span>
 					</div>
 					<div class="project-copy">
@@ -191,7 +229,7 @@ const pageDescription =
 
 				<article class="project-card project-card-notes animate-on-scroll">
 					<div class="project-meta">
-						<span class="project-number">03 / 03</span>
+						<span class="project-number">04 / 04</span>
 						<span class="live-chip live-chip-archived"><span></span> Archived</span>
 					</div>
 					<div class="notes-visual" aria-hidden="true">

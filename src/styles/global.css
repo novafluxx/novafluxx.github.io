@@ -1586,6 +1586,7 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
 .project-type { margin: 3.5rem 0 0.7rem; color: var(--signal-blue); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }
 .project-card h3 { margin: 0; font-family: var(--font-display); font-size: clamp(2.3rem, 4vw, 4rem); font-weight: 700; letter-spacing: -0.045em; line-height: 1.02; }
 .project-card-featured h3 { font-size: clamp(2.6rem, 4.1vw, 3.8rem); white-space: nowrap; }
+.project-card-people h3 { white-space: normal; }
 .project-card-dotnet { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); align-items: stretch; grid-column: 1 / -1; min-height: 560px; }
 .project-card-dotnet .project-meta {
     position: absolute;
@@ -1646,6 +1647,12 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
 .desktop-options span { display: flex; align-items: center; gap: 0.35rem; min-width: 0; color: #8193b1; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.56rem; white-space: nowrap; }
 .desktop-options i { width: 0.33rem; height: 0.33rem; flex: 0 0 auto; border-radius: 50%; background: #5eead4; box-shadow: 0 0 8px #5eead4; }
 
+.people-visual { position: relative; z-index: 2; align-self: center; display: grid; place-items: center; margin: 1.25rem 1.25rem 1.25rem 0; padding: 1.25rem 0.5rem 1.25rem 0; background: radial-gradient(circle at 55% 45%, rgba(15, 23, 42, 0.16), transparent 52%); }
+.people-visual .project-shot-image {
+    width: min(100%, 720px);
+    margin-inline: auto;
+    transform: perspective(1200px) rotateY(-2deg) rotateX(1deg);
+}
 .crypto-console { position: relative; z-index: 2; align-self: center; display: grid; place-items: center; margin: 1.25rem 1.25rem 1.25rem 0; padding: 1.25rem 0.5rem 1.25rem 0; background: radial-gradient(circle at 55% 45%, rgba(37, 99, 235, 0.14), transparent 50%); color: #dbeafe; }
 .crypto-console.project-shot { border: none; border-radius: 0; box-shadow: none; overflow: visible; }
 .console-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1rem; border-bottom: 1px solid rgba(148, 163, 184, 0.13); color: #8fa4c8; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.72rem; }
@@ -1850,7 +1857,8 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
     .project-card-dotnet .project-copy { grid-column: auto; }
     .dotnet-visual { padding: 5.5rem 1.25rem 0; }
     .project-shot-image,
-    .project-shot-tauri .project-shot-image { width: 100%; transform: none; }
+    .project-shot-tauri .project-shot-image,
+    .people-visual .project-shot-image { width: 100%; transform: none; }
     .desktop-window { transform: none; }
     .project-card-featured { grid-template-columns: 1fr; }
     /* Stacked layout: keep meta in flow so it no longer overlays .project-type */
@@ -1866,7 +1874,8 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
     }
     .project-card-featured .project-copy { padding-top: 1rem; }
     .project-card-featured .project-type { margin-top: 0.5rem; }
-    .crypto-console { margin: 0 1.25rem 1.25rem; padding: 0 1.25rem 1.25rem; }
+    .crypto-console,
+    .people-visual { margin: 0 1.25rem 1.25rem; padding: 0 1.25rem 1.25rem; }
     .project-card-notes { grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr); }
     .proof-strip { grid-template-columns: repeat(2, 1fr); }
     .proof-strip > div:nth-child(3) { border-left: 0; }

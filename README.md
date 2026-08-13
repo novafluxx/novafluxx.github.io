@@ -45,7 +45,7 @@ Use **pnpm** (not npm/Bun). Treat `pnpm build` and `pnpm check` as the verificat
 - View-transition theme toggle where supported
 - Full-page animated background + constellation canvas (`hero-3d.ts`)
 - Section nav with active state + adaptive contrast over aviation
-- Selected work (FileCrypter stack comparison, archived High Notes), quality practice (healthcare ROI), aviation, contact
+- Selected work (For the People, FileCrypter stack comparison, archived High Notes), quality practice (healthcare ROI), aviation, contact
 - Project screenshots via `astro:assets`
 - SEO basics: meta description, Open Graph / Twitter tags when `site` is set
 - Skip link and theme-toggle accessibility state
