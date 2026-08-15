@@ -2,11 +2,3 @@ allowBuilds:
   esbuild: true
   sharp: true
 minimumReleaseAge: 1440
-overrides:
-  # Upper bounds on both: an unbounded ">=" override would silently accept a
-  # future major and break the consumers these are patched for.
-  "yaml@<2.8.3": "^2.8.3"
-  # GHSA-2v37-7h3g-55p8: custom generators loop forever when size is 0.
-  # Transitive via postcss (^3.3.16) → vite → astro; build-time only.
-  # Upper bound matters: postcss requires CJS, and nanoid >=4 is ESM-only.
-  "nanoid@<3.3.17": "^3.3.17"
