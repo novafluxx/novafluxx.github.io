@@ -200,7 +200,7 @@ body::before {
     background: linear-gradient(180deg, #0a0e1a 0%, #1a1f35 50%, #0f1729 100%);
 }
 
-/* Animated mesh gradient overlay */
+/* Static mesh gradient overlay */
 body::after {
     content: '';
     position: fixed;
@@ -211,7 +211,6 @@ body::after {
         radial-gradient(ellipse 600px 700px at 80% 70%, rgba(251, 146, 60, 0.1) 0%, transparent 50%),
         radial-gradient(ellipse 700px 500px at 50% 50%, rgba(236, 72, 153, 0.08) 0%, transparent 50%),
         radial-gradient(circle 400px at 10% 80%, rgba(251, 191, 36, 0.08) 0%, transparent 50%);
-    animation: mesh-float 20s ease-in-out infinite;
     pointer-events: none;
 }
 
@@ -224,7 +223,7 @@ body::after {
         radial-gradient(circle 400px at 10% 80%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
 }
 
-/* Animated glow spots */
+/* Static glow spots */
 .page-glow-spots {
     position: fixed;
     inset: 0;
@@ -233,7 +232,6 @@ body::after {
         radial-gradient(circle 350px at 30% 40%, rgba(251, 113, 133, 0.08), transparent 65%),
         radial-gradient(circle 300px at 70% 60%, rgba(251, 146, 60, 0.06), transparent 65%),
         radial-gradient(circle 280px at 50% 80%, rgba(251, 191, 36, 0.05), transparent 60%);
-    animation: glow-pulse 12s ease-in-out infinite;
     pointer-events: none;
 }
 
@@ -281,7 +279,7 @@ body::after {
     opacity: 0.5;
 }
 
-/* Floating orbs */
+/* Static ambient orbs */
 .page-orb {
     position: fixed;
     border-radius: 50%;
@@ -299,7 +297,6 @@ body::after {
     top: 15%;
     left: 8%;
     opacity: 0.3;
-    animation: float-orb-refined 22s ease-in-out infinite;
 }
 
 .page-orb-2 {
@@ -309,8 +306,6 @@ body::after {
     top: 55%;
     right: 12%;
     opacity: 0.3;
-    animation: float-orb-refined 28s ease-in-out infinite reverse;
-    animation-delay: -8s;
 }
 
 .page-orb-3 {
@@ -320,8 +315,6 @@ body::after {
     bottom: 18%;
     left: 45%;
     opacity: 0.3;
-    animation: float-orb-refined 25s ease-in-out infinite;
-    animation-delay: -12s;
 }
 
 /* Dark mode orbs - more vibrant */
@@ -432,7 +425,6 @@ body::after {
     opacity: 0;
     transition: opacity 0.5s;
     background-size: 300% 300%;
-    animation: gradient-shift 4s ease infinite;
     z-index: -1;
 }
 
@@ -561,24 +553,6 @@ button:focus-visible {
     }
 }
 
-@keyframes gradient-shift {
-    0%, 100% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
-}
-
 /* ========================================
    ANIMATION UTILITY CLASSES
    ======================================== */
@@ -667,7 +641,6 @@ button:focus-visible {
 }
 
 .scroll-indicator {
-    animation: float 2s ease-in-out infinite;
     opacity: 0.8;
     cursor: pointer;
     transition: opacity 0.3s;
@@ -689,7 +662,7 @@ button:focus-visible {
 }
 
 /* Fixed particle field shared by the full page. Section-aware intensity is
-   controlled in hero-3d.ts so it recedes behind dense content and photography. */
+   controlled in constellation.ts so it recedes behind dense content and photography. */
 .constellation-canvas {
     position: fixed;
     inset: 3.75rem 0 0;
@@ -701,16 +674,9 @@ button:focus-visible {
     mask-image: radial-gradient(ellipse 115% 100% at 50% 50%, black 62%, transparent 100%);
 }
 
-/* Pointer-driven tilt (custom properties set from hero-3d.ts).
-   preserve-3d lets child layers sit at real depths via translateZ. */
-.hero-content {
-    transform-style: preserve-3d;
-    transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
-    will-change: transform;
-}
+/* Hero content remains steady after its entrance. */
 
-/* Depth layers: each hero child floats at its own translateZ (--depth,
-   set inline in markup) so the tilt reads as true parallax depth. */
+/* Staggered hero entrances settle into static depth layers. */
 .hero-layer {
     transform: translateZ(var(--depth, 0px));
     animation: hero-enter 0.9s cubic-bezier(0.22, 1, 0.36, 1) backwards;
@@ -726,7 +692,7 @@ button:focus-visible {
 
 /* Entrance keeps translateZ in both keyframes so depth never pops.
    `backwards` fill only; after the animation the static .hero-layer
-   transform takes over, keeping the depth live for the tilt effect. */
+   transform takes over without any ongoing animation. */
 @keyframes hero-enter {
     from {
         opacity: 0;
@@ -743,21 +709,19 @@ button:focus-visible {
 /* Each letter carries the gradient individually (parent-level
    background-clip: text doesn't survive per-child 3D transforms). The
    per-letter background-position offset (via --i) makes the gradient read
-   as one continuous flow across the word; the gradient repeats its first
-   color so the 12em shift loops seamlessly. */
+   as one continuous, static gradient across the word. */
 .hero-letter {
     display: inline-block;
     background-image: linear-gradient(90deg, #be123c, #ea580c, #d97706, #db2777, #be123c);
     background-size: 12em 100%;
+    background-position-x: calc(var(--i, 0) * -0.6em);
     background-repeat: repeat;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    animation:
-        letter-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) backwards,
-        letter-gradient 9s linear infinite;
-    animation-delay: calc(var(--i, 0) * 50ms + 0.1s), 0s;
+    animation: letter-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    animation-delay: calc(var(--i, 0) * 50ms + 0.1s);
 }
 
 :root.dark .hero-letter {
@@ -772,103 +736,6 @@ button:focus-visible {
     to {
         opacity: 1;
         transform: translateY(0) rotateX(0);
-    }
-}
-
-/* Both frames bake in the per-letter --i offset; the 12em travel matches
-   background-size, so the loop is seamless. */
-@keyframes letter-gradient {
-    from {
-        background-position-x: calc(var(--i, 0) * -0.6em);
-    }
-    to {
-        background-position-x: calc(var(--i, 0) * -0.6em - 12em);
-    }
-}
-
-/* --- Glitch accent (QA-themed RGB split) --- */
-
-/* Solid-color copies of the name (via data-text) that flash in short
-   clipped slices when hero-3d.ts toggles .glitching. Hidden otherwise.
-   The h1's aria-label keeps the accessible name unaffected. */
-.hero-name::before,
-.hero-name::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.hero-name::before {
-    color: #22d3ee;
-    z-index: 2;
-}
-
-.hero-name::after {
-    color: #f43f5e;
-    z-index: 3;
-}
-
-.hero-name.glitching::before {
-    animation: glitch-slice-a 0.38s linear both;
-}
-
-.hero-name.glitching::after {
-    animation: glitch-slice-b 0.38s linear both;
-}
-
-@keyframes glitch-slice-a {
-    0% {
-        opacity: 0.9;
-        clip-path: inset(8% 0 62% 0);
-        transform: translate(-7px, -2px);
-    }
-    30% {
-        clip-path: inset(48% 0 22% 0);
-        transform: translate(6px, 1px);
-    }
-    60% {
-        clip-path: inset(70% 0 4% 0);
-        transform: translate(-5px, 2px);
-    }
-    85% {
-        opacity: 0.9;
-        clip-path: inset(20% 0 55% 0);
-        transform: translate(4px, -1px);
-    }
-    100% {
-        opacity: 0;
-        clip-path: inset(50% 0 50% 0);
-        transform: translate(0, 0);
-    }
-}
-
-@keyframes glitch-slice-b {
-    0% {
-        opacity: 0.9;
-        clip-path: inset(55% 0 18% 0);
-        transform: translate(7px, 2px);
-    }
-    30% {
-        clip-path: inset(10% 0 68% 0);
-        transform: translate(-6px, -1px);
-    }
-    60% {
-        clip-path: inset(35% 0 40% 0);
-        transform: translate(5px, -2px);
-    }
-    85% {
-        opacity: 0.9;
-        clip-path: inset(65% 0 8% 0);
-        transform: translate(-4px, 1px);
-    }
-    100% {
-        opacity: 0;
-        clip-path: inset(50% 0 50% 0);
-        transform: translate(0, 0);
     }
 }
 
@@ -894,74 +761,6 @@ button:focus-visible {
         margin-left: 0;
     }
 
-    .hero-name::before,
-    .hero-name::after {
-        content: attr(data-mobile-text);
-        white-space: pre-line;
-    }
-}
-
-/* The real letters jitter slightly while the split copies flash */
-.hero-name.glitching .hero-letters {
-    animation: glitch-base 0.38s steps(3, jump-none) both;
-}
-
-@keyframes glitch-base {
-    0% {
-        transform: translate(2px, 0);
-    }
-    50% {
-        transform: translate(-3px, 1px);
-    }
-    100% {
-        transform: translate(0, 0);
-    }
-}
-
-/* Organic Mesh Gradient Animation */
-@keyframes mesh-float {
-    0%, 100% {
-        transform: translate(0, 0) scale(1);
-        opacity: 1;
-    }
-    25% {
-        transform: translate(2%, -3%) scale(1.05);
-        opacity: 0.9;
-    }
-    50% {
-        transform: translate(-3%, 2%) scale(0.98);
-        opacity: 0.95;
-    }
-    75% {
-        transform: translate(3%, 3%) scale(1.02);
-        opacity: 0.92;
-    }
-}
-
-@keyframes glow-pulse {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.7;
-        transform: scale(1.05);
-    }
-}
-
-@keyframes float-orb-refined {
-    0%, 100% {
-        transform: translate(0, 0) scale(1);
-    }
-    25% {
-        transform: translate(25px, -35px) scale(1.08);
-    }
-    50% {
-        transform: translate(-30px, 15px) scale(0.95);
-    }
-    75% {
-        transform: translate(15px, 30px) scale(1.05);
-    }
 }
 
 /* Section Backgrounds */
@@ -1494,9 +1293,6 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
     flex-direction: column;
     align-items: center;
     text-align: center;
-    transform-style: preserve-3d;
-    transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
-    will-change: transform;
 }
 .hero-kicker {
     display: inline-flex;
@@ -1515,7 +1311,7 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
     backdrop-filter: blur(14px);
 }
 :root.dark .hero-kicker { background: rgba(15, 23, 42, 0.42); }
-.status-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--signal-green); box-shadow: 0 0 0 0.3rem color-mix(in srgb, var(--signal-green) 14%, transparent), 0 0 16px var(--signal-green); animation: status-pulse 2.2s ease-in-out infinite; }
+.status-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--signal-green); box-shadow: 0 0 0 0.3rem color-mix(in srgb, var(--signal-green) 14%, transparent), 0 0 16px var(--signal-green); }
 .kicker-divider { width: 1px; height: 0.9rem; background: var(--surface-border); }
 /* line-height under 1.0 clips Space Grotesk descenders (g in High); keep
    slightly over 1 with bottom padding so the full glyph paints cleanly. */
@@ -1533,7 +1329,7 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
 .button-quiet { color: var(--text-color); border-color: var(--surface-border); background: var(--surface); backdrop-filter: blur(16px); }
 .hero-scroll { position: absolute; bottom: 1.75rem; left: 50%; z-index: 3; display: flex; align-items: center; gap: 0.8rem; color: var(--text-muted); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.13em; text-decoration: none; text-transform: uppercase; transform: translateX(-50%); }
 .scroll-track { position: relative; width: 3.5rem; height: 1px; overflow: hidden; background: var(--surface-border); }
-.scroll-track span { position: absolute; inset: 0 auto 0 -50%; width: 50%; background: var(--signal-blue); animation: scan-track 2s ease-in-out infinite; }
+.scroll-track span { position: absolute; inset: 0 auto 0 25%; width: 50%; background: var(--signal-blue); }
 
 /* Section headings and projects */
 .section-heading { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr); align-items: end; gap: clamp(2rem, 6vw, 6rem); margin-bottom: clamp(3rem, 6vw, 5rem); }
@@ -1665,12 +1461,12 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
 .file-node { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; min-width: 0; color: #9fb0ce; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.66rem; text-align: center; }
 .file-node i { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border: 1px solid rgba(96, 165, 250, 0.25); border-radius: 1rem; background: rgba(96, 165, 250, 0.08); color: #93c5fd; font-size: 1.25rem; }
 .flow-line { position: relative; height: 1px; overflow: hidden; background: rgba(96, 165, 250, 0.18); }
-.flow-line span { position: absolute; inset: -1px auto -1px -35%; width: 35%; background: #67e8f9; box-shadow: 0 0 12px #67e8f9; animation: data-flow 2.2s linear infinite; }
+.flow-line span { position: absolute; inset: -1px auto -1px 32.5%; width: 35%; background: #67e8f9; box-shadow: 0 0 12px #67e8f9; }
 .cipher-core { position: relative; display: grid; place-items: center; width: clamp(5.5rem, 10vw, 7.5rem); aspect-ratio: 1; margin-inline: auto; border-radius: 50%; color: #e0f2fe; }
 .cipher-core > i { z-index: 2; font-size: 1.65rem; filter: drop-shadow(0 0 12px #60a5fa); }
 .core-ring { position: absolute; border: 1px solid rgba(96, 165, 250, 0.35); border-radius: 50%; }
-.ring-one { inset: 0; animation: orbit-spin 9s linear infinite; }
-.ring-two { inset: 18%; border-style: dashed; animation: orbit-spin 6s linear infinite reverse; }
+.ring-one { inset: 0; }
+.ring-two { inset: 18%; border-style: dashed; }
 .core-ring::after { content: ''; position: absolute; top: -0.22rem; left: 50%; width: 0.42rem; height: 0.42rem; border-radius: 50%; background: #67e8f9; box-shadow: 0 0 12px #67e8f9; }
 .console-status { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; padding: 0.9rem 1rem; border-top: 1px solid rgba(148, 163, 184, 0.13); color: #8fa4c8; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.66rem; }
 .console-status span { display: inline-flex; align-items: center; gap: 0.35rem; }
@@ -1766,8 +1562,8 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
 .quality-console-header > span { color: #5eead4; }
 .signal-orbit { position: relative; display: grid; place-items: center; width: min(330px, 78%); aspect-ratio: 1; margin: 2rem auto; }
 .orbit { position: absolute; border: 1px solid rgba(96, 165, 250, 0.22); border-radius: 50%; }
-.orbit-a { inset: 4%; animation: orbit-spin 18s linear infinite; }
-.orbit-b { inset: 20%; border-style: dashed; animation: orbit-spin 13s linear infinite reverse; }
+.orbit-a { inset: 4%; }
+.orbit-b { inset: 20%; border-style: dashed; }
 .orbit-c { inset: 36%; box-shadow: 0 0 35px rgba(96, 165, 250, 0.1); }
 .signal-center { z-index: 2; display: grid; place-items: center; width: 4rem; height: 4rem; border: 1px solid rgba(103, 232, 249, 0.3); border-radius: 50%; background: rgba(96, 165, 250, 0.12); color: #67e8f9; box-shadow: 0 0 35px rgba(103, 232, 249, 0.15); }
 .signal-node { position: absolute; display: grid; place-items: center; width: 3rem; height: 3rem; border: 1px solid rgba(96, 165, 250, 0.24); border-radius: 50%; background: #0d1627; color: #93c5fd; font-family: ui-monospace, monospace; font-size: 0.66rem; font-weight: 800; box-shadow: 0 0 22px rgba(96, 165, 250, 0.12); }
@@ -1832,7 +1628,7 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
 .contact-radar { position: absolute; right: -8rem; top: 50%; z-index: 0; width: 30rem; height: 30rem; border: 1px solid rgba(37, 99, 235, 0.2); border-radius: 50%; transform: translateY(-50%); opacity: 0.82; pointer-events: none; }
 .contact-radar span { position: absolute; inset: 18%; border: 1px solid rgba(37, 99, 235, 0.18); border-radius: 50%; }
 .contact-radar span:nth-child(2) { inset: 36%; }
-.contact-radar i { position: absolute; top: 50%; left: 50%; width: 50%; height: 1px; background: linear-gradient(90deg, var(--signal-blue), transparent); transform-origin: 0 50%; animation: radar-sweep 7s linear infinite; }
+.contact-radar i { position: absolute; top: 50%; left: 50%; width: 50%; height: 1px; background: linear-gradient(90deg, var(--signal-blue), transparent); transform-origin: 0 50%; }
 :root.dark .contact-radar { border-color: rgba(96, 165, 250, 0.18); opacity: 0.5; }
 :root.dark .contact-radar span { border-color: rgba(96, 165, 250, 0.16); }
 .site-footer { border-top: 1px solid var(--surface-border); color: var(--text-muted); }
@@ -1842,12 +1638,6 @@ nav.nav-over-dark .nav-link.active, nav.nav-over-dark .nav-link:hover, nav.nav-o
 .footer-links { display: flex; align-items: center; gap: 1rem; }
 .footer-links a { color: var(--text-muted); }
 .footer-links a:hover { color: var(--text-color); }
-
-@keyframes status-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.62; transform: scale(0.82); } }
-@keyframes scan-track { from { transform: translateX(0); } to { transform: translateX(300%); } }
-@keyframes data-flow { from { transform: translateX(0); } to { transform: translateX(385%); } }
-@keyframes orbit-spin { to { transform: rotate(360deg); } }
-@keyframes radar-sweep { to { transform: rotate(360deg); } }
 
 @media (max-width: 980px) {
     .section-heading, .experience-layout, .aviation-shell { grid-template-columns: 1fr; }

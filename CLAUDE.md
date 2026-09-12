@@ -88,7 +88,7 @@ All layers animate independently with different timing and blend modes. The body
 
 ### JavaScript/TypeScript
 
-Located in `src/scripts/`. Loading: `nav.ts` is loaded from `Nav.astro`; `animations.ts`, `smooth-scroll.ts`, and `hero-3d.ts` are loaded from `index.astro`. `Layout.astro` contains only a small inline (`is:inline`) pre-paint script that sets the theme and Safari status-bar color before render. There is no client framework.
+Located in `src/scripts/`. Loading: `nav.ts` is loaded from `Nav.astro`; `animations.ts`, `smooth-scroll.ts`, and `constellation.ts` are loaded from `index.astro`. `Layout.astro` contains only a small inline (`is:inline`) pre-paint script that sets the theme and Safari status-bar color before render. There is no client framework.
 
 **nav.ts** (Theme & Navigation):
 - Manages dark/light theme toggle with localStorage persistence and View Transitions when available
@@ -106,11 +106,11 @@ Located in `src/scripts/`. Loading: `nav.ts` is loaded from `Nav.astro`; `animat
 **smooth-scroll.ts**:
 - Handles smooth scrolling behavior for anchor links (accounts for fixed header offset)
 
-**hero-3d.ts** (Constellation Background):
-- Dependency-free canvas 2D particle field with perspective projection, constellation lines, pointer-driven camera parallax, and hero content tilt
+**constellation.ts** (Constellation Background):
+- Dependency-free static canvas 2D particle field with perspective projection and constellation lines
 - Renders to `#constellation-canvas` but is visible across the whole homepage; per-section intensity comes from the `SECTION_STRENGTHS` map keyed by section ID — update it when adding or renaming sections
-- Theme-aware palettes (swaps when the `dark` class on `<html>` changes, via MutationObserver); pauses when the tab is hidden or the hero is off-screen; respects `prefers-reduced-motion` by painting a single static frame
-- Also drives the occasional RGB-split "glitch" flicker on the hero name
+- Theme-aware palettes (swaps when the `dark` class on `<html>` changes, via MutationObserver); redraws only on initialization, debounced resize, theme changes, or a change in section intensity
+- No animation loop, pointer tracking, or recurring glitch timers; ambient CSS decorations remain static while entrance and hover animations are preserved
 
 All scripts self-initialize on load and re-initialize on `astro:page-load` transitions.
 
@@ -228,7 +228,7 @@ Automated deployment via GitHub Actions:
 **Performance:**
 - Keep backdrop-filter usage optimized (reduce blur on mobile)
 - Avoid adding heavy images without `astro:assets` optimization
-- Constellation canvas caps particle count and DPR; pauses when appropriate
+- Constellation canvas caps particle count and DPR and does no rendering work while idle
 
 **Image Optimization (sharp):**
 - Astro's default image service uses `sharp` at build time to optimize images from `src/images/`

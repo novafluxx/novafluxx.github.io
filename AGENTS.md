@@ -26,7 +26,7 @@ There are no Astro content collections or markdown-driven routes in the current 
 - `src/components/Nav.astro`: section anchor links and theme-toggle button.
 - Client-side TS in `src/scripts/`:
   - `nav.ts` — loaded from `Nav.astro` (theme, active section, adaptive nav).
-  - `animations.ts`, `smooth-scroll.ts`, `hero-3d.ts` — loaded from `index.astro`.
+  - `animations.ts`, `smooth-scroll.ts`, `constellation.ts` — loaded from `index.astro`.
   - `Layout.astro` also has a small inline pre-paint theme/status-bar script.
 - There is no client framework.
 
