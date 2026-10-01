@@ -23,7 +23,7 @@ src/
 ├── images/         # Source images (optimized at build)
 ├── layouts/        # Layout.astro
 ├── pages/          # index.astro, 404.astro
-├── scripts/        # Client TS (nav, animations, smooth-scroll, hero-3d)
+├── scripts/        # Client TS (nav, animations, smooth-scroll, constellation)
 └── styles/         # global.css
 ```
 
@@ -43,7 +43,7 @@ Use **pnpm** (not npm/Bun). Treat `pnpm build` and `pnpm check` as the verificat
 
 - Dual theme (sunrise light / cosmic dark) with localStorage + OS preference
 - View-transition theme toggle where supported
-- Full-page animated background + constellation canvas (`hero-3d.ts`)
+- Full-page animated background + constellation canvas (`constellation.ts`)
 - Section nav with active state + adaptive contrast over aviation
 - Selected work (For the People, FileCrypter stack comparison, archived High Notes), quality practice (healthcare ROI), aviation, contact
 - Project screenshots via `astro:assets`

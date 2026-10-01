@@ -25,7 +25,12 @@ Personal portfolio website for Justin High (QA Analyst & Automation Engineer) bu
 | `pnpm preview` | Preview build locally |
 | `pnpm check` | Run TypeScript type checking (`astro check`) |
 
-**Note:** Use `pnpm`, not Bun or npm. The version is pinned by the `packageManager` field in `package.json`, which pnpm honors natively via `managePackageManagerVersions` (on by default since pnpm 10) — Corepack is not required and is no longer bundled with Node 25+. Treat `pnpm build` and `pnpm check` as the verification steps.
+**Note:** Use `pnpm`, not Bun or npm. The version is pinned by the `packageManager` field in `package.json`, which pnpm honors natively via `managePackageManagerVersions` (on by default since pnpm 10) — Corepack is not required and is no longer bundled with Node 25+. There is no lint, formatter, or test setup, so treat `pnpm build` and `pnpm check` as the verification steps.
+
+**Toolchain quirks:**
+- `pnpm-workspace.yaml` exists only for pnpm settings; this is a single package, not a monorepo. It sets `minimumReleaseAge: 1440`, so pnpm won't resolve a version published less than 24 hours ago, and `allowBuilds` (esbuild, sharp), which lists the only dependencies allowed to run install scripts
+- The social share card `src/images/og-card.png` is generated, not hand-edited. Regenerate it with `node scripts/generate-og-card.mjs`, which uses sharp; the SVG source is embedded in that script
+- Font Awesome 7 and Google Fonts (Space Grotesk, Manrope) load from CDNs in `Layout.astro`; they are not npm dependencies
 
 ## Architecture
 
@@ -55,7 +60,7 @@ Each page imports and uses the Layout component from `src/layouts/Layout.astro`.
 
 ### Styling System
 
-All styles are centralized in `src/styles/global.css` (~1,750 lines):
+All styles are centralized in `src/styles/global.css` (~1,780 lines):
 
 **CSS Custom Properties:**
 - Theme variables defined in `:root` and `:root.dark` for dark mode
@@ -210,6 +215,7 @@ Automated deployment via GitHub Actions:
 - The repo is a GitHub Pages **user site** (`novafluxx.github.io`), so it is served from the domain root: `base` is `/` for every target. `astro.config.mjs` switches on the `DEPLOY_TARGET` env var only to pick `site`: when set to `pages` (done in `deploy.yml`), `site` is `https://novafluxx.github.io`; otherwise (dev, or root deploys like Coolify) `site` comes from the optional `SITE_URL` env var
 - Use `import.meta.env.BASE_URL` for internal links/paths rather than hardcoding a leading `/`, so a future subpath deploy doesn't break every asset
 - GitHub Pages source set to "GitHub Actions" in repository settings
+- `.github/workflows/claude.yml` runs Claude Code on `@claude` mentions in issues and PRs, but only for the repo owner, members, and collaborators. It doesn't affect deployment
 
 ## Important Considerations
 

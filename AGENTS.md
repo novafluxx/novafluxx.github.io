@@ -15,7 +15,7 @@ For deeper architecture prose (animated background layering, Safari iOS status-b
 This is a GitHub Pages user site (`novafluxx.github.io`), served from the domain root — `base` is `/` for every target. `DEPLOY_TARGET=pages` only selects `site` (canonical origin for canonical/OG URLs); root deploys elsewhere read `SITE_URL`. Still use `import.meta.env.BASE_URL` for internal links/paths rather than hardcoding `/`, so a future subpath deploy doesn't break every asset.
 
 ## Astro version
-This repo currently uses Astro 7 (`astro@^7.0.0`) with Tailwind CSS v4 via `@tailwindcss/vite`.
+This repo currently uses Astro 7 (`astro@^7.3.5`) with Tailwind CSS v4 via `@tailwindcss/vite`.
 
 There are no Astro content collections or markdown-driven routes in the current tree. If content collections are reintroduced later, verify the current Astro APIs before copying older Astro 4/6 patterns.
 
@@ -32,7 +32,7 @@ There are no Astro content collections or markdown-driven routes in the current 
 
 ## Styling
 - Tailwind CSS v4 via `@tailwindcss/vite`; apply utility classes inline.
-- All custom CSS lives in `src/styles/global.css` (~1750 lines); do not scatter component-scoped CSS files.
+- All custom CSS lives in `src/styles/global.css` (~1,780 lines); do not scatter component-scoped CSS files.
 - Homepage surfaces use `.project-card`, `.section-shell`, toolkit/experience patterns, etc. Legacy `.glass-card*` rules may still exist in CSS; prefer matching nearby section styles rather than reintroducing glass-card as the default.
 - Theming via CSS custom properties on `:root` / `:root.dark`; dark mode is toggled by adding the `dark` class to `<html>` (see `src/scripts/nav.ts`). Animations are prefixed by purpose (e.g. `float-orb-refined`, `mesh-float`).
 
@@ -48,7 +48,7 @@ The animated background uses negative `z-index` layers that are only visible bec
 - `sharp` is required for Astro's image optimization and needs install scripts to run (already allow-listed).
 
 ## Deploy
-- GitHub Pages via `.github/workflows/deploy.yml` using `withastro/action@v6`, which sets `DEPLOY_TARGET=pages` to select the Pages base path in `astro.config.mjs`.
+- GitHub Pages via `.github/workflows/deploy.yml` using `withastro/action@v6`, which sets `DEPLOY_TARGET=pages` to select the Pages `site` URL in `astro.config.mjs` (`base` stays `/`).
 - Triggers on push to `main` and via manual `workflow_dispatch`.
 - Live URL: https://novafluxx.github.io/
 
