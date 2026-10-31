@@ -1,7 +1,7 @@
 # AGENTS.md
 
 Quick reference for agentic coding agents working in this repository.
-For deeper architecture prose (animated background layering, Safari iOS status-bar theming, constellation canvas), see `CLAUDE.md`; however, trust the code over `CLAUDE.md` when versions/details conflict.
+`CLAUDE.md` is the primary guidance for this repo: read it first for architecture, design patterns, and toolchain details (animated background layering, Safari iOS status-bar theming, constellation canvas, deployment). This file is only a condensed summary of it; when the two conflict, trust the code.
 
 ## Commands
 - `pnpm install`: install deps. Use pnpm (version pinned via `packageManager` in `package.json`, honored by pnpm itself — no Corepack); never Bun/npm.
